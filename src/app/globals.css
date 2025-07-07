@@ -1,7 +1,313 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* das von shadcn */
 @custom-variant dark (&:is(.dark *));
+/*  */
+
+/* das von figma */
+
+@font-face {
+  font-family: Noto Serif;
+  src: url("/fonts/Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-notoSerif: "Noto Serif", sans;
+
+  --color-primary-50: #ecfdf5;
+  --color-primary-100: #d1fae5;
+  --color-primary-200: #a7f3d0;
+  --color-primary-300: #6ee7b7;
+  --color-primary-400: #34d399;
+  --color-primary-500: #10b981;
+  --color-primary-600: #059669;
+  --color-primary-700: #047857;
+  --color-primary-800: #065f46;
+  --color-primary-900: #064e3b;
+  --color-primary-950: #022c22;
+
+  --color-secondary-50: #f0f9ff;
+  --color-secondary-100: #e0f2fe;
+  --color-secondary-200: #bae6fd;
+  --color-secondary-300: #7dd3fc;
+  --color-secondary-400: #38bdf8;
+  --color-secondary-500: #0ea5e9;
+  --color-secondary-600: #0284c7;
+  --color-secondary-700: #0369a1;
+  --color-secondary-800: #075985;
+  --color-secondary-900: #0c4a6e;
+  --color-secondary-950: #082f49;
+
+  --color-tartiary-50: #f5f3ff;
+  --color-tartiary-100: #ede9fe;
+  --color-tartiary-200: #ddd6fe;
+  --color-tartiary-300: #c4b5fd;
+  --color-tartiary-400: #a78bfa;
+  --color-tartiary-500: #8b5cf6;
+  --color-tartiary-600: #7c3aed;
+  --color-tartiary-700: #6d28d9;
+  --color-tartiary-800: #5b21b6;
+  --color-tartiary-900: #4c1d95;
+  --color-tartiary-950: #2e1065;
+
+  --color-dark-50: #327761;
+  --color-dark-100: #26604e;
+  --color-dark-200: #1b483a;
+  --color-dark-300: #123228;
+  --color-dark-400: #0c221b;
+  --color-dark-500: #06100d;
+  --color-dark-600: #040b09;
+  --color-dark-700: #030a08;
+  --color-dark-800: #020a07;
+  --color-dark-900: #000000;
+  --color-dark-950: #000000;
+
+  --color-gray-50: #fafaf9;
+  --color-gray-100: #f5f5f4;
+  --color-gray-200: #e7e5e4;
+  --color-gray-300: #d6d3d1;
+  --color-gray-400: #a8a29e;
+  --color-gray-500: #78716c;
+  --color-gray-600: #57534e;
+  --color-gray-700: #44403c;
+  --color-gray-800: #292524;
+  --color-gray-900: #1c1917;
+  --color-gray-950: #0c0a09;
+
+  --color-light-50: #f5f5f6;
+  --color-light-100: #e5e6e8;
+  --color-light-200: #cdcfd4;
+  --color-light-300: #abafb5;
+  --color-light-400: #81858f;
+  --color-light-500: #6d727d;
+  --color-light-600: #575a63;
+  --color-light-700: #4a4d54;
+  --color-light-800: #424448;
+  --color-light-900: #3a3b3f;
+  --color-light-950: #242528;
+
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+  --color-success-950: #052e14;
+
+  --color-warning-50: #fefce8;
+  --color-warning-100: #fef9c3;
+  --color-warning-200: #fef08a;
+  --color-warning-300: #fde047;
+  --color-warning-400: #facc15;
+  --color-warning-500: #eab308;
+  --color-warning-600: #ca8a04;
+  --color-warning-700: #a16207;
+  --color-warning-800: #854d0e;
+  --color-warning-900: #713f12;
+  --color-warning-950: #423306;
+
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+  --color-error-900: #7f1d1d;
+  --color-error-950: #450a0a;
+
+  --color-information-50: #eff6ff;
+  --color-information-100: #dbeafe;
+  --color-information-200: #bfdbfe;
+  --color-information-300: #93c5fd;
+  --color-information-400: #60a5fa;
+  --color-information-500: #60a5fa;
+  --color-information-600: #2563eb;
+  --color-information-700: #2563eb;
+  --color-information-800: #1e40af;
+  --color-information-900: #1e3a8a;
+  --color-information-950: #172e54;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-xl2: 24px;
+  --radius-full: 999px;
+
+  --spacing-gap-1: 1px;
+  --spacing-gap-2: 2px;
+  --spacing-gap-3: 4px;
+  --spacing-gap-4: 6px;
+  --spacing-gap-5: 8px;
+  --spacing-gap-6: 10px;
+  --spacing-gap-7: 12px;
+  --spacing-gap-8: 14px;
+  --spacing-gap-9: 16px;
+  --spacing-gap-10: 20px;
+  --spacing-gap-11: 24px;
+  --spacing-gap-12: 28px;
+  --spacing-gap-13: 32px;
+  --spacing-gap-14: 36px;
+  --spacing-gap-15: 40px;
+
+  --breakpoint-1440: 1280px;
+  --breakpoint-1920: 1536px;
+
+  --shadow-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.06),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0px 5px 8px -2px rgba(0, 0, 0, 0.08),
+    0px 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0px 20px 24px -4px rgba(0, 0, 0, 0.08),
+    0px 8px 8px -4px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0px 24px 48px -12px rgba(0, 0, 0, 0.18);
+  --shadow-2xl: 0px 32px 64px -12px rgba(0, 0, 0, 0.14);
+}
+
+@utility font-2xl-regular {
+  @apply font-notoSerif text-7xl leading-[1.25];
+}
+
+@utility font-2xl-medium {
+  @apply font-notoSerif text-7xl leading-[1.25] font-medium;
+}
+
+@utility font-2xl-bold {
+  @apply font-notoSerif text-7xl leading-[1.25] font-bold;
+}
+/*  */
+@utility font-xl-regular {
+  @apply font-notoSerif text-6xl leading-[1.25];
+}
+
+@utility font-xl-medium {
+  @apply font-notoSerif text-6xl leading-[1.25] font-medium;
+}
+
+@utility font-xl-bold {
+  @apply font-notoSerif text-6xl leading-[1.25] font-bold;
+}
+/*  */
+@utility font-lg-regular {
+  @apply font-notoSerif text-5xl leading-[1.26];
+}
+
+@utility font-lg-medium {
+  @apply font-notoSerif text-5xl leading-[1.26] font-medium;
+}
+
+@utility font-lg-bold {
+  @apply font-notoSerif text-5xl leading-[1.26] font-bold;
+}
+/*  */
+@utility font-md-regular {
+  @apply font-notoSerif text-4xl leading-[1.29];
+}
+
+@utility font-md-medium {
+  @apply font-notoSerif text-4xl leading-[1.29] font-medium;
+}
+
+@utility font-md-bold {
+  @apply font-notoSerif text-4xl leading-[1.29] font-bold;
+}
+/*  */
+@utility font-sm-regular {
+  @apply font-notoSerif text-3xl leading-[1.2];
+}
+
+@utility font-sm-medium {
+  @apply font-notoSerif text-3xl leading-[1.2] font-medium;
+}
+
+@utility font-sm-bold {
+  @apply font-notoSerif text-3xl leading-[1.2] font-bold;
+}
+/*  */
+@utility font-xs-regular {
+  @apply font-notoSerif text-2xl leading-[1.32];
+}
+
+@utility font-xs-medium {
+  @apply font-notoSerif text-2xl leading-[1.32] font-medium;
+}
+
+@utility font-xs-bold {
+  @apply font-notoSerif text-2xl leading-[1.32] font-bold;
+}
+/*  */
+@utility font-text-xl-regular {
+  @apply font-notoSerif text-xl leading-[1.5];
+}
+
+@utility font-text-xl-medium {
+  @apply font-notoSerif text-xl leading-[1.5] font-medium;
+}
+
+@utility font-text-xl-bold {
+  @apply font-notoSerif text-xl leading-[1.5] font-bold;
+}
+/*  */
+@utility font-text-lg-regular {
+  @apply font-notoSerif text-lg leading-[1.55];
+}
+
+@utility font-text-lg-medium {
+  @apply font-notoSerif text-lg leading-[1.55] font-medium;
+}
+
+@utility font-text-lg-bold {
+  @apply font-notoSerif text-lg leading-[1.55] font-bold;
+}
+/*  */
+@utility font-text-md-regular {
+  @apply font-notoSerif leading-[1.5];
+}
+
+@utility font-text-md-medium {
+  @apply font-notoSerif leading-[1.5] font-medium;
+}
+
+@utility font-text-md-bold {
+  @apply font-notoSerif leading-[1.5] font-bold;
+}
+/*  */
+@utility font-text-sm-regular {
+  @apply font-notoSerif text-sm leading-[1.4];
+}
+
+@utility font-text-sm-medium {
+  @apply font-notoSerif text-sm leading-[1.4] font-medium;
+}
+
+@utility font-text-sm-bold {
+  @apply font-notoSerif text-sm leading-[1.4] font-bold;
+}
+/*  */
+@utility font-text-xs-regular {
+  @apply font-notoSerif text-xs leading-[1.5];
+}
+
+@utility font-text-xs-medium {
+  @apply font-notoSerif text-xs leading-[1.5] font-medium;
+}
+
+@utility font-text-xs-bold {
+  @apply font-notoSerif text-xs leading-[1.5] font-bold;
+}
+
+/*  */
 
 /* hier drunter alles von shadcn */
 @theme inline {
