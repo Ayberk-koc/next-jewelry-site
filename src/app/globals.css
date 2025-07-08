@@ -176,154 +176,154 @@
 }
 
 @utility font-2xl-regular {
-  @apply font-notoSerif text-7xl leading-[1.25];
+  @apply text-7xl leading-[1.25] font-light;
 }
 
 @utility font-2xl-medium {
-  @apply font-notoSerif text-7xl leading-[1.25] font-medium;
+  @apply text-7xl leading-[1.25] font-medium;
 }
 
 @utility font-2xl-bold {
-  @apply font-notoSerif text-7xl leading-[1.25] font-bold;
+  @apply text-7xl leading-[1.25] font-semibold;
 }
-/*  */
+
 @utility font-xl-regular {
-  @apply font-notoSerif text-6xl leading-[1.25];
+  @apply text-6xl leading-[1.25] font-light;
 }
 
 @utility font-xl-medium {
-  @apply font-notoSerif text-6xl leading-[1.25] font-medium;
+  @apply text-6xl leading-[1.25] font-medium;
 }
 
 @utility font-xl-bold {
-  @apply font-notoSerif text-6xl leading-[1.25] font-bold;
+  @apply text-6xl leading-[1.25] font-semibold;
 }
-/*  */
+
 @utility font-lg-regular {
-  @apply font-notoSerif text-5xl leading-[1.26];
+  @apply text-5xl leading-[1.26] font-light;
 }
 
 @utility font-lg-medium {
-  @apply font-notoSerif text-5xl leading-[1.26] font-medium;
+  @apply text-5xl leading-[1.26] font-medium;
 }
 
 @utility font-lg-bold {
-  @apply font-notoSerif text-5xl leading-[1.26] font-bold;
+  @apply text-5xl leading-[1.26] font-semibold;
 }
-/*  */
+
 @utility font-md-regular {
-  @apply font-notoSerif text-4xl leading-[1.29];
+  @apply text-4xl leading-[1.29] font-light;
 }
 
 @utility font-md-medium {
-  @apply font-notoSerif text-4xl leading-[1.29] font-medium;
+  @apply text-4xl leading-[1.29] font-medium;
 }
 
 @utility font-md-bold {
-  @apply font-notoSerif text-4xl leading-[1.29] font-bold;
+  @apply text-4xl leading-[1.29] font-semibold;
 }
-/*  */
+
 @utility font-sm-regular {
-  @apply font-notoSerif text-3xl leading-[1.2];
+  @apply text-3xl leading-[1.2] font-light;
 }
 
 @utility font-sm-medium {
-  @apply font-notoSerif text-3xl leading-[1.2] font-medium;
+  @apply text-3xl leading-[1.2] font-medium;
 }
 
 @utility font-sm-bold {
-  @apply font-notoSerif text-3xl leading-[1.2] font-bold;
+  @apply text-3xl leading-[1.2] font-semibold;
 }
-/*  */
+
 @utility font-xs-regular {
-  @apply font-notoSerif text-2xl leading-[1.32];
+  @apply text-2xl leading-[1.32] font-light;
 }
 
 @utility font-xs-medium {
-  @apply font-notoSerif text-2xl leading-[1.32] font-medium;
+  @apply text-2xl leading-[1.32] font-medium;
 }
 
 @utility font-xs-bold {
-  @apply font-notoSerif text-2xl leading-[1.32] font-bold;
+  @apply text-2xl leading-[1.32] font-semibold;
 }
-/*  */
+
 @utility font-text-xl-regular {
-  @apply font-notoSerif text-xl leading-[1.5];
+  @apply text-xl leading-[1.5] font-light;
 }
 
 @utility font-text-xl-medium {
-  @apply font-notoSerif text-xl leading-[1.5] font-medium;
+  @apply text-xl leading-[1.5] font-medium;
 }
 
 @utility font-text-xl-bold {
-  @apply font-notoSerif text-xl leading-[1.5] font-bold;
+  @apply text-xl leading-[1.5] font-semibold;
 }
-/*  */
+
 @utility font-text-lg-regular {
-  @apply font-notoSerif text-lg leading-[1.55];
+  @apply text-lg leading-[1.55] font-light;
 }
 
 @utility font-text-lg-medium {
-  @apply font-notoSerif text-lg leading-[1.55] font-medium;
+  @apply text-lg leading-[1.55] font-medium;
 }
 
 @utility font-text-lg-bold {
-  @apply font-notoSerif text-lg leading-[1.55] font-bold;
+  @apply text-lg leading-[1.55] font-semibold;
 }
-/*  */
+
 @utility font-text-md-regular {
-  @apply font-notoSerif leading-[1.5];
+  @apply leading-[1.5] font-light;
 }
 
 @utility font-text-md-medium {
-  @apply font-notoSerif leading-[1.5] font-medium;
+  @apply leading-[1.5] font-medium;
 }
 
 @utility font-text-md-bold {
-  @apply font-notoSerif leading-[1.5] font-bold;
+  @apply leading-[1.5] font-semibold;
 }
-/*  */
+
 @utility font-text-sm-regular {
-  @apply font-notoSerif text-sm leading-[1.4];
+  @apply text-sm leading-[1.4] font-light;
 }
 
 @utility font-text-sm-medium {
-  @apply font-notoSerif text-sm leading-[1.4] font-medium;
+  @apply text-sm leading-[1.4] font-medium;
 }
 
 @utility font-text-sm-bold {
-  @apply font-notoSerif text-sm leading-[1.4] font-bold;
+  @apply text-sm leading-[1.4] font-semibold;
 }
-/*  */
+
 @utility font-text-xs-regular {
-  @apply font-notoSerif text-xs leading-[1.5];
+  @apply text-xs leading-[1.5] font-light;
 }
 
 @utility font-text-xs-medium {
-  @apply font-notoSerif text-xs leading-[1.5] font-medium;
+  @apply text-xs leading-[1.5] font-medium;
 }
 
 @utility font-text-xs-bold {
-  @apply font-notoSerif text-xs leading-[1.5] font-bold;
+  @apply text-xs leading-[1.5] font-semibold;
 }
 
 /*  */
 
 /* hier drunter alles von shadcn */
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* --radius-sm: calc(var(--radius) - 4px); */
+  /* --radius-md: calc(var(--radius) - 2px); */
+  /* --radius-lg: var(--radius); */
+  /* --radius-xl: calc(var(--radius) + 4px); */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
+  /* --color-primary: var(--primary); */
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
+  /* --color-secondary: var(--secondary); */
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
