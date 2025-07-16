@@ -162,8 +162,8 @@
   --spacing-gap-14: 36px;
   --spacing-gap-15: 40px;
 
-  --breakpoint-1440: 1280px;
-  --breakpoint-1920: 1536px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-xl2: 1536px;
 
   --shadow-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.06),
     0px 1px 3px 0px rgba(0, 0, 0, 0.1);
@@ -424,4 +424,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@utility header-list-element {
+  @apply font-text-md-medium text-gray-950 uppercase cursor-pointer;
 }

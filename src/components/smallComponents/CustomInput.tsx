@@ -7,6 +7,8 @@ export default function CustomInput({
   className,
   type = "text",
   isError = false,
+  showLabel = true,
+  label,
   labelClass,
   ...props
 }: {
@@ -16,12 +18,16 @@ export default function CustomInput({
   type?: string;
   isError?: boolean;
   labelClass?: string;
+  showLabel?: boolean;
+  label?: string;
 }) {
   return (
     <div className="flex flex-col gap-gap-5">
-      <Label className={labelClass} disabled={disabled} scale={scale}>
-        Label
-      </Label>
+      {showLabel && (
+        <Label className={labelClass} disabled={disabled} scale={scale}>
+          {label}
+        </Label>
+      )}
       <Input
         isError={isError}
         type={type}
