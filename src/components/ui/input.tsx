@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 //die states sind keine extra variants! States musst du mit data-* styles handhaben.
 //die variants sind für varianten! D.h dinge die sich in dem lifetime der component nicht ändern!
-//d.h statische dinge so to say!
+//d.h statische dinge so to say! ALso wie Parameter!
 const inputVariants = cva(
   "flex items-center border outline-none font-text-xs-regular border-gray-200 bg-white text-dark-500 focus:border-primary-500 disabled:text-gray-500 disabled:bg-none data-[isInvalid=true]:border-error-500",
   {
@@ -28,7 +28,7 @@ const inputVariants = cva(
 
 function Input({
   className,
-  scale, //beim typisieren muss ich aufpassen, hier keine propnamen zu nehmen, die is im default "input" schon gibt!
+  scale, //beim typisieren muss ich aufpassen, hier keine propnamen zu nehmen, die es im default "input"-elem schon gibt!
   type,
   isError = false,
   ...props

@@ -161,7 +161,9 @@
   --spacing-gap-13: 32px;
   --spacing-gap-14: 36px;
   --spacing-gap-15: 40px;
+  --spacing-sidePadding: 70px;
 
+  --breakpoint-sm: 960px;
   --breakpoint-xl: 1280px;
   --breakpoint-xl2: 1536px;
 
@@ -425,7 +427,7 @@
     @apply bg-background text-foreground;
   }
 }
-
+/* Hier drunter wieder custom styles! */
 @utility header-list-element {
   @apply font-text-md-medium text-gray-950 uppercase cursor-pointer;
 }
