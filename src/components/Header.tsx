@@ -1,12 +1,11 @@
 import CurrencyDropDown from "./smallComponents/CurrencyDropDown";
 
-export default function Header() {
+export default function Header({ className }: { className?: string }) {
+  const headerClassName = `${className} flex justify-between items-center py-gap-11 w-full px-gap-9 sm:px-sidePadding`;
+
   return (
     <>
-      <header
-        className="flex justify-between items-center py-gap-11 w-full px-gap-9 sm:px-sidePadding"
-        id="header"
-      >
+      <header className={headerClassName} id="header">
         <button className="xl:hidden w-[104px] cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
