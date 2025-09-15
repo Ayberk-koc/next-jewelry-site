@@ -1,4 +1,8 @@
-import LoginRegisterSwitch from "@/components/authComponents/LoginRegisterSwitch";
+import ForgotPasswordForm from "@/components/forms/authenticationForms/ForgotPasswordForm";
+import LoginRegisterSwitch from "@/components/forms/authenticationForms/LoginRegisterSwitch";
+import NewPasswordForm from "@/components/forms/authenticationForms/NewPasswordForm";
+import PasswordUpdateSuccessForm from "@/components/forms/authenticationForms/PasswordUpdateSuccessForm";
+import ReserPasswordConfirmForm from "@/components/forms/authenticationForms/ResetPasswordConfirmForm";
 import Image from "next/image";
 
 //bubbling errors! Muss fixen, dass ich wieder klicken kann!
@@ -14,7 +18,9 @@ export default function LoginPage() {
       {/* sobald screen breiter als login-form -> mache items-center! Deswegen 501px! */}
       <div className="min-h-screen flex justify-center items-end min-[501px]:items-center">
         <div className="w-[500px] bg-white z-10">
+          {/* <ForgotPasswordForm></ForgotPasswordForm> */}
           <LoginRegisterSwitch></LoginRegisterSwitch>
+          {/* <NewPasswordForm></NewPasswordForm> */}
         </div>
       </div>
     </section>

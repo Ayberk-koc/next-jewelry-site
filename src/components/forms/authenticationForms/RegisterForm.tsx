@@ -68,10 +68,10 @@ export default function RegisterForm({
 
   return (
     <div className="p-gap-9 sm:p-gap-11">
-      <p className="font-sm-regular text-gray-950 mb-gap-5 font-notoSerif">
+      <p className="font-sm-regular text-gray-950 mb-gap-5 font-notoSerif text-center">
         Welcome
       </p>
-      <p className="font-text-sm-medium text-gray-700 mb-gap-11">
+      <p className="font-text-sm-medium text-gray-700 mb-gap-11 text-center">
         Please login here
       </p>
       <Form {...form}>
