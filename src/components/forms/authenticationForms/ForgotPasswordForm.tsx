@@ -41,7 +41,7 @@ export default function ForgotPasswordForm() {
   return (
     <div className="p-gap-9 sm:p-gap-11">
       <div className="flex space-y-gap-9 mb-gap-11 items-start">
-        <div className="flex flex-col space-y-gap-5 ">
+        <div className="flex flex-col space-y-gap-5">
           <p className="font-sm-regular text-gray-950 font-notoSerif text-center">
             Forgot Password
           </p>

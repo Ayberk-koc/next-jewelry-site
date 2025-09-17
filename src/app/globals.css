@@ -278,7 +278,7 @@
 }
 
 @utility font-text-md-medium {
-  @apply leading-[1.5] font-medium;
+  @apply leading-[1.5];
 }
 
 @utility font-text-md-bold {
