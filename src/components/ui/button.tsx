@@ -325,7 +325,7 @@ const buttonVariants = cva(
         sm: "gap-gap-3 py-gap-4 px-gap-7 font-text-sm-regular",
         md: "gap-gap-5 py-gap-6 px-gap-9 font-text-sm-regular",
         lg: "gap-gap-5 py-gap-7 px-gap-10 font-text-md-regular",
-        xl: "gap-gap-6 py-gap-9 px-gap-11 font-text-md-regular",
+        xl: "gap-gap-6 py-gap-9 px-gap-13 font-text-md-regular",
         xl2: "gap-gap-7 py-[18px] px-gap-12 font-text-lg-regular",
       },
     },
