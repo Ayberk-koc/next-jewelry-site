@@ -8,17 +8,17 @@ import { BoxIcon } from "@/components/svg-icons/BenefitIcons";
 function HomePageContainer({
   children,
   className,
+  spacing,
 }: {
   children: ReactNode;
+  spacing?: string;
   className?: string;
 }) {
-  return (
-    <div
-      className={`px-gap-9 py-gap-13 sm:px-[70px] sm:py-[80px] ${className}`}
-    >
-      {children}
-    </div>
-  );
+  const spacingClass = spacing
+    ? spacing
+    : "px-gap-9 py-gap-13 sm:px-[70px] sm:py-[80px]";
+
+  return <div className={`${className} ${spacingClass}`}>{children}</div>;
 }
 
 function SectionHeaderContainer({
@@ -222,6 +222,41 @@ function Benefits({
   );
 }
 
+function BenefitsSection() {
+  return (
+    <div className="grid grid-cols-1 gap-gap-13 min-[600px]:grid-cols-2 min-[1000px]:grid-cols-4 justify-center items-center">
+      <div className="w-fit justify-self-center min-[600px]:justify-self-end min-[1000px]:justify-self-center min-[600px]:mr-7 min-[1000px]:mr-0">
+        <Benefits
+          icon={<BoxIcon />}
+          title="Free shipping"
+          subtitle="you will love a great low prices"
+        ></Benefits>
+      </div>
+      <div className="w-fit justify-self-center min-[600px]:justify-self-start min-[1000px]:justify-self-center  min-[600px]:ml-7 min-[1000px]:ml-0">
+        <Benefits
+          icon={<BoxIcon />}
+          title="Free shipping"
+          subtitle="you will love a great low prices"
+        ></Benefits>
+      </div>
+      <div className="w-fit justify-self-center min-[600px]:justify-self-end min-[1000px]:justify-self-center min-[600px]:mr-7 min-[1000px]:mr-0">
+        <Benefits
+          icon={<BoxIcon />}
+          title="Free shipping"
+          subtitle="you will love a great low prices"
+        ></Benefits>
+      </div>
+      <div className="w-fit justify-self-center min-[600px]:justify-self-start min-[1000px]:justify-self-center min-[600px]:ml-7 min-[1000px]:ml-0">
+        <Benefits
+          icon={<BoxIcon />}
+          title="Free shipping"
+          subtitle="you will love a great low prices"
+        ></Benefits>
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -235,8 +270,6 @@ export default function HomePage() {
         </HomePageContainer>
       </section>
 
-      {/* hier was falsach verstanden aus der figma file! Mache die items so groß, dass sie ab bestimmter breakpoint die ganze Breite einnehmen! 
-      -> Kein feste Breite ab breakpoint! D.h ab einer breite soll es wachsen (bilder und spacing zwischen ihnen)! (muss wohl custom breakpoint rein machen) */}
       {/* latest collection Section */}
       <section id="lates collection">
         <HomePageContainer>
@@ -371,32 +404,69 @@ export default function HomePage() {
         </HomePageContainer>
       </section>
 
-      {/* mache das lieber in ne grid. Vom 600px bis 1200px soll es in eine 2x2 grid!*/}
-      {/* auch die container vorher könntest du lieber in eine grid anordnen! */}
+      {/* Benefits section */}
       <section id="leistung">
-        <HomePageContainer className="bg-black">
-          <div className="flex justify-between items-center flex-col sm:flex-row">
-            <Benefits
-              icon={<BoxIcon />}
-              title="Free shipping"
-              subtitle="you will love a great low prices"
-            ></Benefits>
-            <Benefits
-              icon={<BoxIcon />}
-              title="Free shipping"
-              subtitle="you will love a great low prices"
-            ></Benefits>
-            <Benefits
-              icon={<BoxIcon />}
-              title="Free shipping"
-              subtitle="you will love a great low prices"
-            ></Benefits>
-            <Benefits
-              icon={<BoxIcon />}
-              title="Free shipping"
-              subtitle="you will love a great low prices"
-            ></Benefits>
-          </div>
+        <HomePageContainer
+          className="bg-black"
+          spacing="py-[64px] px-gap-9 sm:py-[80px] sm:px-[70px]"
+        >
+          <BenefitsSection />
+        </HomePageContainer>
+      </section>
+
+      {/* testimonaial section */}
+      <section id="testimonial">
+        <HomePageContainer spacing="pt-[64px] px-gap-9 py-gap-13 sm:pt-[160px] sm:pb-[80px] sm:px-[70px]">
+          <div className="flex flex-col gap-gap-13 sm:flex-row"></div>
+        </HomePageContainer>
+      </section>
+
+      {/* get inspired section */}
+      <section id="get insppred">
+        <HomePageContainer>
+          <SectionHeaderContainer>Get Inspired</SectionHeaderContainer>
+          <UlScrollableX spacing="space-x-gap-9" className="justify-between">
+            <li className="flex-1 min-w-[313px]">
+              <div className="relative aspect-[1/1]">
+                <Image
+                  src={"/images/inpired-bild.jpg"}
+                  alt=""
+                  fill
+                  className="object-[50%_50%] object-cover"
+                />
+              </div>
+            </li>
+            <li className="flex-1 min-w-[313px]">
+              <div className="relative aspect-[1/1]">
+                <Image
+                  src={"/images/inpired-bild.jpg"}
+                  alt=""
+                  fill
+                  className="object-[50%_50%] object-cover"
+                />
+              </div>
+            </li>
+            <li className="flex-1 min-w-[313px]">
+              <div className="relative aspect-[1/1]">
+                <Image
+                  src={"/images/inpired-bild.jpg"}
+                  alt=""
+                  fill
+                  className="object-[50%_50%] object-cover"
+                />
+              </div>
+            </li>
+            <li className="flex-1 min-w-[313px]">
+              <div className="relative aspect-[1/1]">
+                <Image
+                  src={"/images/inpired-bild.jpg"}
+                  alt=""
+                  fill
+                  className="object-[50%_50%] object-cover"
+                />
+              </div>
+            </li>
+          </UlScrollableX>
         </HomePageContainer>
       </section>
     </>
