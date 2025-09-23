@@ -1,9 +1,10 @@
 import { ArrowLeftRight } from "@/components/svg-icons/ArrowIcons";
-import { ReactNode } from "react";
+import { ReactNode, useCallback } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import GlareHover from "@/components/animatedComponents/GlareHover";
 import { BoxIcon } from "@/components/svg-icons/BenefitIcons";
+import { RewievStar } from "@/components/svg-icons/ReviewStars";
 
 function HomePageContainer({
   children,
@@ -257,6 +258,108 @@ function BenefitsSection() {
   );
 }
 
+//die utility fkt gehört eigentlich nicht hier hin -> aber erstmal nur prototyp!
+const toFive = (n) => {
+  const k = Math.max(1, Math.min(5, Math.floor(n))); // das macht dass k zwischen 0 und 5 ist zwangsweise!
+  return Array(5)
+    .fill(0)
+    .map((_, i) => (i < k ? 1 : 0));
+};
+//
+function Testimonial({
+  rating,
+  title,
+  subtitle,
+  name,
+  picture,
+}: {
+  rating: 1 | 2 | 3 | 4 | 5;
+  title: string;
+  subtitle: string;
+  name?: string;
+  picture?: string;
+}) {
+  const reviewArr = toFive(rating);
+  const profilePicture = picture ? picture : "/images/ProfilePicDefault.svg";
+
+  return (
+    <div className="p-gap-11 border border-gray-200">
+      <div className="flex space-x-1 items-center mb-gap-11">
+        {reviewArr.map((review, index) => (
+          <RewievStar variant={review ? "fill" : "outline"} key={index} />
+        ))}
+      </div>
+      <div className="flex flex-col space-y-gap-9">
+        <p className="font-sm-regular text-gray-950 font-notoSerif">{title}</p>
+        <p className="font-text-md-medium text-gray-700">{subtitle}</p>
+        <div className="flex space-x-gap-7 items-center">
+          <div className="relative w-[40px] h-[40px]">
+            <Image
+              src={profilePicture}
+              alt=""
+              fill
+              className="object-cover"
+            ></Image>
+          </div>
+          <p className="font-text-lg-medium font-notoSerif text-gray-950">
+            {name}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Testimonials() {
+  //hier aus db die testimonials nehmen. Oder einfach etwas faken!
+  return (
+    <>
+      <div className="flex flex-col space-y-gap-13 w-full">
+        <SectionHeaderContainer>Testimonials</SectionHeaderContainer>
+        <div className="flex flex-col space-y-gap-9">
+          <Testimonial
+            rating={2}
+            title="“Truly Amazing with Diamond Ring”"
+            subtitle="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+            picture="/images/ProfilePicTest.svg"
+            name="Cameron Williuamson"
+          />
+          <Testimonial
+            rating={2}
+            title="“Truly Amazing with Diamond Ring”"
+            subtitle="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+            picture="/images/ProfilePicTest.svg"
+            name="Cameron Williuamson"
+          />
+        </div>
+        <ArrowLeftRight />
+      </div>
+    </>
+  );
+}
+
+function TestimonialImage() {
+  return (
+    <div className="relative aspect-[343/450] w-full sm:aspect-[634/700] min-[700px]:aspect-[340/250]">
+      <Image
+        src={"/images/TestimonialImg.jpg"}
+        alt=""
+        fill //hier fill -> display absolut
+        className="object-[50%_50%] object-cover"
+      />
+      <div className="bg-white absolute bottom-gap-9 left-gap-9 right-gap-9">
+        <Testimonial
+          rating={2}
+          title="“It’s Unbelievable, I Really Like it”"
+          subtitle="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+          picture="/images/ProfilePicTest.svg"
+          name="Cameron Williuamson"
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -415,9 +518,17 @@ export default function HomePage() {
       </section>
 
       {/* testimonaial section */}
+      {/* den teil in onenote machen: Hier gut gemacht, wie shrinkt und steigt. Auch mit den custom comp zeigen! */}
       <section id="testimonial">
         <HomePageContainer spacing="pt-[64px] px-gap-9 py-gap-13 sm:pt-[160px] sm:pb-[80px] sm:px-[70px]">
-          <div className="flex flex-col gap-gap-13 sm:flex-row"></div>
+          <div className="flex flex-col gap-gap-13 items-center sm:flex-row justify-between">
+            <div className="w-full sm:w-1/2 flex-1">
+              <Testimonials />
+            </div>
+            <div className="w-full sm:w-1/2 sm:max-w-[700px]">
+              <TestimonialImage />
+            </div>
+          </div>
         </HomePageContainer>
       </section>
 
