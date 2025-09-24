@@ -1,10 +1,12 @@
 import { ArrowLeftRight } from "@/components/svg-icons/ArrowIcons";
-import { ReactNode, useCallback } from "react";
+import { ReactNode } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import GlareHover from "@/components/animatedComponents/GlareHover";
 import { BoxIcon } from "@/components/svg-icons/BenefitIcons";
 import { RewievStar } from "@/components/svg-icons/ReviewStars";
+import Header from "@/components/Header";
+import HeaderShell from "@/components/smallComponents/HeaderShell";
 
 function HomePageContainer({
   children,
@@ -363,6 +365,40 @@ function TestimonialImage() {
 export default function HomePage() {
   return (
     <>
+      <HeaderShell>
+        <Header />
+      </HeaderShell>
+      {/*Her4o section  */}
+      <section id="hero">
+        <div className="relative aspect-[375/725] sm:aspect-[1440/1024] min-[600px]:aspect-[375/300] w-full flex justify-center items-center">
+          <Image
+            src={"/images/Hero.png"}
+            alt=""
+            fill //hier fill -> display absolut
+            className="object-[0%_50%] min-[600px]:object-[50%_50%] object-cover -z-10"
+          />
+          <div className="flex flex-col items-center p-7">
+            <p className="uppercase text-gray-100 font-text-lg-medium text-center mb-gap-5">
+              EXPRESS YOUR UNIQUE STYLE
+            </p>
+            <p className="font-2xl-regular font-notoSerif text-center text-white mb-[48px]">
+              Discover Timeless Elegance
+            </p>
+            <GlareHover
+              height=""
+              width=""
+              borderRadius="0"
+              background=""
+              className="w-fit"
+            >
+              <Button variant={"fill"} size={"xl"}>
+                SHOP NOW
+              </Button>
+            </GlareHover>
+          </div>
+        </div>
+      </section>
+
       {/* SHop by category section */}
       <section id="category">
         <HomePageContainer>

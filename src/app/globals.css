@@ -290,7 +290,7 @@
 }
 
 @utility font-text-sm-medium {
-  @apply text-sm leading-[1.4] font-medium;
+  @apply text-sm leading-[1.4];
 }
 
 @utility font-text-sm-bold {

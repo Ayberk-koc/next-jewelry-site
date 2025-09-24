@@ -1,10 +1,10 @@
 import CurrencyDropDown from "./smallComponents/CurrencyDropDown";
-
+//hier fixed weggelassen bei header class
 export default function Header() {
   return (
     <header
-      className="fixed z-40 flex justify-between items-center py-gap-11 w-full px-gap-9 sm:px-sidePadding"
-      id="header"
+      className="flex justify-between items-center py-gap-11 w-full px-gap-9 sm:px-sidePadding bg-white/60 backdrop-blur-md backdrop-saturate-150 border-b border-white/20"
+      // id="header"
     >
       <button className="xl:hidden w-[104px] cursor-pointer">
         <svg
