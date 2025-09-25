@@ -10,9 +10,11 @@ export default function ShopLayout({
   return (
     <>
       <HeaderShell overlay={false}>
-        <Header />
+        <Header className="border-b border-gray-200" />
       </HeaderShell>
-      <Breadcrumbs />
+      <div className="pt-gap-9 px-gap-9 sm:pt-gap-13 sm:px-[70px]">
+        <Breadcrumbs />
+      </div>
       {children}
     </>
   );

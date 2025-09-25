@@ -34,46 +34,44 @@ export default function Breadcrumbs() {
   });
 
   return (
-    <div className="pt-gap-9 px-gap-9 sm:pt-gap-13 sm:px-[70px] ">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link
-                href="/"
-                className="font-text-sm-medium text-gray-950 uppercase"
-              >
-                Home
-              </Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link
+              href="/"
+              className="font-text-sm-medium text-gray-950 uppercase"
+            >
+              Home
+            </Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          {crumbs.map((link, i) => {
-            const last = i === crumbs.length - 1;
-            return (
-              <Fragment key={link.label}>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  {last ? (
-                    <BreadcrumbPage className="font-text-sm-medium text-gray-950 uppercase">
+        {crumbs.map((link, i) => {
+          const last = i === crumbs.length - 1;
+          return (
+            <Fragment key={link.label}>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                {last ? (
+                  <BreadcrumbPage className="font-text-sm-medium text-gray-950 uppercase">
+                    {link.label}
+                  </BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink asChild>
+                    <Link
+                      href={link.href}
+                      className="font-text-sm-medium text-gray-950 uppercase"
+                    >
                       {link.label}
-                    </BreadcrumbPage>
-                  ) : (
-                    <BreadcrumbLink asChild>
-                      <Link
-                        href={link.href}
-                        className="font-text-sm-medium text-gray-950 uppercase"
-                      >
-                        {link.label}
-                      </Link>
-                    </BreadcrumbLink>
-                  )}
-                </BreadcrumbItem>
-              </Fragment>
-            );
-          })}
-        </BreadcrumbList>
-      </Breadcrumb>
-    </div>
+                    </Link>
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            </Fragment>
+          );
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 }

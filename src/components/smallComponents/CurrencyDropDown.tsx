@@ -12,12 +12,13 @@ import {
 import { useState } from "react";
 
 export default function CurrencyDropDown() {
+  //das noch in eine Kontext packen! Noch viel zu wiederholen! Oder sonst irgendwas ausgeben!
   const [currency, setCurrency] = useState("EUR");
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center header-list-element gap-gap-3">
+        <button className="flex items-center header-list-element gap-gap-3 group">
           <span className="font-text-md-medium text-gray-950">EUR €</span>
 
           <svg
@@ -26,6 +27,7 @@ export default function CurrencyDropDown() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
+            className="group-data-[state=open]:rotate-180 transition duration-200"
           >
             <path
               d="M7 10L12 14L17 10"
@@ -36,7 +38,7 @@ export default function CurrencyDropDown() {
           </svg>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-20">
+      <DropdownMenuContent className="w-[var(--radix-popper-anchor-width)] rounded-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2">
         <DropdownMenuLabel className="font-text-md-regular">
           Select Currency
         </DropdownMenuLabel>

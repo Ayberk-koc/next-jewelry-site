@@ -7,6 +7,7 @@ import { BoxIcon } from "@/components/svg-icons/BenefitIcons";
 import { RewievStar } from "@/components/svg-icons/ReviewStars";
 import Header from "@/components/Header";
 import HeaderShell from "@/components/smallComponents/HeaderShell";
+import ProductItem from "@/components/ProductItem";
 
 function HomePageContainer({
   children,
@@ -108,47 +109,6 @@ function Categorys() {
         />
       </li>
     </UlScrollableX>
-  );
-}
-
-function CollectionItem({
-  title,
-  image,
-  price,
-  priceNoDiscount,
-}: {
-  title: string;
-  image: string;
-  price: string | number;
-  priceNoDiscount?: string | number;
-}) {
-  return (
-    <div className="flex flex-col space-y-gap-5">
-      <div className="relative aspect-[313/330] group">
-        <Image
-          src={image}
-          alt=""
-          fill //hier fill -> display absolut
-          className="object-[50%_50%] object-cover"
-        />
-        <div className="flex justify-center items-center absolute bottom-0 w-full py-gap-9 px-gap-13 bg-black/90 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition ease-in-out duration-300">
-          <p className="font-text-md-medium uppercase text-white">
-            select option
-          </p>
-        </div>
-      </div>
-      <div className="flex flex-col space-y-gap-3">
-        <p className="font-text-md-medium">{title}</p>
-        <p className="flex space-x-gap-3 font-text-md-medium">
-          <span>{price}$</span>
-          {priceNoDiscount && (
-            <span className="text-gray-400 line-through">
-              {priceNoDiscount}$
-            </span>
-          )}
-        </p>
-      </div>
-    </div>
   );
 }
 
@@ -415,7 +375,7 @@ export default function HomePage() {
           <SectionHeaderContainer>Latest Collaection</SectionHeaderContainer>
           <UlScrollableX spacing="space-x-gap-9" className="justify-between">
             <li className="flex-1 min-w-[313px] max-w-[360px]">
-              <CollectionItem
+              <ProductItem
                 title="Rose gold diamon earrings"
                 image="/images/earrings.png"
                 price={300}
@@ -423,7 +383,7 @@ export default function HomePage() {
               />
             </li>
             <li className="flex-1 min-w-[313px] max-w-[360px]">
-              <CollectionItem
+              <ProductItem
                 title="Rose gold diamon earrings"
                 image="/images/earrings.png"
                 price={300}
@@ -431,7 +391,7 @@ export default function HomePage() {
               />
             </li>
             <li className="flex-1 min-w-[313px] max-w-[360px]">
-              <CollectionItem
+              <ProductItem
                 title="Rose gold diamon earrings"
                 image="/images/earrings.png"
                 price={300}
@@ -439,7 +399,7 @@ export default function HomePage() {
               />
             </li>
             <li className="flex-1 min-w-[313px] max-w-[360px]">
-              <CollectionItem
+              <ProductItem
                 title="Rose gold diamon earrings"
                 image="/images/earrings.png"
                 price={300}
@@ -532,7 +492,7 @@ export default function HomePage() {
               />
             </div>
             <div className="w-full px-gap-9 py-gap-9 min-[650px]:w-1/2 min-[650px]:px-[10%] min-[650px]:py-[7%]">
-              <CollectionItem
+              <ProductItem
                 title="Rose gold diamon earrings"
                 image="/images/earrings.png"
                 price={300}
