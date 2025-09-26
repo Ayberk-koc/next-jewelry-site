@@ -221,7 +221,7 @@ function BenefitsSection() {
 }
 
 //die utility fkt gehört eigentlich nicht hier hin -> aber erstmal nur prototyp!
-const toFive = (n) => {
+const toFive = (n: number) => {
   const k = Math.max(1, Math.min(5, Math.floor(n))); // das macht dass k zwischen 0 und 5 ist zwangsweise!
   return Array(5)
     .fill(0)
