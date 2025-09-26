@@ -1,4 +1,4 @@
-import CurrencyDropDown from "./smallComponents/CurrencyDropDown";
+import CurrencyDropDown from "./CurrencyDropDown";
 //hier fixed weggelassen bei header class
 export default function Header({ className }: { className?: string }) {
   return (
