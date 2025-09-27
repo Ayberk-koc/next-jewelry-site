@@ -254,7 +254,7 @@
 }
 
 @utility font-text-xl-medium {
-  @apply text-xl leading-[1.5] font-medium;
+  @apply text-xl leading-[1.5];
 }
 
 @utility font-text-xl-bold {

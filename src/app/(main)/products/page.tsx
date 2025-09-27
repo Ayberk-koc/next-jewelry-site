@@ -1,3 +1,5 @@
+"use client";
+
 import ProductItem from "@/components/ProductItem";
 import DropDownShell from "@/components/smallComponents/DropDownShell";
 import { DownArrow } from "@/components/svg-icons/ArrowIcons";
@@ -16,7 +18,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+
 import { CloseSheetIcon } from "@/components/svg-icons/CloseIcons";
+import FilterForm from "@/components/forms/sheetForms/FilterForm";
 
 function MainContainer({ children }: { children: ReactNode }) {
   return (
@@ -26,26 +30,11 @@ function MainContainer({ children }: { children: ReactNode }) {
   );
 }
 
-// function FilterSideSheet({ children }: { children: ReactNode }) {
-//   return (
-//     <SheetShell>
-//       <SheetShell.Trigger>{children}</SheetShell.Trigger>
-//       <SheetShell.Content title="Filter">
-//         <p>Hier content von modal</p>
-//       </SheetShell.Content>
-//     </SheetShell>
-//   );
-// }
-
-// <SheetClose>
-//   <CloseSheetIcon />
-// </SheetClose>
-
 function FilterSideSheet({ children }: { children: ReactNode }) {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent>
+      <SheetContent side="right" mobileSide="bottom">
         <SheetHeader className="sr-only">
           <SheetTitle>Filter</SheetTitle>
         </SheetHeader>
@@ -58,16 +47,30 @@ function FilterSideSheet({ children }: { children: ReactNode }) {
               <CloseSheetIcon />
             </SheetClose>
           </div>
+          <FilterForm></FilterForm>
         </div>
       </SheetContent>
     </Sheet>
   );
 }
 
+{
+  /* <Accordion type="multiple">
+  <AccordionItem value="item-1" className="border-gray-200">
+    <AccordionTrigger>
+      <p className="font-text-xl-medium text-gray-950">Categories</p>
+    </AccordionTrigger>
+
+    <AccordionContent>
+      <p>hier content</p>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>; */
+}
+
 //das mache später. Wenn ich das ganze js mache! Das ist zum sortieren! Mache dass man mit searchparams sortiert!
 // const sortByCategories = ["Popularity", "Price"] as const;
 // type SortValue = (typeof sortByCategories)[number];
-
 function FilterBar() {
   return (
     <div className="w-full flex flex-col items-start gap-gap-9 justify-between min-[710px]:flex-row min-[710px]:items-center">
