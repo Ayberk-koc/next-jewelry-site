@@ -21,14 +21,7 @@ import {
 
 import { CloseSheetIcon } from "@/components/svg-icons/CloseIcons";
 import FilterForm from "@/components/forms/sheetForms/FilterForm";
-
-function MainContainer({ children }: { children: ReactNode }) {
-  return (
-    <section className="py-gap-13 px-gap-9 sm:px-[70px] sm:pb-[80px] flex flex-col items-center space-y-gap-13 sm:space-y-[48px] max-w-[1440px] mx-auto">
-      {children}
-    </section>
-  );
-}
+import { MainContainer } from "@/components/containers/MainContainer";
 
 function FilterSideSheet({ children }: { children: ReactNode }) {
   return (
@@ -38,8 +31,8 @@ function FilterSideSheet({ children }: { children: ReactNode }) {
         <SheetHeader className="sr-only">
           <SheetTitle>Filter</SheetTitle>
         </SheetHeader>
-        <div className="p-gap-9 sm:p-gap-11 flex flex-col space-y-gap-11 h-full">
-          <div className="pb-gap-11 flex justify-between items-center space-x-gap-3">
+        <div className="p-gap-9 sm:p-gap-11 flex flex-col h-full">
+          <div className="mb-gap-11 flex justify-between items-center space-x-gap-3">
             <p className="font-sm-regular font-notoSerif text-gray-950 ">
               Filter
             </p>
@@ -47,25 +40,13 @@ function FilterSideSheet({ children }: { children: ReactNode }) {
               <CloseSheetIcon />
             </SheetClose>
           </div>
-          <FilterForm />
+          <div className="flex-1 min-h-0">
+            <FilterForm />
+          </div>
         </div>
       </SheetContent>
     </Sheet>
   );
-}
-
-{
-  /* <Accordion type="multiple">
-  <AccordionItem value="item-1" className="border-gray-200">
-    <AccordionTrigger>
-      <p className="font-text-xl-medium text-gray-950">Categories</p>
-    </AccordionTrigger>
-
-    <AccordionContent>
-      <p>hier content</p>
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>; */
 }
 
 //das mache später. Wenn ich das ganze js mache! Das ist zum sortieren! Mache dass man mit searchparams sortiert!

@@ -68,17 +68,20 @@ export default function FilterForm() {
           e.preventDefault();
           form.handleSubmit(onSubmit);
         }}
-        className="space-y-gap-11 flex flex-col h-full overflow-hidden" //note: Hier overflow-hidden, weil die flexbox nicht wachsen soll! Damit scrollen mögich!! Der child div hat ja keine feste höhe hier! flex-1 sagt ja: nimm restlichen platz. Wenn der parent wachsen kann, dann wird parent wachsen und div nimmt den platz der nun da ist!
+        className="space-y-gap-11 flex flex-col h-full"
       >
         <div className="flex-1 overflow-hidden">
           <ScrollArea className="h-full">
             <Accordion
               type="multiple"
               defaultValue={["", "", ""]}
-              className="flex flex-col space-y-gap-11"
+              className="flex flex-col"
             >
-              <AccordionItem value="Category" className="border-gray-200">
-                <AccordionTrigger className="py-0 mb-gap-9">
+              <AccordionItem
+                value="Category"
+                className="border-t bprder-gray-200"
+              >
+                <AccordionTrigger className="py-gap-9">
                   <p className="font-text-xl-medium text-gray-950">
                     Categories
                   </p>
@@ -128,7 +131,7 @@ export default function FilterForm() {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="PriceRange" className="border-gray-200">
-                <AccordionTrigger className="py-0 mb-gap-9">
+                <AccordionTrigger className="py-gap-9">
                   <p className="font-text-xl-medium text-gray-950">
                     Filter By Price
                   </p>
@@ -148,6 +151,7 @@ export default function FilterForm() {
                             <FormItem>
                               <FormControl>
                                 <Slider
+                                  step={5}
                                   min={0}
                                   max={100}
                                   value={[...(field.value ?? [0, 100])]}
@@ -166,7 +170,7 @@ export default function FilterForm() {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="Size" className="border-gray-200">
-                <AccordionTrigger className="py-0 mb-gap-9">
+                <AccordionTrigger className="py-gap-9">
                   <p className="font-text-xl-medium text-gray-950">Sizes</p>
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col space-y-gap-9">
