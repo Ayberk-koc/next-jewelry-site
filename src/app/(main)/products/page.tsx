@@ -38,8 +38,8 @@ function FilterSideSheet({ children }: { children: ReactNode }) {
         <SheetHeader className="sr-only">
           <SheetTitle>Filter</SheetTitle>
         </SheetHeader>
-        <div className="p-gap-9 sm:p-gap-11 flex flex-col space-y-gap-11">
-          <div className="pb-gap-11 flex justify-between items-center space-x-gap-3 border-b border-gray-200">
+        <div className="p-gap-9 sm:p-gap-11 flex flex-col space-y-gap-11 h-full">
+          <div className="pb-gap-11 flex justify-between items-center space-x-gap-3">
             <p className="font-sm-regular font-notoSerif text-gray-950 ">
               Filter
             </p>
@@ -47,7 +47,7 @@ function FilterSideSheet({ children }: { children: ReactNode }) {
               <CloseSheetIcon />
             </SheetClose>
           </div>
-          <FilterForm></FilterForm>
+          <FilterForm />
         </div>
       </SheetContent>
     </Sheet>
@@ -210,30 +210,36 @@ function ProductsListing() {
 }
 
 function Pagenation() {
+  //das auch über eine route erledigen. Also wenn page 2, soll das über search-params laufen damit keine client component
+  //haben muss!
   return (
     <div className="flex gap-gap-13 items-center flex-wrap max-[600px]:gap-gap-9 max-[400px]:gap-gap-7">
-      <Button variant={"outline"} size={"xl"} className="font-text-md-medium">
+      <Button
+        variant={"outline"}
+        size={"xl"}
+        className="font-text-md-medium max-[500px]:gap-gap-3 max-[500px]:py-gap-4 max-[500px]:px-gap-7"
+      >
         PREV
       </Button>
       <div className="flex items-center gap-gap-9 max-[600px]:gap-gap-9 max-[400px]:gap-gap-7">
         <Button
           variant={"fill"}
           size={"xl"}
-          className="font-text-md-medium w-[59px]"
+          className="font-text-md-medium min-[500px]:w-[59px] max-[500px]:gap-gap-3 max-[500px]:py-gap-4 max-[500px]:px-gap-7"
         >
           01
         </Button>
         <Button
           variant={"outline"}
           size={"xl"}
-          className="font-text-md-medium w-[59px]"
+          className="font-text-md-medium min-[500px]:w-[59px] max-[500px]:gap-gap-3 max-[500px]:py-gap-4 max-[500px]:px-gap-7"
         >
           02
         </Button>
         <Button
           variant={"outline"}
           size={"xl"}
-          className="font-text-md-medium w-[59px]"
+          className="font-text-md-medium min-[500px]:w-[59px] max-[500px]:gap-gap-3 max-[500px]:py-gap-4 max-[500px]:px-gap-7"
         >
           03
         </Button>
@@ -241,7 +247,7 @@ function Pagenation() {
       <Button
         variant={"fill"}
         size={"xl"}
-        className="font-text-md-medium border"
+        className="font-text-md-medium border max-[500px]:gap-gap-3 max-[500px]:py-gap-4 max-[500px]:px-gap-7"
       >
         NEXT
       </Button>
