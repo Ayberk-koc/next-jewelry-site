@@ -147,13 +147,7 @@ function CTAImage({
           </p>
           <p className="font-text-md-medium text-gray-700">{subtitle}</p>
         </div>
-        <GlareHover
-          height=""
-          width=""
-          borderRadius="0"
-          background=""
-          className="w-fit"
-        >
+        <GlareHover>
           <Button variant={"fill"} size={"xl"} className="w-fit">
             <p className="font-text-md-medium">Shop Now</p>
           </Button>
@@ -344,13 +338,7 @@ export default function HomePage() {
             <p className="font-2xl-regular font-notoSerif text-center text-white mb-[48px]">
               Discover Timeless Elegance
             </p>
-            <GlareHover
-              height=""
-              width=""
-              borderRadius="0"
-              background=""
-              className="w-fit"
-            >
+            <GlareHover>
               <Button variant={"fill"} size={"xl"}>
                 SHOP NOW
               </Button>

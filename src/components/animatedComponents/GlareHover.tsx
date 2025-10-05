@@ -20,10 +20,10 @@ interface GlareHoverProps {
 }
 
 const GlareHover: React.FC<GlareHoverProps> = ({
-  width = "500px",
-  height = "500px",
-  background = "#000",
-  borderRadius = "10px",
+  width = "",
+  height = "",
+  background = "",
+  borderRadius = "0",
   borderColor = "#333",
   children,
   glareColor = "#ffffff",
@@ -89,7 +89,7 @@ const GlareHover: React.FC<GlareHoverProps> = ({
 
   return (
     <div
-      className={`relative grid place-items-center overflow-hidden border cursor-pointer ${className}`}
+      className={`relative grid place-items-center overflow-hidden border cursor-pointer w-fit ${className}`}
       style={{
         width,
         height,
