@@ -30,6 +30,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 ///////small component///////////
 const icontextCombiVariants = cva("flex", {
@@ -71,21 +77,27 @@ const toFive = (n: number) => {
     .map((_, i) => (i < k ? 1 : 0));
 };
 
-function Rating({
+function StarsReview({
   rating,
   className,
 }: {
-  rating: 1 | 2 | 3 | 4 | 5;
+  rating: number;
   className?: string;
 }) {
   const reviewArr = toFive(rating);
   return (
+    <div className={cn("flex space-x-1 items-center", className)}>
+      {reviewArr.map((review, index) => (
+        <RewievStar variant={review ? "fill" : "outline"} key={index} />
+      ))}
+    </div>
+  );
+}
+
+function Rating({ rating, className }: { rating: number; className?: string }) {
+  return (
     <div className={cn("flex gap-x-gap-9", className)}>
-      <div className="flex space-x-1 items-center mb-gap-11">
-        {reviewArr.map((review, index) => (
-          <RewievStar variant={review ? "fill" : "outline"} key={index} />
-        ))}
-      </div>
+      <StarsReview rating={rating} />
       <p className="font-text-md-medium text-gray-950">
         {rating}.0 (1.2k Reviews)
       </p>
@@ -97,35 +109,45 @@ function Rating({
 function ProductImages() {
   const images = [
     { imgSrc: "/images/product-test.png", imgAlt: " " },
-    { imgSrc: "/images/woman.png", imgAlt: " " },
+    { imgSrc: "/images/porträt.jpg", imgAlt: " " },
+    { imgSrc: "/images/porträt.jpg", imgAlt: " " },
   ];
   return (
-    <Carousel className="w-full">
+    <Carousel className="w-full relative">
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {images.map((image, index) => (
           <CarouselItem key={index}>
             <div className="relative aspect-[676/640] bg-gray-100">
               <Image
-                src={"/images/product-test.png"}
-                alt=""
-                fill //hier fill -> display absolut
+                src={image.imgSrc}
+                alt={image.imgAlt}
+                fill
                 className="object-[50%_50%] object-cover"
               />
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious
+        className="absolute left-2"
+        variant={"outline"}
+        size={"sm"}
+      />
+      <CarouselNext
+        className="absolute right-2"
+        variant={"outline"}
+        size={"sm"}
+      />
     </Carousel>
   );
 }
 
 function ProductDetailsSideContent() {
+  //das ist nur dumme component. Alle state management mache in wrapper-component! Hier soll nur der style sein. Trenne stets logik und style
   return (
     <>
       {/* text  mit beschreibung und stock anzahl */}
-      <Rating rating={5} className="mb-gap-16" />
+      <Rating rating={5} className="mb-gap-9" />
       <p className="text-gray-950 font-lg-regular font-notoSerif mb-gap-7">
         Rose Gold Diamond Earrings
       </p>
@@ -154,11 +176,13 @@ function ProductDetailsSideContent() {
             <PlusIcon />
           </button>
         </div>
-        <GlareHover className="flex-1">
-          <Button value={"fill"} size={"xl"} className="w-full">
-            ADD TO CART
-          </Button>
-        </GlareHover>
+        <div className="flex-1">
+          <GlareHover className="w-full">
+            <Button value={"fill"} size={"xl"} className="w-full">
+              ADD TO CART
+            </Button>
+          </GlareHover>
+        </div>
       </div>
       <Button
         size={"xl"}
@@ -167,6 +191,8 @@ function ProductDetailsSideContent() {
       >
         BUY NOW
       </Button>
+
+      {/* das gehlört dnoch zdazu */}
 
       {/* diese kleinen icons horizontal aligned */}
       <div className="flex w-full">
@@ -244,16 +270,226 @@ function ProductDetailsSideContent() {
   );
 }
 
+function InfosAccordion() {
+  return (
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full"
+      defaultValue="item-1"
+    >
+      <div className="flex flex-col gap-y-gap-11">
+        <AccordionItem value="item-1" className="border-0">
+          <AccordionTrigger className="font-text-md-medium text-gray-950 uppercase py-0 cursor-pointer">
+            Description
+          </AccordionTrigger>
+          <AccordionContent className="font-text-sm-medium text-gray-500 border-b border-gray-200 mt-gap-5">
+            <p>
+              The Diamond Scattered Stud Earrings are crafted from high-quality
+              gold, featuring a unique pattern of brilliant round diamonds
+              totaling approximately 1.06 carats. Long established fact that a
+              reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it
+              has a more-or-less normal distribution of letters, as opposed to
+              using 'Content here, content here', making it look like readable
+              English. Many desktop publishing packages and web page editors now
+              use Lorem Ipsum as their default model text, and a search for
+              'lorem ipsum' will uncover many web sites still in their infancy.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2" className="border-0">
+          <AccordionTrigger className="font-text-md-medium text-gray-950 uppercase py-0 cursor-pointer">
+            Shipping
+          </AccordionTrigger>
+          <AccordionContent className="font-text-sm-medium text-gray-500 border-b border-gray-200 mt-gap-5">
+            <p>
+              The Diamond Scattered Stud Earrings are crafted from high-quality
+              gold, featuring a unique pattern of brilliant round diamonds
+              totaling approximately 1.06 carats. Long established fact that a
+              reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it
+              has a more-or-less normal distribution of letters, as opposed to
+              using 'Content here, content here', making it look like readable
+              English. Many desktop publishing packages and web page editors now
+              use Lorem Ipsum as their default model text, and a search for
+              'lorem ipsum' will uncover many web sites still in their infancy.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3" className="border-0">
+          <AccordionTrigger className="font-text-md-medium text-gray-950 uppercase py-0 cursor-pointer">
+            packaging
+          </AccordionTrigger>
+          <AccordionContent className="font-text-sm-medium text-gray-500 border-b border-gray-200 mt-gap-5">
+            <p>
+              The Diamond Scattered Stud Earrings are crafted from high-quality
+              gold, featuring a unique pattern of brilliant round diamonds
+              totaling approximately 1.06 carats. Long established fact that a
+              reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it
+              has a more-or-less normal distribution of letters, as opposed to
+              using 'Content here, content here', making it look like readable
+              English. Many desktop publishing packages and web page editors now
+              use Lorem Ipsum as their default model text, and a search for
+              'lorem ipsum' will uncover many web sites still in their infancy.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-4" className="border-0">
+          <AccordionTrigger className="font-text-md-medium text-gray-950 uppercase py-0 cursor-pointer">
+            return
+          </AccordionTrigger>
+          <AccordionContent className="font-text-sm-medium text-gray-500 border-b border-gray-200 mt-gap-5">
+            <p>
+              The Diamond Scattered Stud Earrings are crafted from high-quality
+              gold, featuring a unique pattern of brilliant round diamonds
+              totaling approximately 1.06 carats. Long established fact that a
+              reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it
+              has a more-or-less normal distribution of letters, as opposed to
+              using 'Content here, content here', making it look like readable
+              English. Many desktop publishing packages and web page editors now
+              use Lorem Ipsum as their default model text, and a search for
+              'lorem ipsum' will uncover many web sites still in their infancy.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+      </div>
+    </Accordion>
+  );
+}
+
+function Review({
+  text,
+  subText,
+  name,
+  rating,
+  date,
+  imgSrc,
+}: {
+  text: string;
+  subText?: string;
+  date?: string;
+  name?: string;
+  rating: number;
+  imgSrc?: string;
+}) {
+  return (
+    <div>
+      <div id="userBadge" className="flex gap-x-gap-7 items-stretch mb-gap-9">
+        <div className="relative w-[50px] h-[50px] rounded-full">
+          <Image
+            src={imgSrc ?? "/images/badge.svg"}
+            alt="profile picture review"
+            fill
+            className="object-[0%_70%] object-cover"
+          ></Image>
+        </div>
+        <div className="flex flex-col gap-y-gap-3">
+          <p className="font-text-md-medium text-gray-950">
+            {name ? name : "Anonym"}
+          </p>
+          <StarsReview rating={rating} />
+        </div>
+      </div>
+      <div className="pb-gap-9 border-b border-gray-200">
+        <div className="mb-gap-7">
+          <p className="font-sm-regular text-gray-950 font-notoSerif">
+            &#34;{text}&#34;
+          </p>
+          {subText ? (
+            <p className="mt-gap-5 font-text-md-medium text-gray-500">
+              {subText}
+            </p>
+          ) : null}
+        </div>
+        <p className="font-text-sm-medium text-gray-500">
+          Review by <span className="text-gray-950">Gemjewel</span> Posted on{" "}
+          <span className="text-gray-950">{date ?? "Aug 12, 2025"}</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ReviewsSection() {
+  //hier nehem id von produkt um db call für richtige reviews zu machen
+  const reviews = [
+    {
+      id: 1,
+      rating: 5,
+      text: "My wife is thrilled with these earrings.",
+      subText:
+        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+    },
+    {
+      id: 2,
+      rating: 5,
+      text: "I absolutely adored these fabulous diamond earrings—I'm in love! 😍",
+      subText:
+        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+    },
+  ];
+
+  return (
+    <>
+      <div className="flex items-center justify-between gap-x-gap-9 mb-gap-13">
+        <p className="font-md-regular font-notoSerif">Reviews</p>
+        <Button
+          variant={"outline"}
+          size={"lg"}
+          className="font-text-md-medium text-gray-950 uppercase"
+        >
+          Write a Review
+        </Button>
+      </div>
+      <div className="w-full flex flex-col gap-y-gap-13">
+        {reviews.map((review) => (
+          <Review
+            key={review.id}
+            rating={review.rating}
+            text={review.text}
+            subText={review.subText}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+
+function SimilarProductsSection() {
+  //mache diese bilder immer so, dass entweder 1, 2, 3 oder 4 von ihnen drauf zu sehen sind. Wenn es weniger als 4 sind, mache dass man slide show sehen kann
+  //mit step-breite so, dass immer neue zu sehen sind. D.h wenn 3 zu sehen sind step-1 wenn 2 zu sehen sind step-2 wenn 1 zu sehen ist step-1
+  //außerdem müssen hier ja die daten rein!!
+  return (
+    <>
+      <p className="font-md-regular text-gray-950 font-notoSerif mb-gap-13">
+        Similar Products
+      </p>
+    </>
+  );
+}
+
 export default function ProductPage() {
   return (
     <MainContainer>
-      <div className="flex gap-x-[32px] w-full">
-        <div className="basis-0 grow-[576] h-fit sticky top-0">
+      <div className="flex flex-col gap-y-[48px] min-[900px]:flex-row min-[900px]:gap-x-[32px] min-[900px]:gap-y-0 w-full">
+        <div className="basis-0 grow-[576] h-fit min-[900px]:sticky top-0">
           <ProductImages />
         </div>
         <div className="basis-0 grow-[560]">
           <ProductDetailsSideContent />
         </div>
+      </div>
+      <div className="w-full">
+        <InfosAccordion />
+      </div>
+      <div className="w-full">
+        <ReviewsSection />
+      </div>
+      <div id="similar products" className="w-full">
+        <SimilarProductsSection />
       </div>
     </MainContainer>
   );

@@ -349,6 +349,51 @@ function StripeIcon() {
   );
 }
 
+function ArrowRightIcon({ canScrollNext }: { canScrollNext: boolean }) {
+  const strokeColor = canScrollNext ? "text-grey-950" : "text-grey-200";
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      className={`${strokeColor}`}
+    >
+      <path
+        d="M10 7L14 12L10 17"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ArrowLeftIcon({ canScrollPrev }: { canScrollPrev: boolean }) {
+  const strokeColor = canScrollPrev ? "text-grey-950" : "text-grey-200";
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      className={`${strokeColor}`}
+    >
+      <path
+        d="M14 7L10 12L14 17"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
   HeartIcon,
   ShippingInfoIcon,
@@ -364,4 +409,6 @@ export {
   VisaIcon,
   MastercardIcon,
   StripeIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
 };
