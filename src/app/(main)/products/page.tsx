@@ -1,4 +1,5 @@
 "use client";
+//mache das noch zur server component.
 
 import ProductItem from "@/components/ProductItem";
 import DropDownShell from "@/components/smallComponents/DropDownShell";

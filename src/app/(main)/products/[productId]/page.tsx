@@ -36,6 +36,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import ProductItem from "@/components/ProductItem";
 
 ///////small component///////////
 const icontextCombiVariants = cva("flex", {
@@ -458,6 +459,94 @@ function ReviewsSection() {
   );
 }
 
+function SimilarProductsCarousel() {
+  //wenn ich infinite loops haben will, mache   <Carousel className="w-full relative" opts={{ loop: true }}> bzw muss
+  //alle die keys in as opts object rein machen. Die mögl keys sehe hier: https://www.embla-carousel.com/api/options/
+
+  //erstmal nur statisch! Db anbindung mache später
+  const items = [
+    {
+      id: 1,
+      title: "Rose fold diamond earring",
+      img: "/images/earrings.png",
+      price: 200,
+      priceNoDiscount: 400,
+    },
+    {
+      id: 2,
+      title: "Rose fold diamond earring",
+      img: "/images/earrings.png",
+      price: 300,
+      priceNoDiscount: 400,
+    },
+    {
+      id: 3,
+      title: "Rose fold diamond earring",
+      img: "/images/earrings.png",
+      price: 400,
+      priceNoDiscount: 400,
+    },
+    {
+      id: 4,
+      title: "Rose fold diamond earring",
+      img: "/images/earrings.png",
+      price: 500,
+      priceNoDiscount: 400,
+    },
+    {
+      id: 5,
+      title: "Rose fold diamond earring",
+      img: "/images/earrings.png",
+      price: 600,
+      priceNoDiscount: 400,
+    },
+    {
+      id: 6,
+      title: "Rose fold diamond earring",
+      img: "/images/earrings.png",
+      price: 700,
+      priceNoDiscount: 400,
+    },
+  ];
+
+  return (
+    <Carousel
+      className="w-full relative"
+      opts={{
+        align: "start",
+        // slidesToScroll: "auto",   //falls immer so weit scrollen, dass alle alten weg sind
+        containScroll: "trimSnaps",
+      }}
+    >
+      <CarouselContent className="-ml-gap-5 min-[900px]:-ml-gap-gap-9">
+        {items.map((item) => (
+          <CarouselItem
+            className="basis-1/2 pl-gap-5 min-[900px]:pl-gap-gap-9 min-[900px]:basis-1/3 min-[1400px]:basis-1/4"
+            key={item.id}
+          >
+            <ProductItem
+              title={item.title ?? "Fallback"}
+              image={item.img ?? "/images/earrings.png"}
+              price={item.price ?? 300}
+              priceNoDiscount={item.priceNoDiscount ?? 400}
+            />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious
+        className="absolute left-2 top-[45%]"
+        variant={"outline"}
+        size={"sm"}
+      />
+      <CarouselNext
+        className="absolute right-2 top-[45%]"
+        variant={"outline"}
+        size={"sm"}
+      />
+    </Carousel>
+  );
+}
+
 function SimilarProductsSection() {
   //mache diese bilder immer so, dass entweder 1, 2, 3 oder 4 von ihnen drauf zu sehen sind. Wenn es weniger als 4 sind, mache dass man slide show sehen kann
   //mit step-breite so, dass immer neue zu sehen sind. D.h wenn 3 zu sehen sind step-1 wenn 2 zu sehen sind step-2 wenn 1 zu sehen ist step-1
@@ -467,6 +556,7 @@ function SimilarProductsSection() {
       <p className="font-md-regular text-gray-950 font-notoSerif mb-gap-13">
         Similar Products
       </p>
+      <SimilarProductsCarousel />
     </>
   );
 }
