@@ -266,7 +266,7 @@
 }
 
 @utility font-text-lg-medium {
-  @apply text-lg leading-[1.55] font-medium;
+  @apply text-lg leading-[1.55];
 }
 
 @utility font-text-lg-bold {

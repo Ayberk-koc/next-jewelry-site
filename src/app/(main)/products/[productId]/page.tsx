@@ -37,6 +37,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import ProductItem from "@/components/ProductItem";
+import ReviewDialog from "@/components/dialogs/ReviewDialog";
 
 ///////small component///////////
 const icontextCombiVariants = cva("flex", {
@@ -75,7 +76,7 @@ const toFive = (n: number) => {
   const k = Math.max(1, Math.min(5, Math.floor(n))); // das macht dass k zwischen 0 und 5 ist zwangsweise!
   return Array(5)
     .fill(0)
-    .map((_, i) => (i < k ? 1 : 0));
+    .map((_, i) => (i < k ? true : false));
 };
 
 function StarsReview({
@@ -89,7 +90,7 @@ function StarsReview({
   return (
     <div className={cn("flex space-x-1 items-center", className)}>
       {reviewArr.map((review, index) => (
-        <RewievStar variant={review ? "fill" : "outline"} key={index} />
+        <RewievStar fill={review} key={index} />
       ))}
     </div>
   );
@@ -292,10 +293,10 @@ function InfosAccordion() {
               reader will be distracted by the readable content of a page when
               looking at its layout. The point of using Lorem Ipsum is that it
               has a more-or-less normal distribution of letters, as opposed to
-              using 'Content here, content here', making it look like readable
+              using Content here, content here, making it look like readable
               English. Many desktop publishing packages and web page editors now
               use Lorem Ipsum as their default model text, and a search for
-              'lorem ipsum' will uncover many web sites still in their infancy.
+              lorem ipsum will uncover many web sites still in their infancy.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -311,10 +312,10 @@ function InfosAccordion() {
               reader will be distracted by the readable content of a page when
               looking at its layout. The point of using Lorem Ipsum is that it
               has a more-or-less normal distribution of letters, as opposed to
-              using 'Content here, content here', making it look like readable
+              using Content here, content here, making it look like readable
               English. Many desktop publishing packages and web page editors now
               use Lorem Ipsum as their default model text, and a search for
-              'lorem ipsum' will uncover many web sites still in their infancy.
+              lorem ipsum will uncover many web sites still in their infancy.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -330,10 +331,10 @@ function InfosAccordion() {
               reader will be distracted by the readable content of a page when
               looking at its layout. The point of using Lorem Ipsum is that it
               has a more-or-less normal distribution of letters, as opposed to
-              using 'Content here, content here', making it look like readable
+              using Content here, content here, making it look like readable
               English. Many desktop publishing packages and web page editors now
               use Lorem Ipsum as their default model text, and a search for
-              'lorem ipsum' will uncover many web sites still in their infancy.
+              lorem ipsum will uncover many web sites still in their infancy.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -349,10 +350,10 @@ function InfosAccordion() {
               reader will be distracted by the readable content of a page when
               looking at its layout. The point of using Lorem Ipsum is that it
               has a more-or-less normal distribution of letters, as opposed to
-              using 'Content here, content here', making it look like readable
+              using Content here, content here, making it look like readable
               English. Many desktop publishing packages and web page editors now
               use Lorem Ipsum as their default model text, and a search for
-              'lorem ipsum' will uncover many web sites still in their infancy.
+              lorem ipsum will uncover many web sites still in their infancy.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -419,7 +420,7 @@ function ReviewsSection() {
   const reviews = [
     {
       id: 1,
-      rating: 5,
+      rating: 4,
       text: "My wife is thrilled with these earrings.",
       subText:
         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
@@ -437,13 +438,15 @@ function ReviewsSection() {
     <>
       <div className="flex items-center justify-between gap-x-gap-9 mb-gap-13">
         <p className="font-md-regular font-notoSerif">Reviews</p>
-        <Button
-          variant={"outline"}
-          size={"lg"}
-          className="font-text-md-medium text-gray-950 uppercase"
-        >
-          Write a Review
-        </Button>
+        <ReviewDialog>
+          <Button
+            variant={"outline"}
+            size={"lg"}
+            className="font-text-md-medium text-gray-950 uppercase"
+          >
+            Write a Review
+          </Button>
+        </ReviewDialog>
       </div>
       <div className="w-full flex flex-col gap-y-gap-13">
         {reviews.map((review) => (

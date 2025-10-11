@@ -76,7 +76,6 @@ function SheetContent({
       case "top":
         return "max-[700px]:inset-x-0 max-[700px]:top-0 max-[700px]:h-auto max-[700px]:border-b max-[700px]:data-[state=open]:slide-in-from-top max-[700px]:data-[state=closed]:slide-out-to-top";
       case "bottom":
-      default:
         return "max-[700px]:inset-x-0 max-[700px]:bottom-0 max-[700px]:h-[80%] max-[700px]:border-t max-[700px]:data-[state=open]:slide-in-from-bottom max-[700px]:data-[state=closed]:slide-out-to-bottom";
     }
   })();

@@ -219,7 +219,7 @@ const toFive = (n: number) => {
   const k = Math.max(1, Math.min(5, Math.floor(n))); // das macht dass k zwischen 0 und 5 ist zwangsweise!
   return Array(5)
     .fill(0)
-    .map((_, i) => (i < k ? 1 : 0));
+    .map((_, i) => (i < k ? true : false));
 };
 //
 function Testimonial({
@@ -242,7 +242,7 @@ function Testimonial({
     <div className="p-gap-11 border border-gray-200">
       <div className="flex space-x-1 items-center mb-gap-11">
         {reviewArr.map((review, index) => (
-          <RewievStar variant={review ? "fill" : "outline"} key={index} />
+          <RewievStar fill={review} key={index} />
         ))}
       </div>
       <div className="flex flex-col space-y-gap-9">

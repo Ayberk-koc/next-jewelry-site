@@ -17,4 +17,23 @@ function CloseSheetIcon() {
   );
 }
 
-export { CloseSheetIcon };
+function CloseReviewIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="25"
+      height="25"
+      viewBox="0 0 25 25"
+      fill="none"
+    >
+      <path
+        d="M16.7431 8.50689L8.25781 16.9922M16.7431 16.9921L8.25781 8.50684"
+        stroke="#0C0A09"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export { CloseSheetIcon, CloseReviewIcon };

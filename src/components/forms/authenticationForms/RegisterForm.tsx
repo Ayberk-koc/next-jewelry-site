@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   username: z.string().min(3, { message: "Enter at least 3 characters" }),
-  email: z.string().email({
+  email: z.email({
     message: "Please enter a valid email address.",
   }),
   password: z.string().min(6, {
@@ -50,21 +50,6 @@ export default function RegisterForm({
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
-
-  //das brauche ich doch nicht. Mache, dass der button auf die login-form wechselt! -> mit state!
-  //   function onRegister(values: z.infer<typeof formSchema>) {
-  //     console.log(values);
-  //     //hier logik für registrierung
-  //   }
-  //das ist was ich ins jsx rein gemacht hätte.
-  //   <Button
-  //     size={"xl"}
-  //     className="w-full uppercase font-text-md-medium"
-  //     variant={"outline"}
-  //     onClick={form.handleSubmit(onRegister)}
-  //   >
-  //     Register
-  //   </Button>;
 
   return (
     <div className="p-gap-9 sm:p-gap-11">
