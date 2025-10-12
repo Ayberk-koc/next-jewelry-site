@@ -1,0 +1,24 @@
+Hier schreibe rein, was ich noch tun muss:
+
+- mache noch eine art von animation auf die cta-buttons
+
+- mache noch das besser für mobile diesen teil bei der product-page:
+Free wolrdwide shipping on all orders over 200€
+Delivers in 2-4 working days
+Shipping & Return
+
+- kümmere dich um scroll bei modals wenn zu groß (vorallem bei mobile)
+
+- fehlermeldung von forms mache rechts vom label nicht unter input (damit nicht wächst)
+
+- bei den carousellen mache, dass härteres wischen mehr steps bedeuten (das steht in den docs wie das geht)
+
+- mache die preisberechnungen sicher (also dass immer gerundet wird und alles floats sind etc)
+
+- überlege dir ob du den header nicht doch fixed machen willst
+
+- header responsiveness raparieren (aktuell ist der breakpopint nicht derselbe!)
+
+- alle breakpopints in die globals.css!!!!!!!!!!!!!
+
+- gucke dir noch an, ob es was gibt, was du mit den data-*-states stylen kannst!

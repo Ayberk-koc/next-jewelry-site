@@ -278,7 +278,7 @@
 }
 
 @utility font-text-md-medium {
-  @apply leading-[1.5];
+  @apply leading-[1.5] font-normal;
 }
 
 @utility font-text-md-bold {
@@ -290,7 +290,7 @@
 }
 
 @utility font-text-sm-medium {
-  @apply text-sm leading-[1.4];
+  @apply text-sm leading-[1.4] font-normal;
 }
 
 @utility font-text-sm-bold {

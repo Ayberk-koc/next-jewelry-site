@@ -2,7 +2,6 @@ import { ArrowLeftRight } from "@/components/svg-icons/ArrowIcons";
 import { ReactNode } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import GlareHover from "@/components/animatedComponents/GlareHover";
 import { BoxIcon } from "@/components/svg-icons/BenefitIcons";
 import { RewievStar } from "@/components/svg-icons/ReviewStars";
 import Header from "@/components/Header";
@@ -147,11 +146,10 @@ function CTAImage({
           </p>
           <p className="font-text-md-medium text-gray-700">{subtitle}</p>
         </div>
-        <GlareHover>
-          <Button variant={"fill"} size={"xl"} className="w-fit">
-            <p className="font-text-md-medium">Shop Now</p>
-          </Button>
-        </GlareHover>
+
+        <Button variant={"fill"} size={"xl"} className="w-fit">
+          <p className="font-text-md-medium">Shop Now</p>
+        </Button>
       </div>
     </div>
   );
@@ -338,11 +336,9 @@ export default function HomePage() {
             <p className="font-2xl-regular font-notoSerif text-center text-white mb-[48px]">
               Discover Timeless Elegance
             </p>
-            <GlareHover>
-              <Button variant={"fill"} size={"xl"}>
-                SHOP NOW
-              </Button>
-            </GlareHover>
+            <Button variant={"fill"} size={"xl"}>
+              SHOP NOW
+            </Button>
           </div>
         </div>
       </section>

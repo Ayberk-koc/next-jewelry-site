@@ -22,7 +22,6 @@ import {
   MastercardIcon,
 } from "@/components/svg-icons/ProductPageIcons";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import GlareHover from "@/components/animatedComponents/GlareHover";
 import {
   Carousel,
   CarouselContent,
@@ -38,6 +37,7 @@ import {
 } from "@/components/ui/accordion";
 import ProductItem from "@/components/ProductItem";
 import ReviewDialog from "@/components/dialogs/ReviewDialog";
+import CartSheet from "@/components/dialogs/CartSheet";
 
 ///////small component///////////
 const icontextCombiVariants = cva("flex", {
@@ -179,11 +179,11 @@ function ProductDetailsSideContent() {
           </button>
         </div>
         <div className="flex-1">
-          <GlareHover className="w-full">
+          <CartSheet>
             <Button value={"fill"} size={"xl"} className="w-full">
               ADD TO CART
             </Button>
-          </GlareHover>
+          </CartSheet>
         </div>
       </div>
       <Button
