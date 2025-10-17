@@ -1,15 +1,12 @@
 import { HeadingContainer } from "@/components/containers/HeadingContainer";
 import { MainContainer } from "@/components/containers/MainContainer";
-import QTYDropDown from "@/components/dropdowns/QTYDropDown";
-import { DownArrow } from "@/components/svg-icons/ArrowIcons";
-import {
-  BoxIconCart,
-  DeleteIcon,
-  ReturnItemInBoxIcon,
-  XIconCart,
-} from "@/components/svg-icons/CartIcont";
+import { DeleteIcon } from "@/components/svg-icons/CartIcont";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+
+import CartItem from "@/components/clientComponents/CartItem";
 
 //das musst du wahrscheinlich anpassen. Falls deine items mehrere variations haben!
 //außerdem solltest du das sowieso daran anpassen, wie die items in medusa gespeichert sind. Das ist erstmal eine gute übung aber!
@@ -23,75 +20,6 @@ type CartItemProps = {
   qty: number;
   imgSrc: string;
 };
-//FRAGE OB CHATGPT; WIE MAN MAN MIT TYPES UMGEHEN SOLL -> SOLL MAN DIE WIRKLICH JEDES MAL DRAUCH PACKEN; ODER NUR BEI TYPES DIE IMMER WIEDER VORKOMMEN!!!!
-
-function CartItem({
-  name,
-  price,
-  priceNoDiscount,
-  qty,
-  imgSrc,
-}: Omit<CartItemProps, "id">) {
-  //das muss wahrsch. ne client comp sein, da hier state verwaltet wird!
-  return (
-    <div className="w-full p-gap-9 grid grid-cols-[auto_1fr_auto] items-stretch gap-gap-9 border border-gray-200">
-      <div className="relative aspect-[160/203]">
-        <Image
-          src={imgSrc}
-          alt=""
-          fill //hier fill -> display absolut
-          className="object-[50%_50%] object-cover bg-gray-100"
-        />
-      </div>
-      <div className="flex flex-col gap-y-gap-7">
-        <div className="flex flex-col gap-y-gap-5">
-          <p>{name}</p>
-          <div className="flex items-center gap-x-gap-3 mb-gap-3">
-            <p className="font-text-md-medium text-gray-700">${price}</p>
-            {priceNoDiscount && (
-              <p className="font-text-md-medium text-gray-400 line-through">
-                ${priceNoDiscount}
-              </p>
-            )}
-          </div>
-          <p className="font-text-sm-medium text-gray-500">Color: Gold</p>
-        </div>
-        <QTYDropDown>
-          <Button
-            size={"sm"}
-            variant={"ghost"}
-            className="w-fit group bg-gray-50"
-          >
-            <p className="flex items-center font-text-sm-medium text-gray-950 space-x-[4px]">
-              <span>QTY: {qty}</span>
-              <DownArrow />
-            </p>
-          </Button>
-        </QTYDropDown>
-        <div className="font-text-md-medium text-gray-950 flex items-center">
-          <span className="mr-gap-5">
-            <ReturnItemInBoxIcon />
-          </span>
-          <p className="font-text-md-medium text-gray-500">
-            <span className="text-gray-950">15 days</span> return available
-          </p>
-        </div>
-        <div className="font-text-md-medium text-gray-950 flex items-center">
-          <span className="mr-gap-5">
-            <BoxIconCart />
-          </span>
-          <p className="font-text-md-medium text-gray-500">
-            Delivered by <span className="text-gray-950">Aug 12, 2024</span>
-          </p>
-        </div>
-      </div>
-      {/* damit item löschen. ALso hier event-handler */}
-      <span className="cursor-pointer">
-        <XIconCart />
-      </span>
-    </div>
-  );
-}
 
 function CartContent({ items }: { items: CartItemProps[] }) {
   //das nehme später aus db!
@@ -101,7 +29,7 @@ function CartContent({ items }: { items: CartItemProps[] }) {
   //das selected-state noch implementieren!
   return (
     <div className="flex flex-col gap-y-gap-11 w-full">
-      <div className="flex items-center gap-y-gap-9 justify-between">
+      <div className="flex flex-col min-[1000px]:flex-row gap-y-gap-9 min-[1000px]:items-center justify-between">
         <div className="flex items-center gap-x-gap-5">
           <input type="checkbox" />
           <p className="font-text-md-medium text-gray-950">
@@ -138,8 +66,74 @@ function CartContent({ items }: { items: CartItemProps[] }) {
   );
 }
 
+function TextPriceBox({
+  text,
+  price,
+  className,
+}: {
+  text: string;
+  price: number;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-between gap-gap-9 font-text-md-medium w-full",
+        className
+      )}
+    >
+      <p>{text}</p>
+      <p>{price} €</p>
+    </div>
+  );
+}
+
 function PaymentSummary({ totalPrice }: { totalPrice: number }) {
-  return <div>{totalPrice}</div>;
+  //hier noch two way binding!! Auch muss dass eine api call wegen des discount codes machen!
+  const deliveryPrice = 0;
+  const grandTotalprice = totalPrice + deliveryPrice;
+  return (
+    <div className="w-full p-gap-11 flex flex-col gap-gap-11 border border-gray-200">
+      <div className="flex flex-col gap-gap-9">
+        <TextPriceBox
+          text="Subtotal"
+          price={totalPrice}
+          className="pb-gap-9 border-b border-gray-200"
+        />
+        <div>
+          <Label className="font-text-sm-medium text-gray-500" scale={"xl2"}>
+            Enter Discount Code
+          </Label>
+          <div className="flex items-stretch">
+            <Input
+              scale={"xl2"}
+              className="font-text-md-medium text-gray-950 flex-1"
+            ></Input>
+            <Button
+              variant={"fill"}
+              size={"lg"}
+              className="font-text-md-medium"
+            >
+              APPLY
+            </Button>
+          </div>
+        </div>
+        <TextPriceBox
+          text="Delivery Fee"
+          price={deliveryPrice}
+          className="pb-gap-9 border-b border-gray-200"
+        />
+        <TextPriceBox
+          text="Grabd Total"
+          price={grandTotalprice}
+          className="font-text-lg-bold"
+        />
+      </div>
+      <Button size={"xl"} variant={"fill"}>
+        CHECKOUT
+      </Button>
+    </div>
+  );
 }
 
 export default function CartPage() {
@@ -203,9 +197,13 @@ export default function CartPage() {
       <HeadingContainer>
         <p className="font-notoSerif font-sm-regular text-gray-950">My Cart</p>
       </HeadingContainer>
-      <MainContainer className="flex gap-gap-13 sm:flex-row sm:gap-[64px]">
-        <CartContent items={items} />
-        <PaymentSummary totalPrice={totalPrice} />
+      <MainContainer className="flex flex-col gap-gap-13 min-[1000px]:flex-row min-[1000px]:gap-[64px] items-start">
+        <div className="w-full">
+          <CartContent items={items} />
+        </div>
+        <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
+          <PaymentSummary totalPrice={totalPrice} />
+        </div>
       </MainContainer>
     </>
   );
