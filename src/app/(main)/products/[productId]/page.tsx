@@ -35,7 +35,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ProductItem from "@/components/ProductItem";
+import ProductItem from "@/components/itemComponents/ProductItem";
 import ReviewDialog from "@/components/dialogs/ReviewDialog";
 import CartSheet from "@/components/dialogs/CartSheet";
 

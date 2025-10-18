@@ -1,8 +1,7 @@
 "use client";
 //mache das noch zur server component.
 
-import ProductItem from "@/components/ProductItem";
-import DropDownShell from "@/components/smallComponents/DropDownShell";
+import ProductItem from "@/components/itemComponents/ProductItem";
 import { DownArrow } from "@/components/svg-icons/ArrowIcons";
 import {
   FilterIcon,
@@ -12,6 +11,7 @@ import {
 import { Button, ButtonWithIconWrapper } from "@/components/ui/button";
 import { MainContainer } from "@/components/containers/MainContainer";
 import FilterSheet from "@/components/dialogs/FilterSheet";
+import SortByDropDown from "@/components/dropdowns/SortByDropDown";
 
 //das mache später. Wenn ich das ganze js mache! Das ist zum sortieren! Mache dass man mit searchparams sortiert!
 // const sortByCategories = ["Popularity", "Price"] as const;
@@ -37,14 +37,14 @@ function FilterBar() {
         </FilterSheet>
 
         {/* Hier ist state drinne! Parent muss ja reagieren auf #+nderung, damit es richtig sortieren kann! */}
-        <DropDownShell title="Sort By" categories={["Popularity", "Price"]}>
+        <SortByDropDown title="Sort By" categories={["Popularity", "Price"]}>
           <Button size={"lg"} variant={"outline"} className="group">
             <ButtonWithIconWrapper>
               <span>SORT BY POPULARITY</span>
               <DownArrow />
             </ButtonWithIconWrapper>
           </Button>
-        </DropDownShell>
+        </SortByDropDown>
       </div>
     </div>
   );

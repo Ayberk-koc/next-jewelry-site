@@ -1,4 +1,4 @@
-import CurrencyDropDown from "./CurrencyDropDown";
+import CurrencyDropDown from "../dropdowns/CurrencyDropDown";
 //hier fixed weggelassen bei header class
 export default function Header({ className }: { className?: string }) {
   return (

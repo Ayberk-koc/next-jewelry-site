@@ -54,14 +54,6 @@ function FadeInQuickButtons() {
   );
 }
 
-// function FadeInSelect() {
-//   return (
-//     <div className="flex justify-center items-center absolute bottom-0 w-full py-gap-9 px-gap-13 bg-black/90 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition ease-in-out duration-300 ">
-//       <p className="font-text-md-medium uppercase text-white">select option</p>
-//     </div>
-//   );
-// }
-
 export default function ProductItem({
   title,
   image,

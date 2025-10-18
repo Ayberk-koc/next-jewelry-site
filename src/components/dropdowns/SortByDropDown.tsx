@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ReactNode, useState } from "react";
 
-export default function DropDownShell({
+export default function SortByDropDown({
   children,
   title,
   categories,

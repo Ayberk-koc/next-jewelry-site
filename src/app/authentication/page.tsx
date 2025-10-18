@@ -1,6 +1,6 @@
 import LoginRegisterSwitch from "@/components/forms/authenticationForms/LoginRegisterSwitch";
-import Header from "@/components/Header";
-import HeaderShell from "@/components/smallComponents/HeaderShell";
+import Header from "@/components/layoutComponents/Header";
+import HeaderShell from "@/components/layoutComponents/HeaderShell";
 import Image from "next/image";
 
 //bubbling errors! Muss fixen, dass ich wieder klicken kann!

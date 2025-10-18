@@ -22,3 +22,5 @@ Shipping & Return
 - alle breakpopints in die globals.css!!!!!!!!!!!!!
 
 - gucke dir noch an, ob es was gibt, was du mit den data-*-states stylen kannst!
+
+- modals für handy responsive machen. Überlege ob scroll oder irgendwie anders
