@@ -24,3 +24,9 @@ Shipping & Return
 - gucke dir noch an, ob es was gibt, was du mit den data-*-states stylen kannst!
 
 - modals für handy responsive machen. Überlege ob scroll oder irgendwie anders
+
+- die forms in den modals scrollbar machen fürs handy! 
+
+- Der Filter-form: die scroll area sieht nicht so gut aus. Fix das irgendwie noch!
+
+- Fehler in Formularen rechts vom namen angeben! So nimmt unnötig platz weg! Vorallem bei addresse form großes problem mit der hausnummer weil fehlertext zu groß

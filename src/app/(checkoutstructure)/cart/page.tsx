@@ -1,7 +1,5 @@
 import CartContent from "@/components/itemComponents/CartContent";
-import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
-import { HeadingContainer } from "@/components/containers/HeadingContainer";
-import { MainContainer } from "@/components/containers/MainContainer";
+import CheckoutLayout from "@/components/layoutComponents/CheckoutLayout";
 
 type CartItemProps = {
   id: number;
@@ -63,23 +61,14 @@ export default function CartPage() {
     },
   ];
 
-  const totalPrice = items.reduce((accValue, item) => {
-    return accValue + item.price * item.qty;
-  }, 0);
+  //das wird in der layout berechnet!!
+  // const totalPrice = items.reduce((accValue, item) => {
+  //   return accValue + item.price * item.qty;
+  // }, 0);
 
   return (
-    <>
-      <HeadingContainer>
-        <p className="font-notoSerif font-sm-regular text-gray-950">My Cart</p>
-      </HeadingContainer>
-      <MainContainer className="flex flex-col gap-gap-13 min-[1000px]:flex-row min-[1000px]:gap-[64px] items-start">
-        <div className="w-full">
-          <CartContent items={items} />
-        </div>
-        <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
-          <PaymentSummary totalPrice={totalPrice} />
-        </div>
-      </MainContainer>
-    </>
+    <CheckoutLayout title="My Cart" action="Check out">
+      <CartContent items={items} />
+    </CheckoutLayout>
   );
 }

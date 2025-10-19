@@ -25,7 +25,13 @@ function TextPriceBox({
   );
 }
 
-export default function PaymentSummary({ totalPrice }: { totalPrice: number }) {
+export default function PaymentSummary({
+  totalPrice,
+  action,
+}: {
+  totalPrice: number;
+  action: string;
+}) {
   //hier noch two way binding!! Auch muss dass eine api call wegen des discount codes machen!
   const deliveryPrice = 0;
   const grandTotalprice = totalPrice + deliveryPrice;
@@ -66,8 +72,8 @@ export default function PaymentSummary({ totalPrice }: { totalPrice: number }) {
           className="font-text-lg-bold"
         />
       </div>
-      <Button size={"xl"} variant={"fill"}>
-        CHECKOUT
+      <Button size={"xl"} variant={"fill"} className="uppercase">
+        {action}
       </Button>
     </div>
   );
