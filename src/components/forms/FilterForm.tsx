@@ -74,7 +74,7 @@ export default function FilterForm() {
           <ScrollArea className="h-full">
             <Accordion
               type="multiple"
-              defaultValue={["", "", ""]}
+              defaultValue={["", "", ""]} //hier kann ich die werte der AccordionItem's rein machen
               className="flex flex-col"
             >
               <AccordionItem

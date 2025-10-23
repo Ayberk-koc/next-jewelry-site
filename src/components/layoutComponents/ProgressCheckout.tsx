@@ -55,9 +55,12 @@ function ProgressDashedLine({ activeLines }: { activeLines: number }) {
   );
 }
 
-export default function ProgressCheckout() {
+export default function ProgressCheckout({
+  progressState,
+}: {
+  progressState: number;
+}) {
   //das muss noch mit state nehmen- Erstmal nur für Simmulation
-  const progressState = 0;
 
   return (
     <div className="relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">

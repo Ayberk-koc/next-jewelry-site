@@ -127,7 +127,7 @@ const formSchema = z.object({
   email: z.email({
     message: "Please enter a valid email address.",
   }),
-  phoneNr: z //###################################################### für ecommerce villeicht raus machen!
+  phoneNr: z
     .string()
     .trim()
     .transform((v) => (v === "" ? undefined : v))
@@ -242,6 +242,7 @@ export default function AddressForm() {
             </FormItem>
           )}
         />
+
         <div className="grid grid-cols-[1fr_90px] gap-gap-7">
           <FormField
             control={form.control}

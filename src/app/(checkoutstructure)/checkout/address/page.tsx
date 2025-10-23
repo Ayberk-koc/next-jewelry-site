@@ -1,3 +1,5 @@
+"use client";
+
 import AddressDialog from "@/components/dialogs/AddressDialog";
 import CheckoutLayout from "@/components/layoutComponents/CheckoutLayout";
 import ProgressCheckout from "@/components/layoutComponents/ProgressCheckout";
@@ -100,7 +102,7 @@ export default function AddressPage() {
   return (
     <CheckoutLayout title="Select Address" action="continue">
       <div className="mb-gap-13">
-        <ProgressCheckout></ProgressCheckout>
+        <ProgressCheckout progressState={0}></ProgressCheckout>
       </div>
       <div className="flex flex-col gap-gap-13">
         <AddressBoxes title="Default Address">
