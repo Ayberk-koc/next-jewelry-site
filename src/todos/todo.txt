@@ -30,3 +30,7 @@ Shipping & Return
 - Der Filter-form: die scroll area sieht nicht so gut aus. Fix das irgendwie noch!
 
 - Fehler in Formularen rechts vom namen angeben! So nimmt unnötig platz weg! Vorallem bei addresse form großes problem mit der hausnummer weil fehlertext zu groß
+
+- raneme die form und dialog components. Die namen sollten aussagekräftig sein, sodass ich diese später noch checke!
+
+- bei der address PickAddressForm habe ineffiziente wahl von der derault addresse. Ändere das noch! Mache dass es nur eine default addresse geben kann!
