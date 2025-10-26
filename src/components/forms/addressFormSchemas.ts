@@ -71,7 +71,7 @@ const GermanCitySchema = z
   .refine((v) => cityRe.test(v), "Ungültiger Ortsname");
 
 //für addresse validieren
-const addressFormSchema = z.object({
+const baseAddressFormSchema = z.object({
   name: z
     .string()
     .trim()
@@ -89,12 +89,23 @@ const addressFormSchema = z.object({
       message: "Keine gültige deutsche Nummer",
     }),
   isDefault: z.boolean().optional(),
-  // address:
   street: StreetSchema,
   houseNr: HouseNumberSchema,
   zip: GermanPostalCodeSchema,
   city: GermanCitySchema,
 });
-//HIER FORM SCHEMA FÜR ADDRESSEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-export { addressFormSchema };
+//mit strip streiche die form jeden wert den man bekommt, welches das schema aber nicht erwartet! So kann ich die id, die ich mitschicke streichen!
+//remember ich schicke die id mit, weil ich die form component generisch gemacht habe und dort id erlaubt habe (für das editieren von addressen braucht man diese id -> das formular ist dasselbe!
+//es muss also eine id mitbekommen!!) Btw: Das .strip() ist default einstellung, aber hier nochmal explizit gemacht, damit du checkst!
+const createAddressFormSchema = baseAddressFormSchema.strip();
+
+const editAddressFormSchema = baseAddressFormSchema.extend({
+  addressId: z.string("ungültig"),
+});
+
+type CreateAddressFormValuesType = z.infer<typeof createAddressFormSchema>;
+type EditAddressFormValuesType = z.infer<typeof editAddressFormSchema>;
+
+export { createAddressFormSchema, editAddressFormSchema };
+export type { CreateAddressFormValuesType, EditAddressFormValuesType };

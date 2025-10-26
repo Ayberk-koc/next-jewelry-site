@@ -7,9 +7,33 @@ import {
 } from "@/components/ui/dialog";
 import { ReactNode } from "react";
 import { CloseReviewIcon } from "../svg-icons/CloseIcons";
-import AddressForm from "../forms/AddressForm";
+import {
+  AddressForm,
+  EditAddressFormProvider,
+  CreateAddressFormPrivoder,
+} from "../forms/AddressForms";
+import { EditAddressFormValuesType } from "../forms/addressFormSchemas";
 
-export default function AddressDialog({ children }: { children: ReactNode }) {
+export default function AddressDialog({
+  children,
+  mode,
+  initial,
+}: {
+  children: ReactNode;
+  mode: "edit" | "create";
+  initial?: EditAddressFormValuesType;
+}) {
+  const FormToDisplay =
+    mode === "create" ? (
+      <CreateAddressFormPrivoder>
+        <AddressForm />
+      </CreateAddressFormPrivoder>
+    ) : (
+      <EditAddressFormProvider initial={initial as EditAddressFormValuesType}>
+        <AddressForm />
+      </EditAddressFormProvider>
+    );
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -23,9 +47,7 @@ export default function AddressDialog({ children }: { children: ReactNode }) {
               <CloseReviewIcon />
             </DialogClose>
           </div>
-          <div>
-            <AddressForm />
-          </div>
+          <div>{FormToDisplay}</div>
         </div>
       </DialogContent>
     </Dialog>
