@@ -1,0 +1,204 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionCustomTriggerWrapper,
+} from "@/components/ui/accordion";
+import { z } from "zod";
+import { useForm, useFormContext } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { RadioButtonIcon } from "@/components/svg-icons/PaymentIcons";
+import { Input } from "@/components/ui/input";
+import { ReactNode } from "react";
+import { paymentFormSchema } from "./paymentFormSchemas";
+
+type PaymentFormValuesType = z.infer<typeof paymentFormSchema>;
+
+function normalizeExpiry(input: string) {
+  let val = input.replace(/\D/g, "").slice(0, 4);
+  if (val.length >= 3) val = val.slice(0, 2) + "/" + val.slice(2);
+  return val;
+}
+
+function PaymentForm() {
+  const form = useFormContext<PaymentFormValuesType>();
+
+  const method = form.watch("method");
+
+  return (
+    <form>
+      <Accordion
+        type="single"
+        value={method}
+        onValueChange={(v) =>
+          form.setValue(
+            "method",
+            (v as PaymentFormValuesType["method"]) ?? "paypal"
+          )
+        }
+      >
+        <AccordionItem value="paypal" className="group border-0">
+          <AccordionCustomTriggerWrapper className="mb-gap-9 p-0">
+            <div className="flex items-center gap-x-gap-5 justify-start">
+              <RadioButtonIcon className="relative top-[3px]" />
+              <p className="font-text-lg-medium text-gray-950">PayPal</p>
+            </div>
+          </AccordionCustomTriggerWrapper>
+          <AccordionContent className="mb-gap-11 p-0">
+            <div className="flex">test</div>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="creditCard" className="group">
+          <AccordionCustomTriggerWrapper className="mb-gap-9 p-0">
+            <div className="flex items-center gap-x-gap-5 justify-start">
+              <RadioButtonIcon className="relative top-[3px]" />
+              <p className="font-text-lg-medium text-gray-950">
+                Credit/Debit Card
+              </p>
+            </div>
+          </AccordionCustomTriggerWrapper>
+          <AccordionContent className="mb-gap-11 p-0">
+            <div className="flex flex-col gap-y-gap-9">
+              <div className="flex gap-x-gap-9">
+                <FormField
+                  control={form.control}
+                  name="cardNumber"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className="flex-1">
+                        <FormLabel
+                          scale={"xl2"}
+                          className="font-text-sm-medium text-gray-500"
+                        >
+                          Card Number
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Your Card Number"
+                            scale={"xl2"}
+                            className="font-text-md-medium"
+                            value={field.value ?? ""}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+                {/* das nächstes feld */}
+                <FormField
+                  control={form.control}
+                  name="cardHolderName"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className="flex-1">
+                        <FormLabel
+                          scale={"xl2"}
+                          className="font-text-sm-medium text-gray-500"
+                        >
+                          Card holder name
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Card holder name"
+                            scale={"xl2"}
+                            className="font-text-md-medium"
+                            value={field.value ?? ""}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+              </div>
+              {/* 2.te reihe! */}
+              <div className="flex gap-x-gap-9">
+                <FormField
+                  control={form.control}
+                  name="cardExpiry"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className="flex-1">
+                        <FormLabel
+                          scale={"xl2"}
+                          className="font-text-sm-medium text-gray-500"
+                        >
+                          Card Expiry
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="mm/yy"
+                            scale={"xl2"}
+                            maxLength={5}
+                            className="font-text-md-medium"
+                            value={field.value ?? ""}
+                            onChange={(e) =>
+                              field.onChange(normalizeExpiry(e.target.value))
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+                {/* das nächstes feld */}
+                <FormField
+                  control={form.control}
+                  name="cardCvc"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className="flex-1">
+                        <FormLabel
+                          scale={"xl2"}
+                          className="font-text-sm-medium text-gray-500"
+                        >
+                          CVC
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="password"
+                            placeholder="CVC"
+                            scale={"xl2"}
+                            className="font-text-md-medium"
+                            value={field.value ?? ""}
+                            onChange={field.onChange}
+                            maxLength={4}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </form>
+  );
+}
+
+function PaymentFormProvider({ children }: { children: ReactNode }) {
+  const form = useForm<z.infer<typeof paymentFormSchema>>({
+    resolver: zodResolver(paymentFormSchema),
+    defaultValues: { method: "paypal" },
+  });
+
+  return <Form {...form}>{children}</Form>;
+}
+
+export { PaymentFormProvider, PaymentForm };

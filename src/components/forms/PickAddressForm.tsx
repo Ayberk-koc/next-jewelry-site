@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 import { ReactNode } from "react";
 
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { RadioButtonIconAlt } from "@/components/svg-icons/PaymentIcons";
+import { pickAddressFormSchema } from "./pickAddressFormSchemas";
+import { FinalCheckoutFormValuesType } from "@/components/layoutComponents/checkOutProcessFormProviderLayoutSchemas";
 
 function AddressBox({
   name,
@@ -108,12 +110,96 @@ function AddressBoxes({
   );
 }
 
-const formSchema = z.object({
-  pickedAddress: z.string("Bitte eine addresse wählen"),
-});
+type PickAddressFormSchemaValuesType = z.infer<typeof pickAddressFormSchema>;
 
-export default function PickAddressForm() {
-  //das muss state sein, da man das ja hinzufügt. Bzw das nehme aus backend!
+//diese component brauche ich nicht! Diese Logik kommt ja in das layout-form-provider!
+function PickAddressFormProvider({ children }: { children: ReactNode }) {
+  const deliveryData = [
+    {
+      id: "0",
+      isDefault: true,
+      name: "Perry Wilson",
+      email: "ayberk@live.at",
+      street: "Bahnhofstraße",
+      houseNr: "14",
+      zip: "62639",
+      city: "California",
+      phoneNr: "015783795878",
+    },
+    {
+      id: "1",
+      isDefault: false,
+      name: "Perry Wilson",
+      email: "ayberk@live.at",
+      street: "Bahnhofstraße",
+      houseNr: "14",
+      zip: "62639",
+      city: "California",
+      phoneNr: "015783795878",
+    },
+    {
+      id: "2",
+      isDefault: false,
+      name: "Perry Wilson",
+      email: "ayberk@live.at",
+      street: "Bahnhofstraße",
+      houseNr: "14",
+      zip: "62639",
+      city: "California",
+      phoneNr: "015783795878",
+    },
+    {
+      id: "3",
+      isDefault: false,
+      name: "Perry Wilson",
+      email: "ayberk@live.at",
+      street: "Bahnhofstraße",
+      houseNr: "14",
+      zip: "62639",
+      city: "California",
+      phoneNr: "015783795878",
+    },
+    {
+      id: "4",
+      isDefault: false,
+      name: "Perry Wilson",
+      email: "ayberk@live.at",
+      street: "Bahnhofstraße",
+      houseNr: "14",
+      zip: "62639",
+      city: "California",
+      phoneNr: "015783795878",
+    },
+    {
+      id: "5",
+      isDefault: false,
+      name: "Perry Wilson",
+      email: "ayberk@live.at",
+      street: "Bahnhofstraße",
+      houseNr: "14",
+      zip: "62639",
+      city: "California",
+      phoneNr: "015783795878",
+    },
+  ];
+  const defaultAddress = deliveryData.find((address) => address.isDefault);
+
+  const form = useForm<PickAddressFormSchemaValuesType>({
+    resolver: zodResolver(pickAddressFormSchema),
+    defaultValues: {
+      pickedAddress: defaultAddress?.id,
+    },
+  });
+  return <Form {...form}>{children}</Form>;
+}
+
+function PickAddressForm() {
+  const form = useFormContext<FinalCheckoutFormValuesType>();
+
+  function onSubmit(values: FinalCheckoutFormValuesType) {
+    console.log(values);
+  }
+
   const deliveryData = [
     {
       id: "0",
@@ -183,97 +269,81 @@ export default function PickAddressForm() {
     },
   ];
 
-  const defaultAddress = deliveryData.find((address) => address.isDefault);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      pickedAddress: defaultAddress?.id,
-    },
-  });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
   //das könnte man noch optimieren! Könnte in der db speicher, ob etwas als default gespeichert ist oder nicht! -> Dann spare diese rechnung!
   const defaultDeliveryAddress = deliveryData.filter((data) => data.isDefault);
   const otherDeliveryAddresses = deliveryData.filter((data) => !data.isDefault);
 
   return (
     <div className="flex flex-col gap-gap-13">
-      <Form {...form}>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            //form.handleSubmit(onSubmit) returnt eine fkt! Diese musst du noch callen!
-            form.handleSubmit(onSubmit)(event);
-          }}
-        >
-          <AddressBoxes title="Default Address">
-            {defaultDeliveryAddress.map((address) => (
-              <FormField
-                key={address.id}
-                control={form.control}
-                name="pickedAddress"
-                render={({ field }) => {
-                  return (
-                    <FormItem>
-                      <FormControl>
-                        <AddressBox
-                          key={address.id}
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          addressId={address.id}
-                          name={address.name}
-                          street={address.street}
-                          houseNr={address.houseNr}
-                          zip={address.zip}
-                          city={address.city}
-                          phoneNr={address.phoneNr}
-                          email={address.email}
-                          isDefault={address.isDefault}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  );
-                }}
-              />
-            ))}
-          </AddressBoxes>
-          <AddressBoxes title="Other Address">
-            {otherDeliveryAddresses.map((address) => (
-              <FormField
-                key={address.id}
-                control={form.control}
-                name="pickedAddress"
-                render={({ field }) => {
-                  return (
-                    <FormItem>
-                      <FormControl>
-                        <AddressBox
-                          key={address.id}
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          addressId={address.id}
-                          name={address.name}
-                          street={address.street}
-                          houseNr={address.houseNr}
-                          zip={address.zip}
-                          city={address.city}
-                          phoneNr={address.phoneNr}
-                          email={address.email}
-                          isDefault={address.isDefault}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  );
-                }}
-              />
-            ))}
-          </AddressBoxes>
-        </form>
-      </Form>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          form.handleSubmit(onSubmit)(event);
+        }}
+      >
+        <AddressBoxes title="Default Address">
+          {defaultDeliveryAddress.map((address) => (
+            <FormField
+              key={address.id}
+              control={form.control}
+              name="pickedAddress.id" //beachte hier die name! Das schema welches in der form-provider steckt ist verschachtelt! Deswegen geht sowas! Gucke das schema an!
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormControl>
+                      <AddressBox
+                        key={address.id}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        addressId={address.id}
+                        name={address.name}
+                        street={address.street}
+                        houseNr={address.houseNr}
+                        zip={address.zip}
+                        city={address.city}
+                        phoneNr={address.phoneNr}
+                        email={address.email}
+                        isDefault={address.isDefault}
+                      />
+                    </FormControl>
+                  </FormItem>
+                );
+              }}
+            />
+          ))}
+        </AddressBoxes>
+        <AddressBoxes title="Other Address">
+          {otherDeliveryAddresses.map((address) => (
+            <FormField
+              key={address.id}
+              control={form.control}
+              name="pickedAddress.id"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormControl>
+                      <AddressBox
+                        key={address.id}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        addressId={address.id}
+                        name={address.name}
+                        street={address.street}
+                        houseNr={address.houseNr}
+                        zip={address.zip}
+                        city={address.city}
+                        phoneNr={address.phoneNr}
+                        email={address.email}
+                        isDefault={address.isDefault}
+                      />
+                    </FormControl>
+                  </FormItem>
+                );
+              }}
+            />
+          ))}
+        </AddressBoxes>
+      </form>
 
       <AddressDialog mode={"create"}>
         <Button
@@ -292,3 +362,5 @@ export default function PickAddressForm() {
     </div>
   );
 }
+
+export { PickAddressFormProvider, PickAddressForm };

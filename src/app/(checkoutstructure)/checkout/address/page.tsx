@@ -2,7 +2,7 @@ import ProgressCheckout from "@/components/layoutComponents/ProgressCheckout";
 import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
 import { HeadingContainer } from "@/components/containers/HeadingContainer";
 import { MainContainer } from "@/components/containers/MainContainer";
-import PickAddressForm from "@/components/forms/PickAddressForm";
+import { PickAddressForm } from "@/components/forms/PickAddressForm";
 
 export default function AddressPage() {
   const totalPrice = 9000;
