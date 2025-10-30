@@ -196,10 +196,6 @@ function PickAddressFormProvider({ children }: { children: ReactNode }) {
 function PickAddressForm() {
   const form = useFormContext<FinalCheckoutFormValuesType>();
 
-  function onSubmit(values: FinalCheckoutFormValuesType) {
-    console.log(values);
-  }
-
   const deliveryData = [
     {
       id: "0",
@@ -275,12 +271,7 @@ function PickAddressForm() {
 
   return (
     <div className="flex flex-col gap-gap-13">
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          form.handleSubmit(onSubmit)(event);
-        }}
-      >
+      <form>
         <AddressBoxes title="Default Address">
           {defaultDeliveryAddress.map((address) => (
             <FormField

@@ -3,6 +3,8 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+import { ReactNode } from "react";
+
 function TextPriceBox({
   text,
   price,
@@ -27,10 +29,10 @@ function TextPriceBox({
 
 export default function PaymentSummary({
   totalPrice,
-  action,
+  children,
 }: {
   totalPrice: number;
-  action: string;
+  children: ReactNode;
 }) {
   //hier noch two way binding!! Auch muss dass eine api call wegen des discount codes machen!
   const deliveryPrice = 0;
@@ -72,9 +74,7 @@ export default function PaymentSummary({
           className="font-text-lg-bold"
         />
       </div>
-      <Button size={"xl"} variant={"fill"} className="uppercase">
-        {action}
-      </Button>
+      {children}
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import ProgressCheckout from "@/components/layoutComponents/ProgressCheckout";
+import ProgressCheckoutNavigationLine from "@/components/layoutComponents/ProgressCheckoutNavigationLine";
 import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
 import { HeadingContainer } from "@/components/containers/HeadingContainer";
 import { MainContainer } from "@/components/containers/MainContainer";
 import { PickAddressForm } from "@/components/forms/PickAddressForm";
+import ProceedButton from "@/components/forms/ProceedButton";
 
 export default function AddressPage() {
   const totalPrice = 9000;
@@ -15,7 +16,7 @@ export default function AddressPage() {
       <MainContainer className="flex flex-col gap-gap-13 min-[1000px]:flex-row min-[1000px]:gap-[64px] items-start">
         <div className="w-full">
           <div className="mb-gap-13">
-            <ProgressCheckout progressState={0}></ProgressCheckout>
+            <ProgressCheckoutNavigationLine progressState={0} />
           </div>
 
           <div className="w-full">
@@ -24,7 +25,17 @@ export default function AddressPage() {
         </div>
 
         <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
-          <PaymentSummary totalPrice={totalPrice} action="Continue" />
+          <PaymentSummary totalPrice={totalPrice}>
+            <ProceedButton
+              href={"payment"}
+              fields={"pickedAddress.id"}
+              size={"xl"}
+              variant={"fill"}
+              className="uppercase"
+            >
+              Weiter
+            </ProceedButton>
+          </PaymentSummary>
         </div>
       </MainContainer>
     </>

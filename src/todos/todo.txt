@@ -36,3 +36,5 @@ Shipping & Return
 - bei der address PickAddressForm habe ineffiziente wahl von der derault addresse. Ändere das noch! Mache dass es nur eine default addresse geben kann!
 
 - refactor die forms! Trenne provider und eigentliche form!
+
+- speicher form-state beim checkout auch im localStorage! Weil ich sonst probleme damit habe, wenn leute die seite neu laden!
