@@ -7,6 +7,7 @@ import { ComponentProps } from "react";
 import { Button, buttonVariants } from "../ui/button";
 import { type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useTransitionContext } from "../contexts/TransitionContext";
 
 export default function ProceedButton({
   href,
@@ -25,12 +26,14 @@ export default function ProceedButton({
   }) {
   const form = useFormContext<FinalCheckoutFormValuesType>();
   const router = useRouter();
+  const { isTransitioning, startTransition } = useTransitionContext();
 
   async function handleProceed() {
     const ok = await form.trigger(fields);
-
     if (ok) {
-      router.push(href);
+      startTransition(() => {
+        router.push(href);
+      });
     }
   }
 
@@ -40,7 +43,7 @@ export default function ProceedButton({
       variant={variant}
       className={cn("", className)}
       onClick={handleProceed}
-      disabled={true} //muss dass über context handhaben! so kann ich alle component die es brauchen geben!
+      disabled={isTransitioning}
       {...props}
     >
       {children}

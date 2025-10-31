@@ -9,6 +9,7 @@ import {
   FinalCheckoutSchema,
   FinalCheckoutFormValuesType,
 } from "@/components/layoutComponents/checkOutProcessFormProviderLayoutSchemas";
+import PendingContextProvider from "@/components/contexts/TransitionContext";
 
 export default function CheckOutProcessFormProviderLayout({
   children,
@@ -95,7 +96,11 @@ export default function CheckOutProcessFormProviderLayout({
     // },
   });
 
-  return <Form {...form}>{children}</Form>;
+  return (
+    <Form {...form}>
+      <PendingContextProvider>{children}</PendingContextProvider>
+    </Form>
+  );
 }
 
 export type { FinalCheckoutFormValuesType };

@@ -1,9 +1,6 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-
 import { ReactNode } from "react";
+import DiscountForm from "../forms/DiscountForm";
 
 function TextPriceBox({
   text,
@@ -45,24 +42,7 @@ export default function PaymentSummary({
           price={totalPrice}
           className="pb-gap-9 border-b border-gray-200"
         />
-        <div>
-          <Label className="font-text-sm-medium text-gray-500" scale={"xl2"}>
-            Enter Discount Code
-          </Label>
-          <div className="flex items-stretch">
-            <Input
-              scale={"xl2"}
-              className="font-text-md-medium text-gray-950 flex-1"
-            ></Input>
-            <Button
-              variant={"fill"}
-              size={"lg"}
-              className="font-text-md-medium"
-            >
-              APPLY
-            </Button>
-          </div>
-        </div>
+        <DiscountForm />
         <TextPriceBox
           text="Delivery Fee"
           price={deliveryPrice}
