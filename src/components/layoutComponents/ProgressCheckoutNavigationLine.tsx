@@ -7,11 +7,16 @@ import {
   CheckoutReviewIcon,
 } from "@/components/svg-icons/ChekoutProsessIcons";
 import { ReactNode } from "react";
-import { FinalCheckoutFormValuesType } from "@/components/layoutComponents/checkOutProcessFormProviderLayoutSchemas";
-import { Path, useFormContext } from "react-hook-form";
+import { Path } from "react-hook-form";
 import { Button } from "../ui/button";
 import { useRouter, usePathname } from "next/navigation";
 import { useTransitionContext } from "../contexts/TransitionContext";
+import {
+  useFormLayoutContext,
+  PickPaymentFormValues,
+  PickAddressFormValues,
+  AllFormValueTypes,
+} from "@/app/(checkoutstructure)/checkout/layout";
 
 function ProgressCheckoutButton({
   text,
@@ -71,11 +76,10 @@ function ProgressDashedLine({ activeLines }: { activeLines: number }) {
   );
 }
 
+//wie soll ich das typisieren??
 type NavigationInfoType = {
   href: string;
-  fields?:
-    | Path<FinalCheckoutFormValuesType>
-    | Path<FinalCheckoutFormValuesType>[];
+  fields?: Path<AllFormValueTypes> | Path<AllFormValueTypes>[];
 };
 
 //diese sollte ich aus extra-file nehmen
@@ -85,11 +89,11 @@ const navigationInfosArray: NavigationInfoType[] = [
   },
   {
     href: "payment",
-    fields: "pickedAddress",
+    fields: "addressId",
   },
   {
     href: "review",
-    fields: "pickPaymentMethod",
+    fields: "paymentMethod",
   },
 ];
 const iconsArray = [
@@ -99,19 +103,18 @@ const iconsArray = [
 ];
 const navigationTextArr = ["Address", "Payment Method", "Review"];
 const navigationPath = ["address", "payment", "review"];
-//diese sollte ich aus extra-file nehmen
 
 export default function ProgressCheckoutNavigationLine({
   progressState,
 }: {
   progressState: number;
 }) {
-  const form = useFormContext<FinalCheckoutFormValuesType>();
+  const { pickAddressForm, pickPaymentMethodForm } = useFormLayoutContext();
   const router = useRouter();
   const { isTransitioning, startTransition } = useTransitionContext();
   const pathname = usePathname();
 
-  async function handleNavigate(
+  async function handleNavigate( //mache die type in den onclick handler rein. Da kann ich mit <T> sicher was drehen!
     href: NavigationInfoType["href"],
     fields: NavigationInfoType["fields"]
   ) {

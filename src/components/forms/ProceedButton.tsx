@@ -1,35 +1,51 @@
 "use client";
 
-import { Path, useFormContext } from "react-hook-form";
-import { FinalCheckoutFormValuesType } from "@/components/layoutComponents/checkOutProcessFormProviderLayoutSchemas";
+import { Path } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { ComponentProps } from "react";
 import { Button, buttonVariants } from "../ui/button";
 import { type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { useTransitionContext } from "../contexts/TransitionContext";
+import {
+  useFormLayoutContext,
+  PickAddressFormValues,
+  PickPaymentFormValues,
+} from "@/app/(checkoutstructure)/checkout/layout";
 
-export default function ProceedButton({
+type ProceedButtonProps<T extends "pickAddressForm" | "pickPaymentForm"> =
+  ComponentProps<"button"> &
+    VariantProps<typeof buttonVariants> & {
+      href: string;
+      formType: T;
+      fields?: T extends "pickPaymentForm"
+        ? Path<PickPaymentFormValues> | Path<PickPaymentFormValues>[]
+        : Path<PickAddressFormValues> | Path<PickAddressFormValues>[];
+    };
+
+export default function ProceedButton<
+  T extends "pickAddressForm" | "pickPaymentForm"
+>({
   href,
   fields,
   variant,
   size,
   className,
+  formType,
   children,
   ...props
-}: ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    href: string;
-    fields?:
-      | Path<FinalCheckoutFormValuesType>
-      | Path<FinalCheckoutFormValuesType>[];
-  }) {
-  const form = useFormContext<FinalCheckoutFormValuesType>();
+}: ProceedButtonProps<T>) {
+  const { pickAddressForm, pickPaymentMethodForm } = useFormLayoutContext();
   const router = useRouter();
   const { isTransitioning, startTransition } = useTransitionContext();
 
   async function handleProceed() {
-    const ok = await form.trigger(fields);
+    const formToUse =
+      formType === "pickAddressForm" ? pickAddressForm : pickPaymentMethodForm;
+
+    const ok = await formToUse.trigger(fields as never);
+    console.log("Fields:", fields);
+    console.log("Form values:", formToUse.getValues());
     //wenn fields undefined, dann  soll canNavigate true sein!
     const canNavigate = fields ? ok : true;
 

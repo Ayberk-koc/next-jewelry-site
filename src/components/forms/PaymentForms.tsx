@@ -6,42 +6,41 @@ import {
   AccordionItem,
   AccordionCustomTriggerWrapper,
 } from "@/components/ui/accordion";
-import { useFormContext } from "react-hook-form";
 import { RadioButtonIcon } from "@/components/svg-icons/PaymentIcons";
 import { Input } from "@/components/ui/input";
+import {
+  useFormLayoutContext,
+  PickPaymentFormValues,
+} from "@/app/(checkoutstructure)/checkout/layout";
 
-import { FinalCheckoutFormValuesType } from "../layoutComponents/checkOutProcessFormProviderLayoutSchemas";
+export default function PaymentForm() {
+  const { pickPaymentMethodForm } = useFormLayoutContext();
 
-function PaymentForm() {
-  const form = useFormContext<FinalCheckoutFormValuesType>();
-
-  //das ist einfach der eines fields. NOTE: ICH MUSS KEINE FORMFIELD COMPONENT DAFÜR NUTZEN!!! DIE FIELDS KOMMEN AUS DEM SCHEMA!!
-  const methodValue = form.watch("pickPaymentMethod.method");
+  const methodValue = pickPaymentMethodForm.watch("paymentMethod");
+  const formError =
+    pickPaymentMethodForm.formState.errors.paymentMethod?.message;
 
   async function handlePickPaymentMethod(
-    paymentValue: FinalCheckoutFormValuesType["pickPaymentMethod"]["method"]
+    paymentValue: PickPaymentFormValues["paymentMethod"]
   ) {
-    form.setValue("pickPaymentMethod.method", paymentValue);
-    await form.trigger("pickPaymentMethod");
+    pickPaymentMethodForm.setValue("paymentMethod", paymentValue);
+    await pickPaymentMethodForm.trigger("paymentMethod");
 
-    const values = form.getValues("pickPaymentMethod.method");
+    const values = pickPaymentMethodForm.getValues("paymentMethod");
     console.log(values);
   }
 
-  const formError = form.formState.errors.pickPaymentMethod?.method?.message;
-  console.log(formError);
-
   return (
     <form>
-      {formError && <p className="text-error-500 mb-gap-2">{formError}</p>}
+      {formError && <p className="text-error-500 mb-gap-3">{formError}</p>}
       <Accordion
         type="single"
         value={methodValue}
-        onValueChange={(val) =>
+        onValueChange={(val) => {
           handlePickPaymentMethod(
-            val as FinalCheckoutFormValuesType["pickPaymentMethod"]["method"]
-          )
-        }
+            val as PickPaymentFormValues["paymentMethod"]
+          );
+        }}
       >
         <AccordionItem value="paypal" className="group border-0">
           <AccordionCustomTriggerWrapper className="mb-gap-9 p-0">
@@ -122,15 +121,5 @@ function PaymentForm() {
     </form>
   );
 }
-
-//das brauche ich nicht mehr
-// function PaymentFormProvider({ children }: { children: ReactNode }) {
-//   const form = useForm<z.infer<typeof paymentFormSchema>>({
-//     resolver: zodResolver(paymentFormSchema),
-//     defaultValues: { method: "paypal" },
-//   });
-
-//   return <Form {...form}>{children}</Form>;
-// }
 
 export { PaymentForm };

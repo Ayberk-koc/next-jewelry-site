@@ -5,14 +5,8 @@ import { DotsIcon, PhoneIcon } from "@/components/svg-icons/AddressPageIcons";
 import { PlusIcon } from "@/components/svg-icons/ChekoutProsessIcons";
 import { Button } from "@/components/ui/button";
 import { ReactNode } from "react";
-
-import { z } from "zod";
-import { useForm, useFormContext } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { RadioButtonIconAlt } from "@/components/svg-icons/PaymentIcons";
-import { pickAddressFormSchema } from "./pickAddressFormSchemas";
-import { FinalCheckoutFormValuesType } from "@/components/layoutComponents/checkOutProcessFormProviderLayoutSchemas";
+import { useFormLayoutContext } from "@/app/(checkoutstructure)/checkout/layout";
 
 function AddressBox({
   name,
@@ -110,239 +104,130 @@ function AddressBoxes({
   );
 }
 
-type PickAddressFormSchemaValuesType = z.infer<typeof pickAddressFormSchema>;
+const deliveryData = [
+  {
+    id: "0",
+    isDefault: true,
+    name: "Perry Wilson",
+    email: "ayberk@live.at",
+    street: "Bahnhofstraße",
+    houseNr: "14",
+    zip: "62639",
+    city: "California",
+    phoneNr: "015783795878",
+  },
+  {
+    id: "1",
+    isDefault: false,
+    name: "Perry Wilson",
+    email: "ayberk@live.at",
+    street: "Bahnhofstraße",
+    houseNr: "14",
+    zip: "62639",
+    city: "California",
+    phoneNr: "015783795878",
+  },
+  {
+    id: "2",
+    isDefault: false,
+    name: "Perry Wilson",
+    email: "ayberk@live.at",
+    street: "Bahnhofstraße",
+    houseNr: "14",
+    zip: "62639",
+    city: "California",
+    phoneNr: "015783795878",
+  },
+  {
+    id: "3",
+    isDefault: false,
+    name: "Perry Wilson",
+    email: "ayberk@live.at",
+    street: "Bahnhofstraße",
+    houseNr: "14",
+    zip: "62639",
+    city: "California",
+    phoneNr: "015783795878",
+  },
+  {
+    id: "4",
+    isDefault: false,
+    name: "Perry Wilson",
+    email: "ayberk@live.at",
+    street: "Bahnhofstraße",
+    houseNr: "14",
+    zip: "62639",
+    city: "California",
+    phoneNr: "015783795878",
+  },
+  {
+    id: "5",
+    isDefault: false,
+    name: "Perry Wilson",
+    email: "ayberk@live.at",
+    street: "Bahnhofstraße",
+    houseNr: "14",
+    zip: "62639",
+    city: "California",
+    phoneNr: "015783795878",
+  },
+];
+//das könnte man noch optimieren! Könnte in der db speicher, ob etwas als default gespeichert ist oder nicht! -> Dann spare diese rechnung!
+const defaultDeliveryAddress = deliveryData.filter((data) => data.isDefault);
+const otherDeliveryAddresses = deliveryData.filter((data) => !data.isDefault);
 
-//diese component brauche ich nicht! Diese Logik kommt ja in das layout-form-provider!
-function PickAddressFormProvider({ children }: { children: ReactNode }) {
-  const deliveryData = [
-    {
-      id: "0",
-      isDefault: true,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "1",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "2",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "3",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "4",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "5",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-  ];
-  const defaultAddress = deliveryData.find((address) => address.isDefault);
+export default function PickAddressForm() {
+  const { pickAddressForm } = useFormLayoutContext();
 
-  const form = useForm<PickAddressFormSchemaValuesType>({
-    resolver: zodResolver(pickAddressFormSchema),
-    defaultValues: {
-      pickedAddress: defaultAddress?.id,
-    },
-  });
-  return <Form {...form}>{children}</Form>;
-}
-
-function PickAddressForm() {
-  const form = useFormContext<FinalCheckoutFormValuesType>();
-
-  const deliveryData = [
-    {
-      id: "0",
-      isDefault: true,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "1",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "2",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "3",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "4",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "5",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-  ];
-
-  //das könnte man noch optimieren! Könnte in der db speicher, ob etwas als default gespeichert ist oder nicht! -> Dann spare diese rechnung!
-  const defaultDeliveryAddress = deliveryData.filter((data) => data.isDefault);
-  const otherDeliveryAddresses = deliveryData.filter((data) => !data.isDefault);
-
-  const formError = form.formState.errors.pickedAddress?.id?.message;
+  const formError = pickAddressForm.formState.errors.addressId?.message;
+  const pickedValue = pickAddressForm.watch("addressId");
 
   async function handlePickAddress(val: string) {
-    form.setValue("pickedAddress.id", val);
-    await form.trigger("pickedAddress");
+    pickAddressForm.setValue("addressId", val);
+    await pickAddressForm.trigger("addressId");
 
-    const formValues = form.getValues("pickedAddress.id");
+    const formValues = pickAddressForm.getValues("addressId");
     console.log(formValues);
   }
 
   return (
     <div className="flex flex-col gap-gap-13">
       <form>
-        {formError && <p className="text-error-500 mb-gap-2">{formError}</p>}
+        {formError && <p className="text-error-500 mb-gap-3">{formError}</p>}
         {/* hier die fehlermeldung für die form machen */}
         <AddressBoxes title="Default Address">
           {defaultDeliveryAddress.map((address) => (
-            <FormField
+            <AddressBox
               key={address.id}
-              control={form.control}
-              name="pickedAddress.id" //beachte hier die name! Das schema welches in der form-provider steckt ist verschachtelt! Deswegen geht sowas! Gucke das schema an!
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormControl>
-                      <AddressBox
-                        key={address.id}
-                        value={field.value}
-                        onValueChange={handlePickAddress}
-                        addressId={address.id}
-                        name={address.name}
-                        street={address.street}
-                        houseNr={address.houseNr}
-                        zip={address.zip}
-                        city={address.city}
-                        phoneNr={address.phoneNr}
-                        email={address.email}
-                        isDefault={address.isDefault}
-                      />
-                    </FormControl>
-                  </FormItem>
-                );
-              }}
+              value={pickedValue}
+              onValueChange={handlePickAddress}
+              addressId={address.id}
+              name={address.name}
+              street={address.street}
+              houseNr={address.houseNr}
+              zip={address.zip}
+              city={address.city}
+              phoneNr={address.phoneNr}
+              email={address.email}
+              isDefault={address.isDefault}
             />
           ))}
         </AddressBoxes>
         <AddressBoxes title="Other Address">
           {otherDeliveryAddresses.map((address) => (
-            <FormField
+            <AddressBox
               key={address.id}
-              control={form.control}
-              name="pickedAddress.id"
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormControl>
-                      <AddressBox
-                        key={address.id}
-                        value={field.value}
-                        onValueChange={handlePickAddress}
-                        addressId={address.id}
-                        name={address.name}
-                        street={address.street}
-                        houseNr={address.houseNr}
-                        zip={address.zip}
-                        city={address.city}
-                        phoneNr={address.phoneNr}
-                        email={address.email}
-                        isDefault={address.isDefault}
-                      />
-                    </FormControl>
-                  </FormItem>
-                );
-              }}
+              value={pickedValue}
+              onValueChange={handlePickAddress}
+              addressId={address.id}
+              name={address.name}
+              street={address.street}
+              houseNr={address.houseNr}
+              zip={address.zip}
+              city={address.city}
+              phoneNr={address.phoneNr}
+              email={address.email}
+              isDefault={address.isDefault}
             />
           ))}
         </AddressBoxes>
@@ -365,5 +250,3 @@ function PickAddressForm() {
     </div>
   );
 }
-
-export { PickAddressFormProvider, PickAddressForm };

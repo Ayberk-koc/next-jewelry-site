@@ -2,7 +2,7 @@ import ProgressCheckoutNavigationLine from "@/components/layoutComponents/Progre
 import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
 import { HeadingContainer } from "@/components/containers/HeadingContainer";
 import { MainContainer } from "@/components/containers/MainContainer";
-import { PickAddressForm } from "@/components/forms/PickAddressForm";
+import PickAddressForm from "@/components/forms/PickAddressForm";
 import ProceedButton from "@/components/forms/ProceedButton";
 
 export default function AddressPage() {
@@ -27,8 +27,9 @@ export default function AddressPage() {
         <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
           <PaymentSummary totalPrice={totalPrice}>
             <ProceedButton
+              formType="pickAddressForm"
               href={"payment"}
-              fields={"pickedAddress"}
+              fields={"addressId"}
               size={"xl"}
               variant={"fill"}
               className="uppercase"
