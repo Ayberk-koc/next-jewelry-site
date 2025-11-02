@@ -269,9 +269,20 @@ function PickAddressForm() {
   const defaultDeliveryAddress = deliveryData.filter((data) => data.isDefault);
   const otherDeliveryAddresses = deliveryData.filter((data) => !data.isDefault);
 
+  const formError = form.formState.errors.pickedAddress?.id?.message;
+
+  async function handlePickAddress(val: string) {
+    form.setValue("pickedAddress.id", val);
+    await form.trigger("pickedAddress");
+
+    const formValues = form.getValues("pickedAddress.id");
+    console.log(formValues);
+  }
+
   return (
     <div className="flex flex-col gap-gap-13">
       <form>
+        {formError && <p className="text-error-500 mb-gap-2">{formError}</p>}
         {/* hier die fehlermeldung für die form machen */}
         <AddressBoxes title="Default Address">
           {defaultDeliveryAddress.map((address) => (
@@ -286,7 +297,7 @@ function PickAddressForm() {
                       <AddressBox
                         key={address.id}
                         value={field.value}
-                        onValueChange={field.onChange}
+                        onValueChange={handlePickAddress}
                         addressId={address.id}
                         name={address.name}
                         street={address.street}
@@ -317,7 +328,7 @@ function PickAddressForm() {
                       <AddressBox
                         key={address.id}
                         value={field.value}
-                        onValueChange={field.onChange}
+                        onValueChange={handlePickAddress}
                         addressId={address.id}
                         name={address.name}
                         street={address.street}

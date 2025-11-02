@@ -30,7 +30,10 @@ export default function ProceedButton({
 
   async function handleProceed() {
     const ok = await form.trigger(fields);
-    if (ok) {
+    //wenn fields undefined, dann  soll canNavigate true sein!
+    const canNavigate = fields ? ok : true;
+
+    if (canNavigate) {
       startTransition(() => {
         router.push(href);
       });

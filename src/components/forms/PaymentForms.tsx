@@ -1,47 +1,45 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionCustomTriggerWrapper,
 } from "@/components/ui/accordion";
-import { z } from "zod";
-import { useForm, useFormContext } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { useFormContext } from "react-hook-form";
 import { RadioButtonIcon } from "@/components/svg-icons/PaymentIcons";
 import { Input } from "@/components/ui/input";
-import { ReactNode } from "react";
-import { paymentFormSchema } from "./paymentFormSchemas";
 
-type PaymentFormValuesType = z.infer<typeof paymentFormSchema>;
-
-function normalizeExpiry(input: string) {
-  let val = input.replace(/\D/g, "").slice(0, 4);
-  if (val.length >= 3) val = val.slice(0, 2) + "/" + val.slice(2);
-  return val;
-}
+import { FinalCheckoutFormValuesType } from "../layoutComponents/checkOutProcessFormProviderLayoutSchemas";
 
 function PaymentForm() {
-  const form = useFormContext<PaymentFormValuesType>();
+  const form = useFormContext<FinalCheckoutFormValuesType>();
 
-  const method = form.watch("method");
+  //das ist einfach der eines fields. NOTE: ICH MUSS KEINE FORMFIELD COMPONENT DAFÜR NUTZEN!!! DIE FIELDS KOMMEN AUS DEM SCHEMA!!
+  const methodValue = form.watch("pickPaymentMethod.method");
+
+  async function handlePickPaymentMethod(
+    paymentValue: FinalCheckoutFormValuesType["pickPaymentMethod"]["method"]
+  ) {
+    form.setValue("pickPaymentMethod.method", paymentValue);
+    await form.trigger("pickPaymentMethod");
+
+    const values = form.getValues("pickPaymentMethod.method");
+    console.log(values);
+  }
+
+  const formError = form.formState.errors.pickPaymentMethod?.method?.message;
+  console.log(formError);
 
   return (
     <form>
+      {formError && <p className="text-error-500 mb-gap-2">{formError}</p>}
       <Accordion
         type="single"
-        value={method}
-        onValueChange={(v) =>
-          form.setValue(
-            "method",
-            (v as PaymentFormValuesType["method"]) ?? "paypal"
+        value={methodValue}
+        onValueChange={(val) =>
+          handlePickPaymentMethod(
+            val as FinalCheckoutFormValuesType["pickPaymentMethod"]["method"]
           )
         }
       >
@@ -52,12 +50,9 @@ function PaymentForm() {
               <p className="font-text-lg-medium text-gray-950">PayPal</p>
             </div>
           </AccordionCustomTriggerWrapper>
-          <AccordionContent className="mb-gap-11 p-0">
-            <div className="flex">test</div>
-          </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="creditCard" className="group">
+        <AccordionItem value="Kreditkarte" className="group">
           <AccordionCustomTriggerWrapper className="mb-gap-9 p-0">
             <div className="flex items-center gap-x-gap-5 justify-start">
               <RadioButtonIcon className="relative top-[3px]" />
@@ -69,120 +64,56 @@ function PaymentForm() {
           <AccordionContent className="mb-gap-11 p-0">
             <div className="flex flex-col gap-y-gap-9">
               <div className="flex gap-x-gap-9">
-                <FormField
-                  control={form.control}
-                  name="cardNumber"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className="flex-1">
-                        <FormLabel
-                          scale={"xl2"}
-                          className="font-text-sm-medium text-gray-500"
-                        >
-                          Card Number
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Your Card Number"
-                            scale={"xl2"}
-                            className="font-text-md-medium"
-                            value={field.value ?? ""}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    );
-                  }}
-                />
+                <div className="flex-1">
+                  <p className="text-gray-500 font-text-sm-medium mb-gap-3">
+                    Card Number
+                  </p>
+                  <Input
+                    placeholder="Your Card Number"
+                    scale={"xl2"}
+                    className="font-text-md-medium w-full"
+                  />
+                </div>
+
                 {/* das nächstes feld */}
-                <FormField
-                  control={form.control}
-                  name="cardHolderName"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className="flex-1">
-                        <FormLabel
-                          scale={"xl2"}
-                          className="font-text-sm-medium text-gray-500"
-                        >
-                          Card holder name
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Card holder name"
-                            scale={"xl2"}
-                            className="font-text-md-medium"
-                            value={field.value ?? ""}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    );
-                  }}
-                />
+                <div className="flex-1">
+                  <p className="text-gray-500 font-text-sm-medium mb-gap-3">
+                    Card Holder Name
+                  </p>
+                  <Input
+                    placeholder="Card holder name"
+                    scale={"xl2"}
+                    className="font-text-md-medium w-full"
+                  />
+                </div>
               </div>
               {/* 2.te reihe! */}
               <div className="flex gap-x-gap-9">
-                <FormField
-                  control={form.control}
-                  name="cardExpiry"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className="flex-1">
-                        <FormLabel
-                          scale={"xl2"}
-                          className="font-text-sm-medium text-gray-500"
-                        >
-                          Card Expiry
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="mm/yy"
-                            scale={"xl2"}
-                            maxLength={5}
-                            className="font-text-md-medium"
-                            value={field.value ?? ""}
-                            onChange={(e) =>
-                              field.onChange(normalizeExpiry(e.target.value))
-                            }
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    );
-                  }}
-                />
+                <div className="flex-1">
+                  <p className="text-gray-500 font-text-sm-medium mb-gap-3">
+                    Expiry
+                  </p>
+                  <Input
+                    placeholder="mm/yy"
+                    scale={"xl2"}
+                    maxLength={5}
+                    className="font-text-md-medium w-full"
+                  />
+                </div>
+
                 {/* das nächstes feld */}
-                <FormField
-                  control={form.control}
-                  name="cardCvc"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className="flex-1">
-                        <FormLabel
-                          scale={"xl2"}
-                          className="font-text-sm-medium text-gray-500"
-                        >
-                          CVC
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="password"
-                            placeholder="CVC"
-                            scale={"xl2"}
-                            className="font-text-md-medium"
-                            value={field.value ?? ""}
-                            onChange={field.onChange}
-                            maxLength={4}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    );
-                  }}
-                />
+                <div className="flex-1">
+                  <p className="text-gray-500 font-text-sm-medium mb-gap-3">
+                    CVC
+                  </p>
+                  <Input
+                    type="password"
+                    placeholder="CVC"
+                    scale={"xl2"}
+                    className="font-text-md-medium w-full"
+                    maxLength={4}
+                  />
+                </div>
               </div>
             </div>
           </AccordionContent>
@@ -192,13 +123,14 @@ function PaymentForm() {
   );
 }
 
-function PaymentFormProvider({ children }: { children: ReactNode }) {
-  const form = useForm<z.infer<typeof paymentFormSchema>>({
-    resolver: zodResolver(paymentFormSchema),
-    defaultValues: { method: "paypal" },
-  });
+//das brauche ich nicht mehr
+// function PaymentFormProvider({ children }: { children: ReactNode }) {
+//   const form = useForm<z.infer<typeof paymentFormSchema>>({
+//     resolver: zodResolver(paymentFormSchema),
+//     defaultValues: { method: "paypal" },
+//   });
 
-  return <Form {...form}>{children}</Form>;
-}
+//   return <Form {...form}>{children}</Form>;
+// }
 
-export { PaymentFormProvider, PaymentForm };
+export { PaymentForm };

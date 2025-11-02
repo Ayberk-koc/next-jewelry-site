@@ -5,12 +5,9 @@ import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
 import { HeadingContainer } from "@/components/containers/HeadingContainer";
 import { MainContainer } from "@/components/containers/MainContainer";
 import ProceedButton from "@/components/forms/ProceedButton";
-import {
-  PaymentFormProvider,
-  PaymentForm,
-} from "@/components/forms/PaymentForms";
+import { PaymentForm } from "@/components/forms/PaymentForms";
 
-export default function Payment() {
+export default function PaymentPage() {
   const totalPrice = 9000;
 
   return (
@@ -25,17 +22,15 @@ export default function Payment() {
           </div>
           {/* hier drunter das in eine custom component. Kann das genaue layout mit wrapper kontrollieren! */}
           <div className="w-full">
-            <PaymentFormProvider>
-              <PaymentForm />
-            </PaymentFormProvider>
+            <PaymentForm />
           </div>
         </div>
 
         <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
           <PaymentSummary totalPrice={totalPrice}>
             <ProceedButton
-              href={"payment"}
-              fields={"pickedAddress.id"}
+              href={"review"}
+              fields={"pickPaymentMethod"}
               size={"xl"}
               variant={"fill"}
               className="uppercase"

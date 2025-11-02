@@ -85,11 +85,11 @@ const navigationInfosArray: NavigationInfoType[] = [
   },
   {
     href: "payment",
-    fields: "pickedAddress.id",
+    fields: "pickedAddress",
   },
   {
-    href: "payment",
-    fields: "pickedAddress.id",
+    href: "review",
+    fields: "pickPaymentMethod",
   },
 ];
 const iconsArray = [
@@ -116,7 +116,11 @@ export default function ProgressCheckoutNavigationLine({
     fields: NavigationInfoType["fields"]
   ) {
     const ok = await form.trigger(fields);
-    if (ok) {
+    //wenn fields undefined, dann  soll canNavigate true sein!
+
+    const canNavigate = fields ? ok : true;
+
+    if (canNavigate) {
       startTransition(() => {
         router.push(href);
       });

@@ -38,3 +38,5 @@ Shipping & Return
 - refactor die forms! Trenne provider und eigentliche form!
 
 - speicher form-state beim checkout auch im localStorage! Weil ich sonst probleme damit habe, wenn leute die seite neu laden!
+
+- discount form. Bei erfolgreichen discount brauche platz unten, wo der discount steht! Sowas wie active discoutn: 15% oder sowas

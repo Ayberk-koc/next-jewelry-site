@@ -28,7 +28,7 @@ export default function AddressPage() {
           <PaymentSummary totalPrice={totalPrice}>
             <ProceedButton
               href={"payment"}
-              fields={"pickedAddress.id"}
+              fields={"pickedAddress"}
               size={"xl"}
               variant={"fill"}
               className="uppercase"
