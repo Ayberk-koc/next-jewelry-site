@@ -6,22 +6,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import PendingContextProvider from "@/components/contexts/TransitionContext";
 import { z } from "zod";
 
-const pickAddressFormSchema = z.object({
-  addressId: z.string("Bitte eine addresse wählen"),
-});
-type PickAddressFormValues = z.infer<typeof pickAddressFormSchema>;
+const pickAddressFormSchema = z.object(
+  {
+    addressId: z.string("Bitte eine addresse wählen"),
+  },
+  { error: "Bitte Addresse wählen!" }
+);
 
-const pickPaymentMethodSchema = z.object({
-  paymentMethod: z
-    .string("Bitte wähle eine Zahlungsmethode")
-    //das eigentlich nicht nötig, weil ich es ja erzwinge, dass paypal oder Kreditkarte gewählt wird. Trotzdem gut zur show
-    .refine((val) => val === "paypal" || val === "Kreditkarte", {
-      message: "Nur paypal und Kreditkarte zulässig",
-    }),
-});
-type PickPaymentFormValues = z.infer<typeof pickPaymentMethodSchema>;
+const pickPaymentMethodSchema = z.object(
+  {
+    paymentMethod: z
+      .string("bitte auswählen")
+      .refine((val) => val === "Paypal" || val === "Kreditkarte", {
+        message: "Nur paypal und Kreditkarte zulässig",
+      }),
+  },
+  { error: "Bitte Bezahlmittel eingeben" }
+);
 
-type AllFormValueTypes = PickAddressFormValues & PickPaymentFormValues;
+const totalFormSchema = z.object({
+  pickAddressForm: pickAddressFormSchema,
+  pickPaymentMethodSchema: pickPaymentMethodSchema,
+});
+type TotalFormValuesType = z.infer<typeof totalFormSchema>;
 
 //hohle dise daten mit react-query! Dann brauchst du keinen context und es wird schnell und optimistic geladen!
 const deliveryData = [
@@ -94,32 +101,24 @@ const deliveryData = [
 ];
 const defaultAddress = deliveryData.find((address) => address.isDefault);
 
-type FormLayoutType = {
-  pickAddressForm: UseFormReturn<PickAddressFormValues>;
-  pickPaymentMethodForm: UseFormReturn<PickPaymentFormValues>;
-};
-
-const FormContext = createContext<FormLayoutType | null>(null);
+const FormContext = createContext<UseFormReturn<TotalFormValuesType> | null>(
+  null
+);
 
 export default function FormContextProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const pickAddressForm = useForm<PickAddressFormValues>({
-    resolver: zodResolver(pickAddressFormSchema),
-    defaultValues: { addressId: defaultAddress?.id },
+  const pickAddressForm = useForm<TotalFormValuesType>({
+    resolver: zodResolver(totalFormSchema),
+    // defaultValues: {
+    //   pickAddressForm: { addressId: defaultAddress?.id },
+    //   pickPaymentMethodSchema: { paymentMethod: "" },
+    // },
   });
 
-  const pickPaymentMethodForm = useForm<PickPaymentFormValues>({
-    resolver: zodResolver(pickPaymentMethodSchema),
-    //defaultValues: { paymentMethod: "paypal" },
-  });
-
-  const ctxValues: FormLayoutType = {
-    pickAddressForm,
-    pickPaymentMethodForm,
-  };
+  const ctxValues: UseFormReturn<TotalFormValuesType> = pickAddressForm;
 
   return (
     <FormContext value={ctxValues}>
@@ -140,5 +139,5 @@ function useFormLayoutContext() {
   return formLayoutContext;
 }
 
+export type { TotalFormValuesType };
 export { useFormLayoutContext };
-export type { PickAddressFormValues, PickPaymentFormValues, AllFormValueTypes };

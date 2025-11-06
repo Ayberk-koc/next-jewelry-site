@@ -10,23 +10,25 @@ import { RadioButtonIcon } from "@/components/svg-icons/PaymentIcons";
 import { Input } from "@/components/ui/input";
 import {
   useFormLayoutContext,
-  PickPaymentFormValues,
+  TotalFormValuesType,
 } from "@/app/(checkoutstructure)/checkout/layout";
+import { useFormState } from "react-hook-form";
 
 export default function PaymentForm() {
-  const { pickPaymentMethodForm } = useFormLayoutContext();
+  const totalForm = useFormLayoutContext();
+  const { errors } = useFormState({ control: totalForm.control });
 
-  const methodValue = pickPaymentMethodForm.watch("paymentMethod");
-  const formError =
-    pickPaymentMethodForm.formState.errors.paymentMethod?.message;
+  const methodValue = totalForm.watch("pickPaymentMethodSchema.paymentMethod");
+
+  const formError = errors.pickPaymentMethodSchema?.message;
 
   async function handlePickPaymentMethod(
-    paymentValue: PickPaymentFormValues["paymentMethod"]
+    paymentValue: TotalFormValuesType["pickPaymentMethodSchema"]["paymentMethod"]
   ) {
-    pickPaymentMethodForm.setValue("paymentMethod", paymentValue);
-    await pickPaymentMethodForm.trigger("paymentMethod");
+    totalForm.setValue("pickPaymentMethodSchema.paymentMethod", paymentValue);
+    await totalForm.trigger("pickPaymentMethodSchema");
 
-    const values = pickPaymentMethodForm.getValues("paymentMethod");
+    const values = totalForm.getValues("pickPaymentMethodSchema.paymentMethod");
     console.log(values);
   }
 
@@ -37,12 +39,10 @@ export default function PaymentForm() {
         type="single"
         value={methodValue}
         onValueChange={(val) => {
-          handlePickPaymentMethod(
-            val as PickPaymentFormValues["paymentMethod"]
-          );
+          handlePickPaymentMethod(val);
         }}
       >
-        <AccordionItem value="paypal" className="group border-0">
+        <AccordionItem value="Paypal" className="group border-0">
           <AccordionCustomTriggerWrapper className="mb-gap-9 p-0">
             <div className="flex items-center gap-x-gap-5 justify-start">
               <RadioButtonIcon className="relative top-[3px]" />

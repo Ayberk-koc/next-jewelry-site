@@ -13,9 +13,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useTransitionContext } from "../contexts/TransitionContext";
 import {
   useFormLayoutContext,
-  PickPaymentFormValues,
-  PickAddressFormValues,
-  AllFormValueTypes,
+  TotalFormValuesType,
 } from "@/app/(checkoutstructure)/checkout/layout";
 
 function ProgressCheckoutButton({
@@ -75,27 +73,23 @@ function ProgressDashedLine({ activeLines }: { activeLines: number }) {
     </div>
   );
 }
-
-//wie soll ich das typisieren??
+//################################
 type NavigationInfoType = {
   href: string;
-  fields?: Path<AllFormValueTypes> | Path<AllFormValueTypes>[];
+  fields?: Path<TotalFormValuesType> | Path<TotalFormValuesType>[];
 };
 
-//diese sollte ich aus extra-file nehmen
-const navigationInfosArray: NavigationInfoType[] = [
+type NavigationInfoTypeArr = NavigationInfoType[];
+
+const navigationInfos: NavigationInfoTypeArr = [
   {
     href: "address",
+    fields: "pickAddressForm",
   },
-  {
-    href: "payment",
-    fields: "addressId",
-  },
-  {
-    href: "review",
-    fields: "paymentMethod",
-  },
+  { href: "payment", fields: "pickAddressForm" },
+  { href: "reviews", fields: ["pickAddressForm", "pickPaymentMethodSchema"] },
 ];
+
 const iconsArray = [
   <CheckoutAddressIcon key={"checkoutAddressIcon"} />,
   <CheckoutPaymentIcon key={"checkoutPaymentIcon"} />,
@@ -109,20 +103,19 @@ export default function ProgressCheckoutNavigationLine({
 }: {
   progressState: number;
 }) {
-  const { pickAddressForm, pickPaymentMethodForm } = useFormLayoutContext();
+  const totalForm = useFormLayoutContext();
   const router = useRouter();
   const { isTransitioning, startTransition } = useTransitionContext();
   const pathname = usePathname();
 
-  async function handleNavigate( //mache die type in den onclick handler rein. Da kann ich mit <T> sicher was drehen!
+  async function handleNavigate(
     href: NavigationInfoType["href"],
     fields: NavigationInfoType["fields"]
   ) {
-    const ok = await form.trigger(fields);
-    //wenn fields undefined, dann  soll canNavigate true sein!
-
+    const ok = await totalForm.trigger(fields);
     const canNavigate = fields ? ok : true;
 
+    //mache irgendwie eine navigationsList! Also erst zu dem einen navigieren! Muss einen adneren datentyp für navigationsInfo wählen!
     if (canNavigate) {
       startTransition(() => {
         router.push(href);
@@ -132,7 +125,7 @@ export default function ProgressCheckoutNavigationLine({
 
   return (
     <div className="relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-      {navigationInfosArray.map((navigationInfo, index) => (
+      {navigationInfos.map((navigationInfo, index) => (
         <div
           key={index} // später: navigationInfo.href  (das nur für test)
           className="first:justify-self-start justify-self-auto [&:nth-last-child(2)]:justify-self-end"

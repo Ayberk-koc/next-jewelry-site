@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ReactNode } from "react";
 import { RadioButtonIconAlt } from "@/components/svg-icons/PaymentIcons";
 import { useFormLayoutContext } from "@/app/(checkoutstructure)/checkout/layout";
+import { useFormState } from "react-hook-form";
 
 function AddressBox({
   name,
@@ -177,23 +178,26 @@ const defaultDeliveryAddress = deliveryData.filter((data) => data.isDefault);
 const otherDeliveryAddresses = deliveryData.filter((data) => !data.isDefault);
 
 export default function PickAddressForm() {
-  const { pickAddressForm } = useFormLayoutContext();
+  const totalForm = useFormLayoutContext();
+  const { errors } = useFormState({ control: totalForm.control });
 
-  const formError = pickAddressForm.formState.errors.addressId?.message;
-  const pickedValue = pickAddressForm.watch("addressId");
+  //dieser wert updated nicht! React subscribed nicht das formState! Muss irgendwie die subscription machen!s
+  const pickedValue = totalForm.watch("pickAddressForm.addressId");
 
   async function handlePickAddress(val: string) {
-    pickAddressForm.setValue("addressId", val);
-    await pickAddressForm.trigger("addressId");
+    totalForm.setValue("pickAddressForm.addressId", val);
+    await totalForm.trigger("pickAddressForm");
 
-    const formValues = pickAddressForm.getValues("addressId");
+    const formValues = totalForm.getValues("pickAddressForm.addressId");
     console.log(formValues);
   }
+
+  const formErrors = errors.pickAddressForm?.message;
 
   return (
     <div className="flex flex-col gap-gap-13">
       <form>
-        {formError && <p className="text-error-500 mb-gap-3">{formError}</p>}
+        {formErrors && <p className="text-error-500 mb-gap-3">{formErrors}</p>}
         {/* hier die fehlermeldung für die form machen */}
         <AddressBoxes title="Default Address">
           {defaultDeliveryAddress.map((address) => (

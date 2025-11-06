@@ -29,9 +29,8 @@ export default function PaymentPage() {
         <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
           <PaymentSummary totalPrice={totalPrice}>
             <ProceedButton
-              formType="pickPaymentForm"
               href={"review"}
-              fields={"paymentMethod"}
+              fields={"pickPaymentMethodSchema"}
               size={"xl"}
               variant={"fill"}
               className="uppercase"

@@ -9,43 +9,32 @@ import { cn } from "@/lib/utils";
 import { useTransitionContext } from "../contexts/TransitionContext";
 import {
   useFormLayoutContext,
-  PickAddressFormValues,
-  PickPaymentFormValues,
+  TotalFormValuesType,
 } from "@/app/(checkoutstructure)/checkout/layout";
 
-type ProceedButtonProps<T extends "pickAddressForm" | "pickPaymentForm"> =
-  ComponentProps<"button"> &
-    VariantProps<typeof buttonVariants> & {
-      href: string;
-      formType: T;
-      fields?: T extends "pickPaymentForm"
-        ? Path<PickPaymentFormValues> | Path<PickPaymentFormValues>[]
-        : Path<PickAddressFormValues> | Path<PickAddressFormValues>[];
-    };
+type ProceedButtonProps = ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    href: string;
+    fields?: Path<TotalFormValuesType>;
+  };
 
-export default function ProceedButton<
-  T extends "pickAddressForm" | "pickPaymentForm"
->({
+export default function ProceedButton({
   href,
   fields,
   variant,
   size,
   className,
-  formType,
   children,
   ...props
-}: ProceedButtonProps<T>) {
-  const { pickAddressForm, pickPaymentMethodForm } = useFormLayoutContext();
+}: ProceedButtonProps) {
+  const totalForm = useFormLayoutContext();
   const router = useRouter();
   const { isTransitioning, startTransition } = useTransitionContext();
 
   async function handleProceed() {
-    const formToUse =
-      formType === "pickAddressForm" ? pickAddressForm : pickPaymentMethodForm;
+    const ok = await totalForm.trigger(fields);
 
-    const ok = await formToUse.trigger(fields as never);
-    console.log("Fields:", fields);
-    console.log("Form values:", formToUse.getValues());
+    console.log("Form values:", totalForm.getValues());
     //wenn fields undefined, dann  soll canNavigate true sein!
     const canNavigate = fields ? ok : true;
 
@@ -55,6 +44,9 @@ export default function ProceedButton<
       });
     }
   }
+
+  const value = totalForm.getValues();
+  console.log(value);
 
   return (
     <Button

@@ -27,9 +27,8 @@ export default function AddressPage() {
         <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
           <PaymentSummary totalPrice={totalPrice}>
             <ProceedButton
-              formType="pickAddressForm"
               href={"payment"}
-              fields={"addressId"}
+              fields={"pickAddressForm"}
               size={"xl"}
               variant={"fill"}
               className="uppercase"
