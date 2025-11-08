@@ -74,21 +74,6 @@ function ProgressDashedLine({ activeLines }: { activeLines: number }) {
   );
 }
 //################################
-type NavigationInfoType = {
-  href: string;
-  fields?: Path<TotalFormValuesType> | Path<TotalFormValuesType>[];
-};
-
-type NavigationInfoTypeArr = NavigationInfoType[];
-
-const navigationInfos: NavigationInfoTypeArr = [
-  {
-    href: "address",
-    fields: "pickAddressForm",
-  },
-  { href: "payment", fields: "pickAddressForm" },
-  { href: "reviews", fields: ["pickAddressForm", "pickPaymentMethodSchema"] },
-];
 
 const iconsArray = [
   <CheckoutAddressIcon key={"checkoutAddressIcon"} />,
@@ -96,7 +81,49 @@ const iconsArray = [
   <CheckoutReviewIcon key={"checkoutReviewIcon"} />,
 ];
 const navigationTextArr = ["Address", "Payment Method", "Review"];
-const navigationPath = ["address", "payment", "review"];
+const navigationPath = ["address", "payment", "review"] as const;
+
+type NavigationInfoType = {
+  href: (typeof navigationPath)[number];
+  fields?: Path<TotalFormValuesType>;
+};
+type totalNavigationInfos = NavigationInfoType[][];
+
+function getCurrentStepInCheckout(pathName: string) {
+  const currentStepInCheckout = navigationPath.find((elem) =>
+    pathName.endsWith(elem)
+  );
+  return currentStepInCheckout ?? "address";
+}
+
+function getNavigationInfoBasedOnPathName(pathName: string) {
+  const currentStep = getCurrentStepInCheckout(pathName);
+
+  let navigationTotal: totalNavigationInfos;
+  if (currentStep === "address") {
+    navigationTotal = [
+      [{ href: "address" }],
+      [{ href: "payment", fields: "pickAddressForm" }],
+      [
+        { href: "payment", fields: "pickAddressForm" },
+        { href: "review", fields: "pickPaymentMethodSchema" },
+      ],
+    ];
+  } else if (currentStep === "payment") {
+    navigationTotal = [
+      [{ href: "address" }],
+      [{ href: "payment" }],
+      [{ href: "review", fields: "pickPaymentMethodSchema" }],
+    ];
+  } else {
+    navigationTotal = [
+      [{ href: "address" }],
+      [{ href: "payment" }],
+      [{ href: "review" }],
+    ];
+  }
+  return navigationTotal;
+}
 
 export default function ProgressCheckoutNavigationLine({
   progressState,
@@ -112,20 +139,33 @@ export default function ProgressCheckoutNavigationLine({
     href: NavigationInfoType["href"],
     fields: NavigationInfoType["fields"]
   ) {
-    const ok = await totalForm.trigger(fields);
+    let ok = true;
+    if (fields) {
+      ok = await totalForm.trigger(fields);
+    }
+
     const canNavigate = fields ? ok : true;
 
-    //mache irgendwie eine navigationsList! Also erst zu dem einen navigieren! Muss einen adneren datentyp für navigationsInfo wählen!
     if (canNavigate) {
       startTransition(() => {
         router.push(href);
+        totalForm.clearErrors(fields);
       });
     }
   }
 
+  //das ruft das push mehrfach aus. Das ist arsch praxis! Verbessere das!
+  async function handleMultiNavigation(navInfos: NavigationInfoType[]) {
+    for (const navInfo of navInfos) {
+      await handleNavigate(navInfo.href, navInfo.fields);
+    }
+  }
+
+  const navigationTotalInfos = getNavigationInfoBasedOnPathName(pathname);
+
   return (
     <div className="relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-      {navigationInfos.map((navigationInfo, index) => (
+      {navigationTotalInfos.map((navigationInfo, index) => (
         <div
           key={index} // später: navigationInfo.href  (das nur für test)
           className="first:justify-self-start justify-self-auto [&:nth-last-child(2)]:justify-self-end"
@@ -138,7 +178,7 @@ export default function ProgressCheckoutNavigationLine({
             data-pending={isTransitioning.toString()}
             onClick={() => {
               if (pathname.includes(navigationPath[index])) return;
-              handleNavigate(navigationInfo.href, navigationInfo.fields);
+              handleMultiNavigation(navigationInfo);
             }}
           >
             {iconsArray[index]}
