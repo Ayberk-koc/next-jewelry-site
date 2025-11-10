@@ -81,10 +81,11 @@ const iconsArray = [
   <CheckoutReviewIcon key={"checkoutReviewIcon"} />,
 ];
 const navigationTextArr = ["Address", "Payment Method", "Review"];
-const navigationPath = ["address", "payment", "review"] as const;
+const navigationPath = ["address", "payment", "review"] as const; //das könnte ich auch ins layout schreiben!
+type NavigationPathValuesType = (typeof navigationPath)[number];
 
 type NavigationInfoType = {
-  href: (typeof navigationPath)[number];
+  href: NavigationPathValuesType;
   fields?: Path<TotalFormValuesType>;
 };
 type totalNavigationInfos = NavigationInfoType[][];
@@ -152,12 +153,17 @@ export default function ProgressCheckoutNavigationLine({
         totalForm.clearErrors(fields);
       });
     }
+
+    return canNavigate;
   }
 
-  //das ruft das push mehrfach aus. Das ist arsch praxis! Verbessere das!
   async function handleMultiNavigation(navInfos: NavigationInfoType[]) {
     for (const navInfo of navInfos) {
-      await handleNavigate(navInfo.href, navInfo.fields);
+      const success = await handleNavigate(navInfo.href, navInfo.fields);
+
+      if (!success) {
+        break;
+      }
     }
   }
 

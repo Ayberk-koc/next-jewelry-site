@@ -40,3 +40,5 @@ Shipping & Return
 - speicher form-state beim checkout auch im localStorage! Weil ich sonst probleme damit habe, wenn leute die seite neu laden!
 
 - discount form. Bei erfolgreichen discount brauche platz unten, wo der discount steht! Sowas wie active discoutn: 15% oder sowas
+
+- könnte für den form prozess loading-states einführen. Oder generell für andere stellen auch  loading state machen!

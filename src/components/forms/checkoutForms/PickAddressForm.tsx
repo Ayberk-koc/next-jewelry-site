@@ -8,6 +8,7 @@ import { ReactNode } from "react";
 import { RadioButtonIconAlt } from "@/components/svg-icons/PaymentIcons";
 import { useFormLayoutContext } from "@/app/(checkoutstructure)/checkout/layout";
 import { useFormState } from "react-hook-form";
+import { useAddressContext } from "@/components/contexts/AddressContext";
 
 function AddressBox({
   name,
@@ -105,81 +106,10 @@ function AddressBoxes({
   );
 }
 
-const deliveryData = [
-  {
-    id: "0",
-    isDefault: true,
-    name: "Perry Wilson",
-    email: "ayberk@live.at",
-    street: "Bahnhofstraße",
-    houseNr: "14",
-    zip: "62639",
-    city: "California",
-    phoneNr: "015783795878",
-  },
-  {
-    id: "1",
-    isDefault: false,
-    name: "Perry Wilson",
-    email: "ayberk@live.at",
-    street: "Bahnhofstraße",
-    houseNr: "14",
-    zip: "62639",
-    city: "California",
-    phoneNr: "015783795878",
-  },
-  {
-    id: "2",
-    isDefault: false,
-    name: "Perry Wilson",
-    email: "ayberk@live.at",
-    street: "Bahnhofstraße",
-    houseNr: "14",
-    zip: "62639",
-    city: "California",
-    phoneNr: "015783795878",
-  },
-  {
-    id: "3",
-    isDefault: false,
-    name: "Perry Wilson",
-    email: "ayberk@live.at",
-    street: "Bahnhofstraße",
-    houseNr: "14",
-    zip: "62639",
-    city: "California",
-    phoneNr: "015783795878",
-  },
-  {
-    id: "4",
-    isDefault: false,
-    name: "Perry Wilson",
-    email: "ayberk@live.at",
-    street: "Bahnhofstraße",
-    houseNr: "14",
-    zip: "62639",
-    city: "California",
-    phoneNr: "015783795878",
-  },
-  {
-    id: "5",
-    isDefault: false,
-    name: "Perry Wilson",
-    email: "ayberk@live.at",
-    street: "Bahnhofstraße",
-    houseNr: "14",
-    zip: "62639",
-    city: "California",
-    phoneNr: "015783795878",
-  },
-];
-//das könnte man noch optimieren! Könnte in der db speicher, ob etwas als default gespeichert ist oder nicht! -> Dann spare diese rechnung!
-const defaultDeliveryAddress = deliveryData.filter((data) => data.isDefault);
-const otherDeliveryAddresses = deliveryData.filter((data) => !data.isDefault);
-
 export default function PickAddressForm() {
   const totalForm = useFormLayoutContext();
   const { errors } = useFormState({ control: totalForm.control });
+  const { addressListe: deliveryData } = useAddressContext();
 
   //dieser wert updated nicht! React subscribed nicht das formState! Muss irgendwie die subscription machen!s
   const pickedValue = totalForm.watch("pickAddressForm.addressId");
@@ -193,6 +123,10 @@ export default function PickAddressForm() {
   }
 
   const formErrors = errors.pickAddressForm?.message;
+
+  //das kann sicher noch irgendwie optimieren!
+  const defaultDeliveryAddress = deliveryData.filter((data) => data.isDefault);
+  const otherDeliveryAddresses = deliveryData.filter((data) => !data.isDefault);
 
   return (
     <div className="flex flex-col gap-gap-13">

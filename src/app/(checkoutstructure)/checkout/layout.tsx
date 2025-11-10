@@ -5,6 +5,7 @@ import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PendingContextProvider from "@/components/contexts/TransitionContext";
 import { z } from "zod";
+import AddressContextProvider from "@/components/contexts/AddressContext";
 
 const pickAddressFormSchema = z.object(
   {
@@ -15,11 +16,7 @@ const pickAddressFormSchema = z.object(
 
 const pickPaymentMethodSchema = z.object(
   {
-    paymentMethod: z
-      .string("bitte auswählen")
-      .refine((val) => val === "Paypal" || val === "Kreditkarte", {
-        message: "Nur paypal und Kreditkarte zulässig",
-      }),
+    paymentMethod: z.union([z.literal("Paypal"), z.literal("Kreditkarte")]),
   },
   { error: "Bitte Bezahlmittel eingeben" }
 );
@@ -112,17 +109,19 @@ export default function FormContextProvider({
 }) {
   const pickAddressForm = useForm<TotalFormValuesType>({
     resolver: zodResolver(totalFormSchema),
-    // defaultValues: {
-    //   pickAddressForm: { addressId: defaultAddress?.id },
-    //   pickPaymentMethodSchema: { paymentMethod: "" },
-    // },
+    defaultValues: {
+      pickAddressForm: { addressId: defaultAddress?.id },
+      pickPaymentMethodSchema: { paymentMethod: "Paypal" },
+    },
   });
 
   const ctxValues: UseFormReturn<TotalFormValuesType> = pickAddressForm;
 
   return (
     <FormContext value={ctxValues}>
-      <PendingContextProvider>{children}</PendingContextProvider>
+      <PendingContextProvider>
+        <AddressContextProvider>{children}</AddressContextProvider>
+      </PendingContextProvider>
     </FormContext>
   );
 }

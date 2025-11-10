@@ -29,7 +29,7 @@ function QuickCartItem({
 }: Omit<CartItemProps, "id">) {
   return (
     <div className="grid grid-cols-[auto_1fr] items-stretch gap-x-gap-5">
-      <div className="relative aspect-[1/1]">
+      <div className="relative aspect-[1/1] h-full">
         <Image
           src={imgSrc}
           alt=""

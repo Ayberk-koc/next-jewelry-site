@@ -4,8 +4,8 @@ import ProgressCheckoutNavigationLine from "@/components/layoutComponents/Progre
 import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
 import { HeadingContainer } from "@/components/containers/HeadingContainer";
 import { MainContainer } from "@/components/containers/MainContainer";
-import ProceedButton from "@/components/forms/ProceedButton";
-import { PaymentForm } from "@/components/forms/PaymentForms";
+import ProceedButton from "@/components/forms/checkoutForms/ProceedButton";
+import { PaymentForm } from "@/components/forms/checkoutForms/PaymentForms";
 
 export default function PaymentPage() {
   const totalPrice = 9000;

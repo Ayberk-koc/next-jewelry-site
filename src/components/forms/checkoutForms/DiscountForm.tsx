@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useForm, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem } from "../ui/form";
+import { Form, FormControl, FormField, FormItem } from "../../ui/form";
 
 function InputWithButtonFormInput({
   value,

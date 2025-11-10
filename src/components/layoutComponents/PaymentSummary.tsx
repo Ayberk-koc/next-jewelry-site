@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
-import DiscountForm from "../forms/DiscountForm";
+import DiscountForm from "../forms/checkoutForms/DiscountForm";
 
 function TextPriceBox({
   text,

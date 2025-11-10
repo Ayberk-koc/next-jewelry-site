@@ -13,18 +13,7 @@ type TransitionType = {
   startTransition: (callback: TransitionFunction) => void;
 };
 
-const TransitionContext = createContext<TransitionType>({
-  isTransitioning: false,
-  startTransition: () => {
-    return;
-  },
-});
-
-function useTransitionContext() {
-  const context = useContext(TransitionContext);
-
-  return context;
-}
+const TransitionContext = createContext<TransitionType | null>(null);
 
 export default function PendingContextProvider({
   children,
@@ -36,6 +25,16 @@ export default function PendingContextProvider({
   const ctxValue: TransitionType = { isTransitioning, startTransition };
 
   return <TransitionContext value={ctxValue}>{children}</TransitionContext>;
+}
+
+function useTransitionContext() {
+  const context = useContext(TransitionContext);
+
+  if (!context) {
+    throw new Error("Context can only be used within a Context-Provder!");
+  }
+
+  return context;
 }
 
 export { useTransitionContext };

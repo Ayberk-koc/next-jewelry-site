@@ -32,6 +32,12 @@ export default function PaymentForm() {
     console.log(values);
   }
 
+  type PossibleValueTypes =
+    TotalFormValuesType["pickPaymentMethodSchema"]["paymentMethod"];
+
+  const accordionValue1: PossibleValueTypes = "Paypal";
+  const accordionValue2: PossibleValueTypes = "Kreditkarte";
+
   return (
     <form>
       {formError && <p className="text-error-500 mb-gap-3">{formError}</p>}
@@ -39,10 +45,10 @@ export default function PaymentForm() {
         type="single"
         value={methodValue}
         onValueChange={(val) => {
-          handlePickPaymentMethod(val);
+          handlePickPaymentMethod(val as PossibleValueTypes);
         }}
       >
-        <AccordionItem value="Paypal" className="group border-0">
+        <AccordionItem value={accordionValue1} className="group border-0">
           <AccordionCustomTriggerWrapper className="mb-gap-9 p-0">
             <div className="flex items-center gap-x-gap-5 justify-start">
               <RadioButtonIcon className="relative top-[3px]" />
@@ -51,7 +57,7 @@ export default function PaymentForm() {
           </AccordionCustomTriggerWrapper>
         </AccordionItem>
 
-        <AccordionItem value="Kreditkarte" className="group">
+        <AccordionItem value={accordionValue2} className="group">
           <AccordionCustomTriggerWrapper className="mb-gap-9 p-0">
             <div className="flex items-center gap-x-gap-5 justify-start">
               <RadioButtonIcon className="relative top-[3px]" />
