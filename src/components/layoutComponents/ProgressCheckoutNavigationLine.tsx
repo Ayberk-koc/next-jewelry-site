@@ -12,9 +12,9 @@ import { Button } from "../ui/button";
 import { useRouter, usePathname } from "next/navigation";
 import { useTransitionContext } from "../contexts/TransitionContext";
 import {
-  useFormLayoutContext,
-  TotalFormValuesType,
-} from "@/app/(checkoutstructure)/checkout/layout";
+  CheckoutFormValuesType,
+  useCheckoutFormContext,
+} from "@/components/contexts/CheckoutFormContext";
 
 function ProgressCheckoutButton({
   text,
@@ -86,7 +86,7 @@ type NavigationPathValuesType = (typeof navigationPath)[number];
 
 type NavigationInfoType = {
   href: NavigationPathValuesType;
-  fields?: Path<TotalFormValuesType>;
+  fields?: Path<CheckoutFormValuesType>;
 };
 type totalNavigationInfos = NavigationInfoType[][];
 
@@ -131,7 +131,7 @@ export default function ProgressCheckoutNavigationLine({
 }: {
   progressState: number;
 }) {
-  const totalForm = useFormLayoutContext();
+  const totalForm = useCheckoutFormContext();
   const router = useRouter();
   const { isTransitioning, startTransition } = useTransitionContext();
   const pathname = usePathname();

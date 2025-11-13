@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { EditButton } from "@/components/svg-icons/ReviewPageIcon";
-import { useFormLayoutContext } from "@/app/(checkoutstructure)/checkout/layout";
+import { useCheckoutFormContext } from "@/components/contexts/CheckoutFormContext";
 import { useAddressContext } from "@/components/contexts/AddressContext";
 import { useRouter } from "next/navigation";
 import { useTransitionContext } from "@/components/contexts/TransitionContext";
@@ -105,7 +105,7 @@ export default function OrderReviewForm() {
     },
   ];
 
-  const totalForm = useFormLayoutContext();
+  const totalForm = useCheckoutFormContext();
   const pickedAddressId = totalForm.getValues("pickAddressForm.addressId");
 
   const router = useRouter();

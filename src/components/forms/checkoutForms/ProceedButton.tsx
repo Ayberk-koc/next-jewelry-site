@@ -8,14 +8,14 @@ import { type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { useTransitionContext } from "../../contexts/TransitionContext";
 import {
-  useFormLayoutContext,
-  TotalFormValuesType,
-} from "@/app/(checkoutstructure)/checkout/layout";
+  useCheckoutFormContext,
+  CheckoutFormValuesType,
+} from "@/components/contexts/CheckoutFormContext";
 
 type ProceedButtonProps = ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     href: string;
-    fields?: Path<TotalFormValuesType>;
+    fields?: Path<CheckoutFormValuesType>;
   };
 
 export default function ProceedButton({
@@ -27,7 +27,7 @@ export default function ProceedButton({
   children,
   ...props
 }: ProceedButtonProps) {
-  const totalForm = useFormLayoutContext();
+  const totalForm = useCheckoutFormContext();
   const router = useRouter();
   const { isTransitioning, startTransition } = useTransitionContext();
 

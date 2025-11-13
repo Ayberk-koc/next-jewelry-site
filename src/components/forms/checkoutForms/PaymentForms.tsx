@@ -9,13 +9,13 @@ import {
 import { RadioButtonIcon } from "@/components/svg-icons/PaymentIcons";
 import { Input } from "@/components/ui/input";
 import {
-  useFormLayoutContext,
-  TotalFormValuesType,
-} from "@/app/(checkoutstructure)/checkout/layout";
+  CheckoutFormValuesType,
+  useCheckoutFormContext,
+} from "@/components/contexts/CheckoutFormContext";
 import { useFormState } from "react-hook-form";
 
 export default function PaymentForm() {
-  const totalForm = useFormLayoutContext();
+  const totalForm = useCheckoutFormContext();
   const { errors } = useFormState({ control: totalForm.control });
 
   const methodValue = totalForm.watch("pickPaymentMethodSchema.paymentMethod");
@@ -23,7 +23,7 @@ export default function PaymentForm() {
   const formError = errors.pickPaymentMethodSchema?.message;
 
   async function handlePickPaymentMethod(
-    paymentValue: TotalFormValuesType["pickPaymentMethodSchema"]["paymentMethod"]
+    paymentValue: CheckoutFormValuesType["pickPaymentMethodSchema"]["paymentMethod"]
   ) {
     totalForm.setValue("pickPaymentMethodSchema.paymentMethod", paymentValue);
     await totalForm.trigger("pickPaymentMethodSchema");
@@ -33,7 +33,7 @@ export default function PaymentForm() {
   }
 
   type PossibleValueTypes =
-    TotalFormValuesType["pickPaymentMethodSchema"]["paymentMethod"];
+    CheckoutFormValuesType["pickPaymentMethodSchema"]["paymentMethod"];
 
   const accordionValue1: PossibleValueTypes = "Paypal";
   const accordionValue2: PossibleValueTypes = "Kreditkarte";

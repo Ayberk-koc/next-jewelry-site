@@ -6,7 +6,7 @@ import { PlusIcon } from "@/components/svg-icons/ChekoutProsessIcons";
 import { Button } from "@/components/ui/button";
 import { ReactNode } from "react";
 import { RadioButtonIconAlt } from "@/components/svg-icons/PaymentIcons";
-import { useFormLayoutContext } from "@/app/(checkoutstructure)/checkout/layout";
+import { useCheckoutFormContext } from "@/components/contexts/CheckoutFormContext";
 import { useFormState } from "react-hook-form";
 import { useAddressContext } from "@/components/contexts/AddressContext";
 
@@ -107,11 +107,10 @@ function AddressBoxes({
 }
 
 export default function PickAddressForm() {
-  const totalForm = useFormLayoutContext();
+  const totalForm = useCheckoutFormContext();
   const { errors } = useFormState({ control: totalForm.control });
   const { addressListe: deliveryData } = useAddressContext();
 
-  //dieser wert updated nicht! React subscribed nicht das formState! Muss irgendwie die subscription machen!s
   const pickedValue = totalForm.watch("pickAddressForm.addressId");
 
   async function handlePickAddress(val: string) {

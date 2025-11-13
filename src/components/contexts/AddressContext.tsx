@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, ReactNode, useContext } from "react";
 
 type Addresse = {
@@ -22,81 +24,15 @@ const AddressContext = createContext<AddressContextValues | null>(null);
 
 export default function AddressContextProvider({
   children,
+  initialAddressData,
 }: {
   children: ReactNode;
+  initialAddressData: AddressListe;
 }) {
-  //diese werte über react-query bekommen
-  const deliveryData = [
-    {
-      id: "0",
-      isDefault: true,
-      name: "Ayberk Koc",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "1",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "2",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "3",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "4",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-    {
-      id: "5",
-      isDefault: false,
-      name: "Perry Wilson",
-      email: "ayberk@live.at",
-      street: "Bahnhofstraße",
-      houseNr: "14",
-      zip: "62639",
-      city: "California",
-      phoneNr: "015783795878",
-    },
-  ];
+  //HOhle die daten mit react query. Die initial daten sind dann das was ich mit der prop bekomme!
 
   const ctxValues: AddressContextValues = {
-    addressListe: deliveryData,
+    addressListe: initialAddressData,
   };
 
   return <AddressContext value={ctxValues}>{children}</AddressContext>;

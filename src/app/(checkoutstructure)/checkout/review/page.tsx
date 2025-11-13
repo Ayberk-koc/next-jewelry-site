@@ -4,6 +4,7 @@ import { HeadingContainer } from "@/components/containers/HeadingContainer";
 import { MainContainer } from "@/components/containers/MainContainer";
 import { Button } from "@/components/ui/button";
 import OrderReviewForm from "@/components/forms/checkoutForms/OrderReviews";
+import ConfirmOrderDialog from "@/components/dialogs/ConfirmOrderDialog";
 
 export default function ReviewPage() {
   const totalPrice = 9000;
@@ -29,9 +30,11 @@ export default function ReviewPage() {
         <div className="w-full min-[1000px]:w-[360px] sticky top-gap-11">
           <PaymentSummary totalPrice={totalPrice}>
             {/* hier brauche ich ein bestätigen button, der das dialog "bestätigen dialog" ruft! Auch noch disabled bei transition machen! */}
-            <Button size={"xl"} variant={"fill"} className="uppercase">
-              Place Order
-            </Button>
+            <ConfirmOrderDialog>
+              <Button size={"xl"} variant={"fill"} className="uppercase">
+                Place Order
+              </Button>
+            </ConfirmOrderDialog>
           </PaymentSummary>
         </div>
       </MainContainer>
