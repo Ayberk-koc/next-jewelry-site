@@ -566,9 +566,9 @@ function SimilarProductsSection() {
 
 export default function ProductPage() {
   return (
-    <MainContainer>
+    <MainContainer className="flex flex-col items-center gap-y-gap-13 sm:gap-y-[48px]">
       <div className="flex flex-col gap-y-[48px] min-[900px]:flex-row min-[900px]:gap-x-[32px] min-[900px]:gap-y-0 w-full">
-        <div className="basis-0 grow-[576] h-fit min-[900px]:sticky top-0">
+        <div className="basis-0 grow-[576] h-fit min-[900px]:sticky top-gap-11">
           <ProductImages />
         </div>
         <div className="basis-0 grow-[560]">

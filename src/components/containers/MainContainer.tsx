@@ -11,10 +11,7 @@ function MainContainer({
   //max-w-[1440px] mx-auto
   return (
     <section
-      className={cn(
-        "py-gap-13 px-gap-9 xl:px-[70px] sm:pb-[80px] flex flex-col items-center gap-y-gap-13 sm:gap-y-[48px]",
-        className
-      )}
+      className={cn("py-gap-13 sm:pb-[80px] layout-container-x", className)}
     >
       {children}
     </section>

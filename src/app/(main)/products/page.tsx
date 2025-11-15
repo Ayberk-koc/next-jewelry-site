@@ -202,12 +202,10 @@ function Pagenation() {
 
 export default function Products() {
   return (
-    <>
-      <MainContainer>
-        <FilterBar />
-        <ProductsListing />
-        <Pagenation />
-      </MainContainer>
-    </>
+    <MainContainer className="flex flex-col items-center gap-y-gap-13 sm:gap-y-[48px]">
+      <FilterBar />
+      <ProductsListing />
+      <Pagenation />
+    </MainContainer>
   );
 }

@@ -13,7 +13,7 @@ export default function ShopLayout({
         <Header className="border-b border-gray-200" />
       </HeaderShell> */}
       <Header className="border-b border-gray-200" />
-      <div className="pt-gap-9 px-gap-9 sm:pt-gap-13 xl:px-[70px]">
+      <div className="pt-gap-9 sm:pt-gap-13 layout-container-x">
         <Breadcrumbs />
       </div>
       {children}

@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 function HeartIcon() {
   return (
     <svg
@@ -360,7 +362,7 @@ function ArrowRightIcon({ canScrollNext }: { canScrollNext: boolean }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      className={`${strokeColor}`}
+      className={cn(strokeColor)}
     >
       <path
         d="M10 7L14 12L10 17"
@@ -382,7 +384,7 @@ function ArrowLeftIcon({ canScrollPrev }: { canScrollPrev: boolean }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      className={`${strokeColor}`}
+      className={cn(strokeColor)}
     >
       <path
         d="M14 7L10 12L14 17"

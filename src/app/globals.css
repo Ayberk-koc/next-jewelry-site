@@ -309,7 +309,14 @@
   @apply text-xs leading-[1.5] font-semibold;
 }
 
-/*  */
+/* hier nicht styles-system related */
+@utility layout-container-x {
+  @apply px-gap-9 xl:px-[70px];
+}
+
+@utility header-list-element {
+  @apply font-text-md-medium text-gray-950 uppercase cursor-pointer;
+}
 
 /* hier drunter alles von shadcn */
 @theme inline {
@@ -426,8 +433,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-/* Hier drunter wieder custom styles! */
-@utility header-list-element {
-  @apply font-text-md-medium text-gray-950 uppercase cursor-pointer;
 }
