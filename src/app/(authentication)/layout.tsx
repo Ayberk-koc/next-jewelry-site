@@ -1,10 +1,9 @@
-import LoginRegisterSwitch from "@/components/forms/authenticationForms/LoginRegisterSwitch";
 import Header from "@/components/layoutComponents/Header";
 import HeaderShell from "@/components/layoutComponents/HeaderShell";
 import Image from "next/image";
+import { ReactNode } from "react";
 
-//bubbling errors! Muss fixen, dass ich wieder klicken kann!
-export default function LoginPage() {
+export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <HeaderShell>
@@ -19,11 +18,7 @@ export default function LoginPage() {
         ></Image>
         {/* sobald screen breiter als login-form -> mache items-center! Deswegen 501px! */}
         <div className="min-h-screen flex justify-center items-end min-[501px]:items-center">
-          <div className="w-[500px] bg-white z-10">
-            {/* <ForgotPasswordForm></ForgotPasswordForm> */}
-            <LoginRegisterSwitch></LoginRegisterSwitch>
-            {/* <NewPasswordForm></NewPasswordForm> */}
-          </div>
+          <div className="w-[500px] bg-white z-10">{children}</div>
         </div>
       </section>
     </>

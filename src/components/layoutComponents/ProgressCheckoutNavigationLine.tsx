@@ -10,7 +10,6 @@ import { ReactNode } from "react";
 import { Path } from "react-hook-form";
 import { Button } from "../ui/button";
 import { useRouter, usePathname } from "next/navigation";
-import { useTransitionContext } from "../contexts/TransitionContext";
 import {
   CheckoutFormValuesType,
   useCheckoutFormContext,
@@ -50,24 +49,18 @@ function ProgressCheckoutButton({
 }
 
 function ProgressDashedLine({ activeLines }: { activeLines: number }) {
-  const { isTransitioning } = useTransitionContext();
-
   return (
     <div className="absolute inset-x-[25px] top-[18px] -z-10 flex">
       <div
         className={cn(
           "flex-1 border border-dashed",
-          activeLines >= 1 && !isTransitioning
-            ? "border-gray-950"
-            : "border-gray-200"
+          activeLines >= 1 ? "border-gray-950" : "border-gray-200"
         )}
       ></div>
       <div
         className={cn(
           "flex-1 border border-dashed",
-          activeLines >= 2 && !isTransitioning
-            ? "border-gray-950"
-            : "border-gray-200"
+          activeLines >= 2 ? "border-gray-950" : "border-gray-200"
         )}
       ></div>
     </div>
@@ -133,7 +126,6 @@ export default function ProgressCheckoutNavigationLine({
 }) {
   const totalForm = useCheckoutFormContext();
   const router = useRouter();
-  const { isTransitioning, startTransition } = useTransitionContext();
   const pathname = usePathname();
 
   async function handleNavigate(
@@ -148,10 +140,8 @@ export default function ProgressCheckoutNavigationLine({
     const canNavigate = fields ? ok : true;
 
     if (canNavigate) {
-      startTransition(() => {
-        router.push(href);
-        totalForm.clearErrors(fields);
-      });
+      router.push(href);
+      totalForm.clearErrors(fields);
     }
 
     return canNavigate;
@@ -180,8 +170,6 @@ export default function ProgressCheckoutNavigationLine({
             key={index}
             text={navigationTextArr[index]}
             isActive={progressState >= index}
-            disabled={isTransitioning}
-            data-pending={isTransitioning.toString()}
             onClick={() => {
               if (pathname.includes(navigationPath[index])) return;
               handleMultiNavigation(navigationInfo);

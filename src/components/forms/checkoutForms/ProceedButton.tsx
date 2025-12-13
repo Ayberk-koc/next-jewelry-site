@@ -6,7 +6,6 @@ import { ComponentProps } from "react";
 import { Button, buttonVariants } from "../../ui/button";
 import { type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { useTransitionContext } from "../../contexts/TransitionContext";
 import {
   useCheckoutFormContext,
   CheckoutFormValuesType,
@@ -29,7 +28,6 @@ export default function ProceedButton({
 }: ProceedButtonProps) {
   const totalForm = useCheckoutFormContext();
   const router = useRouter();
-  const { isTransitioning, startTransition } = useTransitionContext();
 
   async function handleProceed() {
     const ok = await totalForm.trigger(fields);
@@ -39,9 +37,7 @@ export default function ProceedButton({
     const canNavigate = fields ? ok : true;
 
     if (canNavigate) {
-      startTransition(() => {
-        router.push(href);
-      });
+      router.push(href);
     }
   }
 
@@ -54,7 +50,6 @@ export default function ProceedButton({
       variant={variant}
       className={cn("", className)}
       onClick={handleProceed}
-      disabled={isTransitioning}
       {...props}
     >
       {children}

@@ -1,11 +1,10 @@
-import PendingContextProvider from "@/components/contexts/TransitionContext";
 import AddressContextProvider from "@/components/contexts/AddressContext";
 import FormContextProvider from "@/components/contexts/CheckoutFormContext";
 import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
   //stelle dir vor, das hätte direkt aus db genommen.
-  const deliveryData = [
+  const initAddressData = [
     {
       id: "0",
       isDefault: true,
@@ -75,10 +74,8 @@ export default function Layout({ children }: { children: ReactNode }) {
   ];
 
   return (
-    <AddressContextProvider initialAddressData={deliveryData}>
-      <FormContextProvider>
-        <PendingContextProvider>{children}</PendingContextProvider>
-      </FormContextProvider>
+    <AddressContextProvider initialAddressData={initAddressData}>
+      <FormContextProvider>{children}</FormContextProvider>
     </AddressContextProvider>
   );
 }

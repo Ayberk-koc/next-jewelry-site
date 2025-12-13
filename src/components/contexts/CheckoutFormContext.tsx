@@ -47,7 +47,7 @@ export default function FormContextProvider({
     },
   });
 
-  const ctxValues: UseFormReturn<CheckoutFormValuesType> = pickAddressForm;
+  const ctxValues = pickAddressForm; //type wird inferred
 
   return <FormContext value={ctxValues}>{children}</FormContext>;
 }

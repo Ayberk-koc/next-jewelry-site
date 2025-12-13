@@ -25,9 +25,9 @@ export default function NewsLetterForm() {
 
   const inputValues = useWatch<NewsLetterFormType>({ control: form.control });
 
-  function handleChangeInput(val: string) {
-    console.log("on change angekommen");
+  async function handleChangeInput(val: string) {
     form.setValue("email", val);
+    await form.trigger("email");
   }
 
   async function submitForm() {

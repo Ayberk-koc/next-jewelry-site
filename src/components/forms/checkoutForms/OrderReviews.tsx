@@ -6,7 +6,6 @@ import { EditButton } from "@/components/svg-icons/ReviewPageIcon";
 import { useCheckoutFormContext } from "@/components/contexts/CheckoutFormContext";
 import { useAddressContext } from "@/components/contexts/AddressContext";
 import { useRouter } from "next/navigation";
-import { useTransitionContext } from "@/components/contexts/TransitionContext";
 import { ComponentProps } from "react";
 
 function EditFormLink({
@@ -109,7 +108,6 @@ export default function OrderReviewForm() {
   const pickedAddressId = totalForm.getValues("pickAddressForm.addressId");
 
   const router = useRouter();
-  const { isTransitioning, startTransition } = useTransitionContext();
 
   const { addressListe } = useAddressContext();
 
@@ -121,9 +119,7 @@ export default function OrderReviewForm() {
   const name = pickedAddress?.name;
 
   function handleNavigate(href: naviGationPaths) {
-    startTransition(() => {
-      router.push(href);
-    });
+    router.push(href);
   }
 
   return (
@@ -149,14 +145,12 @@ export default function OrderReviewForm() {
         subtext={name ?? "Customer"}
         subtextInfo={addressSummary}
         onClick={() => handleNavigate("address")}
-        disabled={isTransitioning}
       />
       <EditFormLink
         title="Payment Methode"
         subtext="Perry wilson"
         subtextInfo="3891 Ranchview Dr. Richardson, California 62639"
         onClick={() => handleNavigate("payment")}
-        disabled={isTransitioning}
       />
     </div>
   );
