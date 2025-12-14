@@ -1,9 +1,9 @@
-import ProgressCheckoutNavigationLine from "@/components/layoutComponents/ProgressCheckoutNavigationLine";
-import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
-import { HeadingContainer } from "@/components/containers/HeadingContainer";
-import { MainContainer } from "@/components/containers/MainContainer";
-import PickAddressForm from "@/components/forms/checkoutForms/PickAddressForm";
-import ProceedButton from "@/components/forms/checkoutForms/ProceedButton";
+import ProgressCheckoutNavigationLine from "@/features/checkout/components/ProgressCheckoutNavigationLine";
+import PaymentSummary from "@/features/checkout/components/PaymentSummary";
+import { HeadingContainer } from "@/components/layout/containers/HeadingContainer";
+import { MainContainer } from "@/components/layout/containers/MainContainer";
+import PickAddressForm from "@/features/checkout/forms/PickAddressForm";
+import ProceedButton from "@/features/checkout/components/ProceedButton";
 
 export default function AddressPage() {
   const totalPrice = 9000;

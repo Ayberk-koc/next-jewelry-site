@@ -1,5 +1,5 @@
-import Header from "@/components/layoutComponents/Header";
-import HeaderShell from "@/components/layoutComponents/HeaderShell";
+import Header from "@/components/layout/components/Header";
+import HeaderShell from "@/components/layout/containers/HeaderShell";
 import Image from "next/image";
 import { ReactNode } from "react";
 

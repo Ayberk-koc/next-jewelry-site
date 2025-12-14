@@ -1,5 +1,5 @@
-import AddressContextProvider from "@/components/contexts/AddressContext";
-import FormContextProvider from "@/components/contexts/CheckoutFormContext";
+import AddressContextProvider from "@/features/address/contexts/AddressContext";
+import FormContextProvider from "@/features/checkout/contexts/CheckoutFormContext";
 import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {

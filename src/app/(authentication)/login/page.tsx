@@ -1,4 +1,4 @@
-import LoginDialog from "@/components/dialogs/authDialogs/LoginDialog";
+import LoginDialog from "@/features/auth/dialogs/LoginDialog";
 
 export default function LoginPage() {
   return <LoginDialog />;

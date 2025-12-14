@@ -1,11 +1,11 @@
 "use client";
 
-import ProgressCheckoutNavigationLine from "@/components/layoutComponents/ProgressCheckoutNavigationLine";
-import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
-import { HeadingContainer } from "@/components/containers/HeadingContainer";
-import { MainContainer } from "@/components/containers/MainContainer";
-import ProceedButton from "@/components/forms/checkoutForms/ProceedButton";
-import { PaymentForm } from "@/components/forms/checkoutForms/PaymentForms";
+import ProgressCheckoutNavigationLine from "@/features/checkout/components/ProgressCheckoutNavigationLine";
+import PaymentSummary from "@/features/checkout/components/PaymentSummary";
+import { HeadingContainer } from "@/components/layout/containers/HeadingContainer";
+import { MainContainer } from "@/components/layout/containers/MainContainer";
+import ProceedButton from "@/features/checkout/components/ProceedButton";
+import { PaymentForm } from "@/features/checkout/forms/PaymentForms";
 
 export default function PaymentPage() {
   const totalPrice = 9000;

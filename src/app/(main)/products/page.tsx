@@ -1,7 +1,7 @@
 "use client";
 //mache das noch zur server component.
 
-import ProductItem from "@/components/itemComponents/ProductItem";
+import ProductItem from "@/features/products/components/ProductItem";
 import { DownArrow } from "@/components/svg-icons/ArrowIcons";
 import {
   FilterIcon,
@@ -9,9 +9,9 @@ import {
   GridIcon,
 } from "@/components/svg-icons/FilterIcons";
 import { Button, ButtonWithIconWrapper } from "@/components/ui/button";
-import { MainContainer } from "@/components/containers/MainContainer";
-import FilterSheet from "@/components/dialogs/FilterSheet";
-import SortByDropDown from "@/components/dropdowns/SortByDropDown";
+import { MainContainer } from "@/components/layout/containers/MainContainer";
+import FilterSheet from "@/features/products/dialogs/FilterSheet";
+import SortByDropDown from "@/features/products/dropdowns/SortByDropDown";
 
 //das mache später. Wenn ich das ganze js mache! Das ist zum sortieren! Mache dass man mit searchparams sortiert!
 // const sortByCategories = ["Popularity", "Price"] as const;

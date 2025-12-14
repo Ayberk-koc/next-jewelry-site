@@ -1,7 +1,7 @@
-import CartContent from "@/components/itemComponents/CartContent";
-import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
-import { HeadingContainer } from "@/components/containers/HeadingContainer";
-import { MainContainer } from "@/components/containers/MainContainer";
+import CartContent from "@/features/checkout/components/CartContent";
+import PaymentSummary from "@/features/checkout/components/PaymentSummary";
+import { HeadingContainer } from "@/components/layout/containers/HeadingContainer";
+import { MainContainer } from "@/components/layout/containers/MainContainer";
 import { Button } from "@/components/ui/button";
 
 type CartItemProps = {

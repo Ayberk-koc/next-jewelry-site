@@ -1,10 +1,10 @@
-import ProgressCheckoutNavigationLine from "@/components/layoutComponents/ProgressCheckoutNavigationLine";
-import PaymentSummary from "@/components/layoutComponents/PaymentSummary";
-import { HeadingContainer } from "@/components/containers/HeadingContainer";
-import { MainContainer } from "@/components/containers/MainContainer";
+import ProgressCheckoutNavigationLine from "@/features/checkout/components/ProgressCheckoutNavigationLine";
+import PaymentSummary from "@/features/checkout/components/PaymentSummary";
+import { HeadingContainer } from "@/components/layout/containers/HeadingContainer";
+import { MainContainer } from "@/components/layout/containers/MainContainer";
 import { Button } from "@/components/ui/button";
-import OrderReviewForm from "@/components/forms/checkoutForms/OrderReviews";
-import ConfirmOrderDialog from "@/components/dialogs/ConfirmOrderDialog";
+import OrderReviewForm from "@/features/checkout/forms/OrderReviews";
+import ConfirmOrderDialog from "@/features/checkout/dialogs/ConfirmOrderDialog";
 
 export default function ReviewPage() {
   const totalPrice = 9000;

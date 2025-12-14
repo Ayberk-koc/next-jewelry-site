@@ -1,4 +1,4 @@
-import NewPasswordDialog from "@/components/dialogs/authDialogs/NewPasswordDialog";
+import NewPasswordDialog from "@/features/auth/dialogs/NewPasswordDialog";
 
 export default function NewPassword() {
   return <NewPasswordDialog />;

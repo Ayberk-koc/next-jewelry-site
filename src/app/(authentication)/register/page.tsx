@@ -1,4 +1,4 @@
-import RegisterDialog from "@/components/dialogs/authDialogs/RegisterDialog";
+import RegisterDialog from "@/features/auth/dialogs/RegisterDialog";
 
 export default function RegisterPage() {
   return <RegisterDialog />;

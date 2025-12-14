@@ -1,5 +1,5 @@
-import Header from "@/components/layoutComponents/Header";
-import Breadcrumbs from "@/components/layoutComponents/BreadCrumbs";
+import Header from "@/components/layout/components/Header";
+import Breadcrumbs from "@/components/layout/components/BreadCrumbs";
 //import HeaderShell from "@/components/smallComponents/HeaderShell";
 
 export default function ShopLayout({

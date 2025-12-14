@@ -1,4 +1,4 @@
-import { MainContainer } from "@/components/containers/MainContainer";
+import { MainContainer } from "@/components/layout/containers/MainContainer";
 import Image from "next/image";
 import { RewievStar } from "@/components/svg-icons/ReviewStars";
 import { Button } from "@/components/ui/button";
@@ -35,9 +35,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ProductItem from "@/components/itemComponents/ProductItem";
-import ReviewDialog from "@/components/dialogs/ReviewDialog";
-import CartSheet from "@/components/dialogs/CartSheet";
+import ProductItem from "@/features/products/components/ProductItem";
+import ReviewDialog from "@/features/products/dialogs/ReviewDialog";
+import CartSheet from "@/features/products/dialogs/CartSheet";
 
 ///////small component///////////
 const icontextCombiVariants = cva("flex", {

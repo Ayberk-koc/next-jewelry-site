@@ -4,9 +4,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BoxIcon } from "@/components/svg-icons/BenefitIcons";
 import { RewievStar } from "@/components/svg-icons/ReviewStars";
-import Header from "@/components/layoutComponents/Header";
-import HeaderShell from "@/components/layoutComponents/HeaderShell";
-import ProductItem from "@/components/itemComponents/ProductItem";
+import Header from "@/components/layout/components/Header";
+import HeaderShell from "@/components/layout/containers/HeaderShell";
+import ProductItem from "@/features/products/components/ProductItem";
 
 function HomePageContainer({
   children,
