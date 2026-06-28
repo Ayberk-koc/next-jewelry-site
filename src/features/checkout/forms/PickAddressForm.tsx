@@ -20,7 +20,7 @@ function AddressBox({
   addressId,
   isDefault = false,
   email,
-  value,
+  isChecked,
   onValueChange,
 }: {
   name: string;
@@ -32,7 +32,7 @@ function AddressBox({
   addressId: string;
   email: string;
   isDefault?: boolean;
-  value: string;
+  isChecked: boolean;
   onValueChange: (val: string) => void;
 }) {
   const address = `${street} ${houseNr}, ${zip} ${city}`;
@@ -59,7 +59,7 @@ function AddressBox({
       >
         <RadioButtonIconAlt
           className="relative top-[1px]"
-          isChecked={value === addressId}
+          isChecked={isChecked}
         />
       </button>
 
@@ -136,7 +136,7 @@ export default function PickAddressForm() {
           {defaultDeliveryAddress.map((address) => (
             <AddressBox
               key={address.id}
-              value={pickedValue}
+              isChecked={pickedValue == address.id}
               onValueChange={handlePickAddress}
               addressId={address.id}
               name={address.name}
@@ -154,7 +154,7 @@ export default function PickAddressForm() {
           {otherDeliveryAddresses.map((address) => (
             <AddressBox
               key={address.id}
-              value={pickedValue}
+              isChecked={pickedValue == address.id}
               onValueChange={handlePickAddress}
               addressId={address.id}
               name={address.name}

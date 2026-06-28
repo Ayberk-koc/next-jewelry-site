@@ -1,44 +1,12 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import z from "zod";
 import { useForm, useWatch, useFormState } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ComponentProps, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-
-type LabelInputProps = ComponentProps<"input"> & {
-  label: string;
-  errorMessage?: string;
-  className?: string;
-};
-
-function LabelInput({
-  label,
-  placeholder,
-  className,
-  errorMessage,
-  ...props
-}: LabelInputProps) {
-  return (
-    <div className={cn(className)}>
-      <div className="flex items-center justify-between mb-gap-3">
-        <p className="font-text-sm-medium text-gray-500">{label}</p>
-        {errorMessage && (
-          <p className="font-text-sm-medium text-error-500">{errorMessage}</p>
-        )}
-      </div>
-      <Input
-        className="w-full"
-        scale={"xl2"}
-        placeholder={placeholder}
-        {...props}
-      />
-    </div>
-  );
-}
+import { LabelInput, LabelPasswordInput } from "../components/LabelInputs";
 
 const loginSchema = z.object({
   email: z.email({ error: "Please provide valid email address" }),
@@ -108,10 +76,9 @@ export default function LoginForm() {
           value={email}
           onChange={(e) => handleEmailChange(e.target.value)}
         />
-        <LabelInput
+        <LabelPasswordInput
           label="Password"
           placeholder="Your Password"
-          type="password"
           errorMessage={passwordError}
           value={password}
           onChange={(e) => handlePasswordChange(e.target.value)}

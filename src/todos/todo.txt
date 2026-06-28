@@ -42,3 +42,11 @@ Shipping & Return
 - discount form. Bei erfolgreichen discount brauche platz unten, wo der discount steht! Sowas wie active discoutn: 15% oder sowas
 
 - könnte für den form prozess loading-states einführen. Oder generell für andere stellen auch  loading state machen!
+
+- dialogs für handy noch in der höhe anpassen. Es kann passieren, dass die zu hoch sind! Besonders wenn fehler auf treten -> nutze die component, wo fehler neben label gezeigt werden!
+
+- filter sheet muss scrollbar sein. 
+
+- wenn beim filtern nur 1 elem raus kommt, dann sieht es mega shit aus, weil das elem stark wächst!
+
+- alle types an einem ort -> mache es sauber!

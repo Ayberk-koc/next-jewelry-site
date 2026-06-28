@@ -7,8 +7,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { CloseSheetIcon } from "@/components/svg-icons/CloseIcons";
-import FilterForm from "@/features/products/forms/FilterForm";
+// import FilterForm from "@/features/products/forms/FilterForm";
 import { ReactNode } from "react";
+import FilterForm from "../forms/FilterForm";
 
 export default function FilterSheet({ children }: { children: ReactNode }) {
   return (
