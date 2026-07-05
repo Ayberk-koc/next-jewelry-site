@@ -45,8 +45,6 @@ Shipping & Return
 
 - dialogs für handy noch in der höhe anpassen. Es kann passieren, dass die zu hoch sind! Besonders wenn fehler auf treten -> nutze die component, wo fehler neben label gezeigt werden!
 
-- filter sheet muss scrollbar sein. 
-
-- wenn beim filtern nur 1 elem raus kommt, dann sieht es mega shit aus, weil das elem stark wächst!
-
 - alle types an einem ort -> mache es sauber!
+
+- noch loading-states an verschiedenen stellen: z.b nachdem man login gedrückt hat, oder bei anderen dingen. Das wird noch relativ viel sein!

@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import Link from "next/link";
 import { LabelInput, LabelPasswordInput } from "../components/LabelInputs";
+import { useRouter } from "next/navigation";
 
 const loginSchema = z.object({
   email: z.email({ error: "Please provide valid email address" }),
@@ -20,6 +21,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
   const [send, setSend] = useState(false);
+  const router = useRouter();
 
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -61,7 +63,8 @@ export default function LoginForm() {
 
     if (ok) {
       const values = loginForm.getValues();
-      console.log(values);
+      console.log(values); // hier den Login bearbeiten. Vielleicht auf homepage navigieren.
+      router.push("/");
     }
   }
 

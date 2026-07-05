@@ -54,13 +54,13 @@ function ProgressDashedLine({ activeLines }: { activeLines: number }) {
       <div
         className={cn(
           "flex-1 border border-dashed",
-          activeLines >= 1 ? "border-gray-950" : "border-gray-200"
+          activeLines >= 1 ? "border-gray-950" : "border-gray-200",
         )}
       ></div>
       <div
         className={cn(
           "flex-1 border border-dashed",
-          activeLines >= 2 ? "border-gray-950" : "border-gray-200"
+          activeLines >= 2 ? "border-gray-950" : "border-gray-200",
         )}
       ></div>
     </div>
@@ -85,7 +85,7 @@ type totalNavigationInfos = NavigationInfoType[][];
 
 function getCurrentStepInCheckout(pathName: string) {
   const currentStepInCheckout = navigationPath.find((elem) =>
-    pathName.endsWith(elem)
+    pathName.endsWith(elem),
   );
   return currentStepInCheckout ?? "address";
 }
@@ -130,7 +130,7 @@ export default function ProgressCheckoutNavigationLine({
 
   async function handleNavigate(
     href: NavigationInfoType["href"],
-    fields: NavigationInfoType["fields"]
+    fields: NavigationInfoType["fields"],
   ) {
     let ok = true;
     if (fields) {

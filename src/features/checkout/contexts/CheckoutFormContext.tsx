@@ -11,14 +11,14 @@ const pickAddressFormSchema = z.object(
   {
     addressId: z.string("Bitte eine addresse wählen"),
   },
-  { error: "Bitte Addresse wählen!" }
+  { error: "Bitte Addresse wählen!" },
 );
 
 const pickPaymentMethodSchema = z.object(
   {
     paymentMethod: z.union([z.literal("Paypal"), z.literal("Kreditkarte")]),
   },
-  { error: "Bitte Bezahlmittel eingeben" }
+  { error: "Bitte Bezahlmittel eingeben" },
 );
 
 const totalFormSchema = z.object({
@@ -28,7 +28,7 @@ const totalFormSchema = z.object({
 type CheckoutFormValuesType = z.infer<typeof totalFormSchema>;
 
 const FormContext = createContext<UseFormReturn<CheckoutFormValuesType> | null>(
-  null
+  null,
 );
 
 export default function FormContextProvider({
@@ -57,7 +57,7 @@ function useCheckoutFormContext() {
 
   if (!formLayoutContext) {
     throw new Error(
-      "Context muss innerhalb von provider-component genutzt werden!"
+      "Context muss innerhalb von provider-component genutzt werden!",
     );
   }
 

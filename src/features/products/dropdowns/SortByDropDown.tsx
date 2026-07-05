@@ -9,18 +9,35 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import {
+  querySchema,
+  SORTBYOPTIONS,
+} from "@/features/products/utils/queryUtils";
 
 export default function SortByDropDown({
   children,
   title,
-  categories,
 }: {
   children: ReactNode;
   title: string;
-  categories: readonly [string, ...string[]];
 }) {
-  const [sortValue, setSortValue] = useState<string>(categories[0]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const params = new URLSearchParams(searchParams.toString());
+  const result = querySchema.safeParse(Object.fromEntries(params));
+
+  const sortingCategories = SORTBYOPTIONS;
+
+  const sortValue = result.data?.sort || "newest";
+
+  function applySort(val: string) {
+    params.set("sort", val);
+
+    router.replace(`?${params.toString()}`);
+  }
 
   return (
     <DropdownMenu>
@@ -30,8 +47,8 @@ export default function SortByDropDown({
           {title}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={sortValue} onValueChange={setSortValue}>
-          {categories.map((category) => (
+        <DropdownMenuRadioGroup value={sortValue} onValueChange={applySort}>
+          {sortingCategories.map((category) => (
             <DropdownMenuRadioItem
               className="font-text-md-regular cursor-pointer data-[highlighted]:font-text-md-bold"
               value={category}

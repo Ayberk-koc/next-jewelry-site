@@ -51,7 +51,7 @@ export default function ForgotPasswordDialog() {
                 variant={"fill"}
                 className="uppercase w-full font-text-md-medium"
               >
-                Back to home
+                Back to Home
               </Button>
             </Link>
           </div>

@@ -77,7 +77,7 @@ export default function RegisterForm() {
 
     if (ok) {
       const values = registerForm.getValues();
-      console.log(values);
+      console.log(values); //hier muss ich die werte weiter bearbeiten.
     }
   }
 

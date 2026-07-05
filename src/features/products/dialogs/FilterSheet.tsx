@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sheet,
   SheetClose,
@@ -7,13 +9,18 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { CloseSheetIcon } from "@/components/svg-icons/CloseIcons";
-// import FilterForm from "@/features/products/forms/FilterForm";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import FilterForm from "../forms/FilterForm";
 
 export default function FilterSheet({ children }: { children: ReactNode }) {
+  const [open, setOpen] = useState<boolean>(false);
+
+  function handleClose() {
+    setOpen(false);
+  }
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent side="right" mobileSide="bottom">
         <SheetTitle className="sr-only">Muss für Sr hier sein</SheetTitle>
@@ -28,7 +35,7 @@ export default function FilterSheet({ children }: { children: ReactNode }) {
             </SheetClose>
           </div>
           <div className="flex-1 min-h-0">
-            <FilterForm />
+            <FilterForm handleClose={handleClose} />
           </div>
         </div>
       </SheetContent>
