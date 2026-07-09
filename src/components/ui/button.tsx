@@ -30,7 +30,7 @@ const buttonVariants = cva(
       variant: "fill",
       size: default_size,
     },
-  }
+  },
 );
 
 function Button({

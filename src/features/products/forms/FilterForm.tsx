@@ -157,6 +157,8 @@ export default function FilterForm({
   }
 
   function applyFilter() {
+    const oldParams = params.toString();
+
     if (categoriesValue.length > 0) {
       params.set("categories", categoriesValue.join(",")); //DAS NOCH TYPESAFE MACHEN!!! Auch bei diesem SortBY-Ding! Also das soll nur werte nehen dürfen, die in dem schema sind!
     } else {
@@ -181,11 +183,15 @@ export default function FilterForm({
       params.delete("priceMax");
     }
 
-    router.replace(`?${params.toString()}`);
-
-    startTransition(() => {
+    //hier gucke, ob sich params geändert haben. Wenn neun muss nicht nochmal seite neu laden!
+    if (params.toString() !== oldParams) {
+      router.replace(`?${params.toString()}`);
+      startTransition(() => {
+        handleClose();
+      });
+    } else {
       handleClose();
-    });
+    }
   }
 
   function resetFilter() {

@@ -1,4 +1,9 @@
+import { ReactNode } from "react";
 import z from "zod";
+import {
+  SmallArrowIconDown,
+  SmallArrowIconUp,
+} from "@/components/svg-icons/SmallArrowIcons";
 
 const CATEGORIES = ["Rings", "Necklaces", "Bracelets", "Earrings"] as const;
 const SIZES = [
@@ -17,6 +22,26 @@ const SIZES = [
 const minFilterPrice = 0;
 const maxFilterPrice = 500;
 const SORTBYOPTIONS = ["price-asc", "price-desc", "popular", "newest"] as const;
+
+function formatSortByCategory(category: (typeof SORTBYOPTIONS)[number]) {
+  let formattedCategory: ReactNode = category;
+  if (category == "price-asc") {
+    formattedCategory = (
+      <div className="flex justify-between">
+        <span>{"price"}</span>
+        <SmallArrowIconUp className="self-end w-5 relative "></SmallArrowIconUp>
+      </div>
+    );
+  } else if (category == "price-desc") {
+    formattedCategory = (
+      <div className="flex justify-between items-center">
+        <span>{"price"}</span>
+        <SmallArrowIconDown className="self-end w-5 relative "></SmallArrowIconDown>
+      </div>
+    );
+  }
+  return formattedCategory;
+}
 
 const querySchema = z.object({
   categories: z
@@ -62,6 +87,14 @@ const querySchema = z.object({
     }),
 
   sort: z.enum(SORTBYOPTIONS).optional().default("newest"),
+
+  page: z.coerce
+    .number()
+    .default(1)
+    .transform((v) => {
+      if (v < 1) return 1;
+      return v;
+    }),
 });
 
 export {
@@ -71,4 +104,5 @@ export {
   minFilterPrice,
   maxFilterPrice,
   SORTBYOPTIONS,
+  formatSortByCategory,
 };
