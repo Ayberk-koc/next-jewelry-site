@@ -1,10 +1,11 @@
 "use client"; // Nur dieser kleine Part ist Client-seitig!
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import ProductsListing from "./ProductsListing";
 import { createPortal } from "react-dom";
 import { TailSpin } from "react-loader-spinner";
+import { useSearchParams } from "next/navigation";
 
 type Item = {
   id: number;
@@ -299,18 +300,71 @@ const TESTITEMS = [
     size: "3",
   },
 ];
+const ANZAHLITEMSNEHMENBEISCROLL = 20; //das offensichtlich nich handhaben!
 
 export default function InfiniteScrollLoader() {
   const { ref, inView } = useInView();
   const [additionalItems, setAdditionalItems] = useState<Item[]>([]);
   const [mounted, setMounted] = useState<boolean>(false);
 
+  //muss noch rein machen, dass er sich merkt, wie viele angezeigt waren. Damit beim zurück gehen nicht der state verloren geht. Das mache über query-params + state. Dann noch Effect für synchro
+  const searchParams = useSearchParams();
+  const rawScrolled = Number(searchParams.get("scrolled"));
+  const currScrolled = isNaN(rawScrolled) ? 0 : rawScrolled;
+
+  const replaceUrl = useCallback(
+    (val: number) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      params.set("scrolled", val.toString());
+      const newUrl = `?${params.toString()}`;
+      window.history.pushState(
+        { ...window.history.state, as: newUrl, url: newUrl },
+        "",
+        newUrl,
+      );
+    },
+    [searchParams],
+  );
+
+  // function replaceUrl(val: number) {
+  //   const params = new URLSearchParams(searchParams.toString());
+
+  //   params.set("scrolled", val.toString());
+  //   const newUrl = `?${params.toString()}`;
+  //   window.history.pushState(
+  //     { ...window.history.state, as: newUrl, url: newUrl },
+  //     "",
+  //     newUrl,
+  //   );
+  // }
+
+  //das ist damit beim zurück gehen die selbe anzahl an elementen geladen wird, wie vorher da waren.
+  useEffect(() => {
+    const newItems: Item[] = [];
+    for (let i = 0; i < currScrolled; i++) {
+      newItems.push(...TESTITEMS.slice(10, 10 + ANZAHLITEMSNEHMENBEISCROLL));
+    }
+    setAdditionalItems((prevState) => [
+      ...prevState,
+      ...newItems, //hier items mit api-call holen! Das ist erstmal nur zum testen. Das Gibt halt mega viele
+    ]);
+    if (currScrolled > 0) {
+      replaceUrl(currScrolled);
+    }
+  }, [currScrolled, replaceUrl]);
+
   useEffect(() => {
     if (inView) {
       setAdditionalItems((prevState) => [
         ...prevState,
-        ...TESTITEMS.slice(10, 50), //hier items mit api-call holen! Das ist erstmal nur zum testen. Das Gibt halt mega viele
+        ...TESTITEMS.slice(10, 10 + ANZAHLITEMSNEHMENBEISCROLL), //hier items mit api-call holen! Das ist erstmal nur zum testen. Das Gibt halt mega viele
       ]);
+
+      const currScrolledCalculated = Math.floor(
+        additionalItems.length / ANZAHLITEMSNEHMENBEISCROLL,
+      );
+      replaceUrl(currScrolledCalculated);
     }
   }, [inView]);
 

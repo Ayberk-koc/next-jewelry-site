@@ -88,13 +88,15 @@ const querySchema = z.object({
 
   sort: z.enum(SORTBYOPTIONS).optional().default("newest"),
 
-  page: z.coerce
-    .number()
-    .default(1)
-    .transform((v) => {
-      if (v < 1) return 1;
-      return v;
-    }),
+  scrolled: z.coerce.number().default(0),
+
+  // page: z.coerce
+  //   .number()
+  //   .default(1)
+  //   .transform((v) => {
+  //     if (v < 1) return 1;
+  //     return v;
+  //   }),
 });
 
 export {
